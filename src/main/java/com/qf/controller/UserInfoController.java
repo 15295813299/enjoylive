@@ -14,12 +14,27 @@ public class UserInfoController{
 @Autowired
     UserInfoService userInfoService;
 
+    /**
+     * 注册用户
+     * @param userInfoVo
+     * @return
+     */
     @RequestMapping(value ="insertRegister",method = RequestMethod.POST)
    public Object insertRegister(@RequestBody(required = false) UserInfoVo userInfoVo){
-        userInfoVo.setPassword(Md5Utils.encodePassword(userInfoVo.getPassword()));
+        String password = userInfoVo.getPassword();
+        for (int i = 0; i < 3; i++) {
+            password = Md5Utils.encodePassword(password+password);
+        }
+        userInfoVo.setPassword(password);
         Integer count = userInfoService.insertRegister(userInfoVo);
        return count;
    }
+
+    /**
+     * 验证用户名是否被注册
+     * @param username
+     * @return
+     */
     @RequestMapping(value ="checkUserName",method = RequestMethod.POST)
    public Object checkUserName(@RequestParam String username){
         System.out.println("用户名为"+username);
@@ -30,6 +45,12 @@ public class UserInfoController{
        }
        return true;
    }
+
+    /**
+     * 邮箱验证码
+     * @param email
+     * @return
+     */
    @RequestMapping(value = "checkEmail",method = RequestMethod.POST)
    public Object checkEmail(@RequestParam String email){
        String code = CodeUtils.getCode();//获取邮箱验证码
