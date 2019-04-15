@@ -1,0 +1,1175 @@
+﻿<!DOCTYPE html>
+<html class="translated-ltr"><head>
+		<title>NGRNetwork</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="shortcut icon" href="img/favicon.png">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="style/bootstrap.min.css">
+		<link rel="stylesheet" href="font-awesome/4.3.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="style/icon.css">
+		<link rel="stylesheet" href="style/loader.css">
+		<link rel="stylesheet" href="style/idangerous.swiper.css">
+		<link rel="stylesheet" href="style/stylesheet.css">
+
+		
+		<!--[if lt IE 10]>
+			<link rel="stylesheet" type="text/css" href="style/ie-9.css" />
+		<![endif]-->		
+		<!--[if lt IE 9]>
+		    <script src="script/html5shiv/3.7.2/html5shiv.min.js"></script>
+		    <script src="script/respond/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	    
+	<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css">
+	<script type="text/javascript">
+        window.onload = function() {
+            var CJPCD1 = new CJPCD("province", "city", "district");
+
+            //设置值
+            document.getElementById('setValue').onclick = function () {
+                CJPCD1.setUp("广东省", "广州市", "天河区");
+            }
+
+            //获取地址
+            document.getElementById('getValue').onclick = function () {
+                var value = CJPCD1.getValue();//json对象
+                console.log(value);
+                if (!value) {
+                    console.log("暂时未设置地址");
+                    alert("暂时未设置地址");
+                    return false;
+                }
+                alert(value.province + "," + value.city + "," + value.district)
+            }
+
+            //自定义分割结果
+            document.getElementById('getCustomValue').onclick = function () {
+                var customChar = document.getElementById('customChar').value;
+                console.log(CJPCD1.getValue(customChar))
+            }
+            //重置
+            document.getElementById('resetValue').onclick = function () {
+                CJPCD1.reSet();//重置
+            }
+
+            document.getElementById('newcase').onclick = function () {
+                document.getElementById('btn-group2').style = "display:block";
+                document.getElementById('row2').style = "display:block";
+            }
+
+
+            //实例 2
+            var CJPCD2 = new CJPCD("province1", "city1", "district1");
+            document.getElementById('setValue1').onclick = function () {
+                CJPCD2.setUp("广东省", "广州市", "越秀区");
+            }
+
+            //获取地址
+            document.getElementById('getValue1').onclick = function () {
+                var value = CJPCD2.getValue();//json对象
+                console.log(value);
+                if (!value) {
+                    console.log("暂时未设置地址");
+                    alert("暂时未设置地址");
+                    return false;
+                }
+                alert(value.province + "," + value.city + "," + value.district);
+            }
+            //自定义分割结果
+            document.getElementById('getCustomValue1').onclick = function () {
+                var customChar = document.getElementById('customChar1').value;
+                alert(CJPCD2.getValue(customChar))
+            }
+            //重置
+            document.getElementById('resetValue1').onclick = function () {
+                CJPCD2.reSet();
+            }
+        }
+	</script>
+</head>
+	<body>
+
+	<!-- THE LOADER -->
+
+	<div class="be-loader" style="display:none;">
+	    	<div class="spinner">
+				<div class="spinner-container container1">
+			    <div class="circle1"></div>
+			    <div class="circle2"></div>
+			    <div class="circle3"></div>
+			    <div class="circle4"></div>
+				</div>
+			  	<div class="spinner-container container2">
+			    <div class="circle1"></div>
+			    <div class="circle2"></div>
+			    <div class="circle3"></div>
+			    <div class="circle4"></div>
+			  	</div>
+			  	<div class="spinner-container container3">
+			    <div class="circle1"></div>
+			    <div class="circle2"></div>
+			    <div class="circle3"></div>
+			    <div class="circle4"></div>
+  				</div>
+			</div>
+	    </div>
+	    <!--引入头部-->
+	    <div id="headLoad">	</div>
+	<script src="script/jquery-2.1.4.min.js"></script>
+	<script src="js/jquery.validate.js"></script>
+		<script>
+			$("#headLoad").load("header1.html")
+		</script>
+	<!-- MAIN CONTENT -->
+	<div id="content-block">
+		<div class="head-bg">
+			<div class="head-bg-img"></div>
+			<div class="head-bg-content">
+				<h1><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">全球最牛的社交平台</font></font></h1>
+				<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">The world's most powerful social platform</font><font style="vertical-align: inherit;">, I love life!!</font></font></p>
+				<a class="btn color-1 size-1 hover-1" href="blog-detail-2.html"><i class="fa fa-facebook"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通过Facebook注册</font></font></a>
+				<a class="be-register btn color-3 size-1 hover-6"><i class="fa fa-lock"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">立即注册</font></font></a>
+			</div>	
+		</div>
+		<div class="container-fluid custom-container">
+			<div class="row">
+				<div class="col-md-2 left-feild">
+					<form action="./" class="input-search">
+						<input type="text" required="" placeholder="Enter keyword">
+							<i class="fa fa-search"></i>
+							<input type="submit" value="">
+					</form>				
+				</div>			
+				<div class="col-md-10 ">
+					<div class="for-be-dropdowns">
+						<div class="be-drop-down">
+							<i class="icon-projects"></i>
+							<span class="be-dropdown-content"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 时间	</font></font></span>
+							<ul class="drop-down-list" style="display: none;">
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">三天内</font></font></a></li>
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一周内</font></font></a></li>
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一个月内</font></font></a></li>
+							</ul>
+						</div>
+						<div class="be-drop-down">
+							<i class="icon-creative"></i>
+							<span class="be-dropdown-content"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所有Creative Filds
+							</font></font></span>
+							<ul class="drop-down-list" style="display: none;">
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">项目 -  1</font></font></a></li>
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">项目 -  2</font></font></a></li>
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">项目 -  3</font></font></a></li>
+							</ul>
+						</div>
+						<div class="be-drop-down">
+							<i class="icon-features"></i>
+							<span class="be-dropdown-content"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">特征
+							</font></font></span>
+							<ul class="drop-down-list" style="display: none;">
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">精选</font></font></a></li>
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最欣赏的</font></font></a></li>
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最受关注</font></font></a></li>
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">讨论最多</font></font></a></li>
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最近的</font></font></a></li>
+							</ul>
+						</div>
+						<div class="be-drop-down">
+							<i class="icon-worldwide"></i>
+							<span class="be-dropdown-content"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">地区
+							</font></font></span>
+							<ul class="drop-down-list">
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">中国</font></font></a></li>
+								<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">国外</font></font></a></li>
+							</ul>
+						</div>
+					</div>				
+				</div>
+			</div>
+		</div>
+		<div class="s_keywords">
+			<div class="container-fluid custom-container">
+				<a class="btn color-1 size-3 hover-10"><i class="fa fa-trash-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">清除所有过滤</font></font></a>
+				<a class="btn color-6 size-3 hover-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网页设计</font></font><i class="fa keyword fa-times"></i></a>
+				<a class="btn color-6 size-3 hover-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">UI </font></font><i class="fa keyword fa-times"></i></a>
+				<a class="btn color-6 size-3 hover-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">平面 </font></font><i class="fa keyword fa-times"></i></a>
+				<a class="btn color-6 size-3 hover-10"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">线框 </font></font><i class="fa keyword fa-times"></i></a>
+
+			</div>
+		</div>
+		<div class="container-fluid custom-container">
+			<div class="row">
+				<div class="col-md-10 col-md-push-2">
+					<div class="row _post-container_">
+						<h1>游戏</h1>
+						<HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=3>
+						<div>
+							<div class="custom-column-5">
+								<div class="be-post">
+									<a href="blog-detail-2.html" class="be-img-block">
+									<img src="img/p1.jpg" alt="我的天啊">
+									</a>
+									<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我们的世界</font></font></a>
+									<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">， 
+										 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，  
+										 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span><a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;">的媚俗破坏</font></a></font><span>
+										<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
+									</span>
+									<div class="author-post">
+										<img src="img/a1.png" alt="" class="ava-author">
+										<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hoang Nguyen</font></font></a></span>
+									</div>
+									<div class="info-block">
+										<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
+										<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
+										<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
+									</div>
+								</div>
+						</div>
+						<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p2.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Treebeard </font></font></a>
+								<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">， 
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，  
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">Web设计</font></a></span></font><span>
+									<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
+								</span>
+								<div class="author-post">
+									<img src="img/a1.png" alt="" class="ava-author">
+									<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hoang Nguyen</font></font></a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
+									<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
+									<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
+								</div>
+							</div>
+						</div>
+						<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p3.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">斋月</font></font></a>
+								<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">， 
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，  
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计的</font></a></span><a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;">颜色</font></a></font><span>
+									<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
+								</span>
+								<div class="author-post">
+									<img src="img/a2.png" alt="" class="ava-author">
+									<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hoang Nguyen</font></font></a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
+									<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
+									<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
+								</div>
+							</div>
+						</div>
+						<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p4.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">离开家 -  L'Officiel乌克兰</font></font></a>
+								<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">互动设计</font></a></span><span><font style="vertical-align: inherit;">， 
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，  
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
+									<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
+								</span>
+								<div class="author-post">
+									<img src="img/a3.png" alt="" class="ava-author">
+									<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hoang Nguyen</font></font></a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
+									<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
+									<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
+								</div>
+							</div>
+						</div>
+						<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p7.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">雨滴单色</font></font></a>
+								<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">， 
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，  
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
+									<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
+								</span>
+								<div class="author-post">
+									<img src="img/a6.png" alt="" class="ava-author">
+									<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hoang Nguyen</font></font></a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
+									<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
+									<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
+								</div>
+							</div>
+						</div>
+						</div>
+						
+						</div>
+						
+						<div class="row _post-container_">
+						</div>
+						<div id="">
+							<h1>摄影</h1>
+							<HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=3>
+						<div class="row _post-container_">
+							<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p11.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title">Tropicalia</a>
+								<span>
+									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
+									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
+									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
+								</span>
+								<div class="author-post">
+									<img src="img/a5.png" alt="" class="ava-author">
+									<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+									<span><i class="fa fa-comment-o"></i> 20</span>
+								</div>
+							</div>
+						</div>
+						<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p12.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title">Face</a>
+								<span>
+									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
+									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
+									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
+								</span>
+								<div class="author-post">
+									<img src="img/a6.png" alt="" class="ava-author">
+									<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+									<span><i class="fa fa-comment-o"></i> 20</span>
+								</div>
+							</div>
+						</div>
+						<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p13.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">保持领先系列</font></font></a>
+								<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">， 
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，  
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
+									<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
+								</span>
+								<div class="author-post">
+									<img src="img/a5.png" alt="" class="ava-author">
+									<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hoang Nguyen</font></font></a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
+									<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
+									<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
+								</div>
+							</div>
+						</div>
+						<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p14.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Faber-Castell /心理问题</font></font></a>
+								<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">， 
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，  
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
+									<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
+								</span>
+								<div class="author-post">
+									<img src="img/a1.png" alt="" class="ava-author">
+									<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hoang Nguyen</font></font></a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
+									<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
+									<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
+								</div>
+							</div>
+						</div>
+						<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p15.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Garry Simpson  -  Bridges  -  Intelligent Life Magazine </font></font></a>
+								<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">， 
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，  
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
+									<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
+								</span>
+								<div class="author-post">
+									<img src="img/a9.png" alt="" class="ava-author">
+									<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hoang Nguyen</font></font></a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
+									<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
+									<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+						<div id="">
+							<h1>摄影</h1>
+							<HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=3>
+						<div class="row _post-container_">
+							<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p11.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title">Tropicalia</a>
+								<span>
+									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
+									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
+									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
+								</span>
+								<div class="author-post">
+									<img src="img/a5.png" alt="" class="ava-author">
+									<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+									<span><i class="fa fa-comment-o"></i> 20</span>
+								</div>
+							</div>
+						</div>
+						<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p12.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title">Face</a>
+								<span>
+									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
+									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
+									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
+								</span>
+								<div class="author-post">
+									<img src="img/a6.png" alt="" class="ava-author">
+									<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+									<span><i class="fa fa-comment-o"></i> 20</span>
+								</div>
+							</div>
+						</div>
+						<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p13.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">保持领先系列</font></font></a>
+								<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">， 
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，  
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
+									<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
+								</span>
+								<div class="author-post">
+									<img src="img/a5.png" alt="" class="ava-author">
+									<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hoang Nguyen</font></font></a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
+									<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
+									<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
+								</div>
+							</div>
+						</div>
+						<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p14.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Faber-Castell /心理问题</font></font></a>
+								<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">， 
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，  
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
+									<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
+								</span>
+								<div class="author-post">
+									<img src="img/a1.png" alt="" class="ava-author">
+									<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hoang Nguyen</font></font></a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
+									<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
+									<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
+								</div>
+							</div>
+						</div>
+						<div class="custom-column-5">
+							<div class="be-post">
+								<a href="blog-detail-2.html" class="be-img-block">
+								<img src="img/p15.jpg" alt="我的天啊">
+								</a>
+								<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Garry Simpson  -  Bridges  -  Intelligent Life Magazine </font></font></a>
+								<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">， 
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，  
+									 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
+									<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
+								</span>
+								<div class="author-post">
+									<img src="img/a9.png" alt="" class="ava-author">
+									<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hoang Nguyen</font></font></a></span>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
+									<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
+									<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+				<div class="col-md-2 col-md-pull-10 left-feild">
+					<div class="be-vidget">
+						<h3 class="letf-menu-article"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+							流行的Creative Filds
+						</font></font></h3>
+						<div class="creative_filds_block">
+							<div class="ul">
+								<a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">平面设计		 </font></font></a>
+								<a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">摄影			 </font></font></a>
+								<a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">互动设计	 </font></font></a>
+								<a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">艺术方向		 </font></font></a>
+								<a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">图		</font></font></a>
+							</div>
+						</div>
+					</div>
+					<div class="be-vidget">
+						<h3 class="letf-menu-article"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+							热门标签
+						</font></font></h3>
+						<div class="tags_block clearfix">
+							<ul>
+								<li><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的Photoshop</font></font></a></li>
+								<li><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">图像</font></font></a></li>
+								<li><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">艺术</font></font></a></li>
+								<li><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网站</font></font></a></li>
+								<li><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">商标</font></font></a></li>
+								<li><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">身分</font></font></a></li>
+								<li><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标志设计</font></font></a></li>
+								<li><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">互动</font></font></a></li>
+								<li><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">蓝色</font></font></a></li>
+								<li><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">品牌</font></font></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="be-vidget">
+						<h3 class="letf-menu-article"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+							过滤
+						</font></font></h3>
+						<div class="filter-block">
+							<ul>
+								<li><a><i class="fa fa-graduation-cap"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">学校</font></font></a>
+									<div class="be-popup">
+										<h3 class="letf-menu-article"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+											进入学校
+										</font></font></h3>
+											<form action="./" class="input-search">
+												<input type="text" required="" placeholder="Start typing to see list">
+											</form>
+										<i class="fa fa-times"></i>
+									</div>
+								</li>
+								<li><a><i class="fa fa-wrench"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用的工具</font></font></a>
+									<div class="be-popup">
+										<h3 class="letf-menu-article"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+											工具
+										</font></font></h3>
+											<form action="./" class="input-search">
+												<input type="text" required="" placeholder="Start typing to see list">
+											</form>
+										<i class="fa fa-times"></i>
+									</div>
+								</li>
+								<li><a><i class="fa fa-paint-brush"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">颜色</font></font></a>
+									<div class="be-popup be-color-picker">
+									<h3 class="letf-menu-article"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+											选择颜色
+										</font></font></h3>
+										<div class="for-colors">
+											<ul class="colors cfix">
+												  <li class="color color-0-0"></li>
+												  <li class="color color-0-1"></li>
+												  <li class="color color-0-2"></li>
+												  <li class="color color-0-3"></li>
+												  <li class="color color-0-4"></li>
+												  <li class="color color-0-5"></li>
+												  <li class="color color-0-6"></li>
+												  <li class="color color-0-7"></li>
+												  <li class="color color-0-8"></li>
+												  <li class="color color-0-9"></li>
+												  <li class="color color-0-10"></li>
+												  <li class="color color-0-11"></li>
+												  <li class="color color-1-0"></li>
+												  <li class="color color-1-1"></li>
+												  <li class="color color-1-2"></li>
+												  <li class="color color-1-3"></li>
+												  <li class="color color-1-4"></li>
+												  <li class="color color-1-5"></li>
+												  <li class="color color-1-6"></li>
+												  <li class="color color-1-7"></li>
+												  <li class="color color-1-8"></li>
+												  <li class="color color-1-9"></li>
+												  <li class="color color-1-10"></li>
+												  <li class="color color-1-11"></li>
+												  <li class="color color-2-0"></li>
+												  <li class="color color-2-1"></li>
+												  <li class="color color-2-2"></li>
+												  <li class="color color-2-3"></li>
+												  <li class="color color-2-4"></li>
+												  <li class="color color-2-5"></li>
+												  <li class="color color-2-6"></li>
+												  <li class="color color-2-7"></li>
+												  <li class="color color-2-8"></li>
+												  <li class="color color-2-9"></li>
+												  <li class="color color-2-10"></li>
+												  <li class="color color-2-11"></li>
+												  <li class="color color-3-0"></li>
+												  <li class="color color-3-1"></li>
+												  <li class="color color-3-2"></li>
+												  <li class="color color-3-3"></li>
+												  <li class="color color-3-4"></li>
+												  <li class="color color-3-5"></li>
+												  <li class="color color-3-6"></li>
+												  <li class="color color-3-7"></li>
+												  <li class="color color-3-8"></li>
+												  <li class="color color-3-9"></li>
+												  <li class="color color-3-10"></li>
+												  <li class="color color-3-11"></li>
+												  <li class="color color-4-0"></li>
+												  <li class="color color-4-1"></li>
+												  <li class="color color-4-2"></li>
+												  <li class="color color-4-3"></li>
+												  <li class="color color-4-4"></li>
+												  <li class="color color-4-5"></li>
+												  <li class="color color-4-6"></li>
+												  <li class="color color-4-7"></li>
+												  <li class="color color-4-8"></li>
+												  <li class="color color-4-9"></li>
+												  <li class="color color-4-10"></li>
+												  <li class="color color-4-11"></li>
+												  <li class="color color-5-0"></li>
+												  <li class="color color-5-1"></li>
+												  <li class="color color-5-2"></li>
+												  <li class="color color-5-3"></li>
+												  <li class="color color-5-4"></li>
+												  <li class="color color-5-5"></li>
+												  <li class="color color-5-6"></li>
+												  <li class="color color-5-7"></li>
+												  <li class="color color-5-8"></li>
+												  <li class="color color-5-9"></li>
+												  <li class="color color-5-10"></li>
+												  <li class="color color-5-11"></li>
+												  <li class="color color-6-0"></li>
+												  <li class="color color-6-1"></li>
+												  <li class="color color-6-2"></li>
+												  <li class="color color-6-3"></li>
+												  <li class="color color-6-4"></li>
+												  <li class="color color-6-5"></li>
+												  <li class="color color-6-6"></li>
+												  <li class="color color-6-7"></li>
+												  <li class="color color-6-8"></li>
+												  <li class="color color-6-9"></li>
+												  <li class="color color-6-10"></li>
+												  <li class="color color-6-11"></li>
+												  <li class="color color-7-0"></li>
+												  <li class="color color-7-1"></li>
+												  <li class="color color-7-2"></li>
+												  <li class="color color-7-3"></li>
+												  <li class="color color-7-4"></li>
+												  <li class="color color-7-5"></li>
+												  <li class="color color-7-6"></li>
+												  <li class="color color-7-7"></li>
+												  <li class="color color-7-8"></li>
+												  <li class="color color-7-9"></li>
+												  <li class="color color-7-10"></li>
+												  <li class="color color-7-11"></li>
+												  <li class="color color-8-0"></li>
+												  <li class="color color-8-1"></li>
+												  <li class="color color-8-2"></li>
+												  <li class="color color-8-3"></li>
+												  <li class="color color-8-4"></li>
+												  <li class="color color-8-5"></li>
+												  <li class="color color-8-6"></li>
+												  <li class="color color-8-7"></li>
+												  <li class="color color-8-8"></li>
+												  <li class="color color-8-9"></li>
+												  <li class="color color-8-10"></li>
+												  <li class="color color-8-11"></li>
+												  <li class="color color-9-0"></li>
+												  <li class="color color-9-1"></li>
+												  <li class="color color-9-2"></li>
+												  <li class="color color-9-3"></li>
+												  <li class="color color-9-4"></li>
+												  <li class="color color-9-5"></li>
+												  <li class="color color-9-6"></li>
+												  <li class="color color-9-7"></li>
+												  <li class="color color-9-8"></li>
+												  <li class="color color-9-9"></li>
+												  <li class="color color-9-10"></li>
+												  <li class="color color-9-11"></li>
+											</ul>
+										</div>
+										<i class="fa fa-times"></i>
+											
+									</div>
+								</li>
+								<li><a><i class="fa fa-camera-retro"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">访问画廊</font></font></a>
+									<div class="be-popup">
+										<h3 class="letf-menu-article"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+											Galerry
+										</font></font></h3>
+											<form action="./" class="input-search">
+												<input type="text" required="" placeholder="Start typing to see list">
+											</form>
+										<i class="fa fa-times"></i>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div></div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- THE FOOTER -->
+	
+
+	<div id="footerLoad">
+		
+	</div>
+	<!--引入末尾页-->
+	<script>
+		$("#footerLoad").load("footer.html");
+	</script>
+	<div class="be-fixed-filter"></div>
+	
+	<div class="large-popup login">
+		<div class="large-popup-fixed"></div>
+		<div class="container large-popup-container">
+			<div class="row">
+				<div class="col-md-8 col-md-push-2 col-lg-6 col-lg-push-3  large-popup-content">
+					<div class="row">
+						<div class="col-md-12">
+							<i class="fa fa-times close-button"></i>
+							<h5 class="large-popup-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登录</font></font></h5>
+						</div>
+						<form action="./" class="popup-input-search">
+						<div class="col-md-6">
+							<input class="input-signtype" type="email" required="" placeholder="Your email">
+						</div>
+						<div class="col-md-6">
+							<input class="input-signtype" type="password" required="" placeholder="Password">
+						</div>
+						<div class="col-xs-6">
+							<div class="be-checkbox">
+							<label class="check-box">
+								    <input id="" class="checkbox-input" type="checkbox" value="" name=""> <span class="check-box-sign"></span>
+								</label>
+								<span class="large-popup-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+									保持登录
+								</font></font></span>
+							</div>
+							
+							<a href="blog-detail-2.html" class="link-large-popup"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">忘记密码？</font></font></a>
+						</div>
+						<div class="col-xs-6 for-signin">
+							<font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><input type="submit" class="be-popup-sign-button" value="登入"></font></font>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="large-popup register">
+		<div class="large-popup-fixed"></div>
+		<div class="container large-popup-container">
+			<div class="row">
+				<div class="col-md-10 col-md-push-1 col-lg-8 col-lg-push-2 large-popup-content">
+					<div class="row">
+						<div class="col-md-12">
+							<i class="fa fa-times close-button"></i>
+							<h5 class="large-popup-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册账号</font></font></h5>
+						</div>
+						<form class="popup-input-search" id="registerform">
+						<div class="col-md-4">
+							<input id="username" name="username" class="input-signtype" type="text" required="" placeholder="账号">
+						</div>
+							<div class="col-md-4">
+								<input id="password" name="password" class="input-signtype" type="text" required="" placeholder="密码">
+							</div>
+							<div class="col-md-4">
+								<input id="repassword" name="repassword" class="input-signtype" type="text" required="" placeholder="确认密码">
+							</div>
+							<div class="col-md-2">
+								<div class="be-custom-select-block">
+									<select name="sex" id="sex" class="be-custom-select">
+										<option value="sex" disabled="disabled" selected="selected"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+											性别
+										</font></font></option>
+										<option value="man"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">男</font></font></option>
+										<option value="woman"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">女</font></font></option>
+									</select>
+								</div>
+							</div>
+						<div class="col-md-4">
+							<input id="name" name="name" class="input-signtype" type="text" required="" placeholder="名字">
+						</div>
+							<div class="col-md-2">
+							<div class="be-custom-select-block">
+							<select name="nation" id="nation" class="be-custom-select">
+								<option value="" disabled="" selected=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+									国家
+								</font></font></option>
+								<option value=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">中国</font></font></option>
+								<option value=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">外国</font></font></option>
+							</select>
+							</div>
+						</div>
+								<div class="form-group col-md-2">
+									<select id="province" name="province" class="form-control"></select>
+								</div>
+									<div class="form-group col-md-2">
+										<select id="city" name="city" class="form-control"></select>
+									</div>
+						<div class="col-md-4">
+							<input class="input-signtype" id="email" name="email" type="text" required="" placeholder="邮箱">
+						</div>
+							<div class="col-md-2">
+								<a href="javascript:void(0)" onclick="toCode()" >点击获取</a>
+								<input class="input-signtype" type="text" id="checkcode" name="checkcode" required="" placeholder="邮箱验证码">
+							</div>
+							<div class="col-md-6">
+								<input class="input-signtype" id="phone" name="phone" type="text" required="" placeholder="电话号码">
+							</div>
+							<div class="col-md-2">
+								<select id="y" name="year" onchange="funy(this)" class="form-control">
+									<option value="">请选择 年</option>
+								</select>
+							</div>
+							<div class="col-md-2">
+								<select id="m" name="m" onchange="funm(this)" class="form-control">
+									<option value="">选择 月</option>
+								</select>
+							</div>
+							<div class="col-md-2">
+								<select id="d"  name="d" onChange="DDD(this.value)" class="form-control">
+									<option value="">选择 日</option>
+								</select>
+							</div>
+						<div class="col-md-6">
+							<div class="be-checkbox">
+								<label class="check-box">
+								    <input id="accept" name="accept" class="checkbox-input" type="checkbox" required=""> <span class="check-box-sign"></span>
+								</label>
+								<span class="large-popup-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+									我已阅读并同意</font></font><a class="be-popup-terms" href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用条款</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><a class="be-popup-terms" href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">隐私政策</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。
+								</font></font></span>
+							</div>
+						</div>
+						<div class="col-md-6 for-signin">
+							<font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><input type="submit" id="regbt" class="be-popup-sign-button" value="注册"></font></font>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- 背景动画 -->
+<!--<canvas id="c_n9" width="1920" height="990" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
+<script src="script/canvas-nest.min.js"></script>-->
+	<!-- SCRIPTS	 -->
+	<script type="text/javascript" src="./dist/cj-pcd-1.0.1.min.js"></script>
+	<script type="text/javascript" src="./dist/cj-pcd-1.0.1.js"></script>
+	<script src="script/bootstrap.min.js"></script>		
+	<script src="script/idangerous.swiper.min.js"></script>
+	<script src="script/isotope.pkgd.min.js"></script>	
+	<script src="script/jquery.viewportchecker.min.js"></script>
+	<script src="script/global.js"></script><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google 翻译"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">提供更好的翻译建议</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>	
+	
+    <div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div>
+	</body>
+  <script type="text/javascript">
+      //    年月日
+      var y = document.getElementById('y');
+      var m = document.getElementById('m');
+      var d = document.getElementById('d');
+
+      var D = new Date();
+      var yy = D.getFullYear();               //年
+      var mm = parseInt(D.getMonth()) + 1;    //现在是8月，月份获取是7月。一脸懵逼！
+      var dd = D.getDate();                   //日
+      var oyy = 10 * (yy - 100).toString().substr(0,3);   //计算最小年 o = old
+      var marr = [1,3,5,7,8,10,12];           //列出31天的月份
+      var add;                                //初始化每月天数 a = all
+
+      starty();           //开始生成年下拉列表
+      startm();           //开始生成月下拉列表
+      startd(dd,mm,yy);   //开始生成日下拉列表
+
+      // 生成年下拉列表
+      function starty(){
+          // 初始化
+          var pyy = document.createElement('option');
+          pyy.innerText = '选择 年';
+          pyy.value = 0;
+          y.appendChild(pyy);
+
+          // 循环出所有年
+          for(i=yy;i>=oyy;i--){
+              pyy = document.createElement('option');
+              pyy.innerText = i + ' 年';
+              pyy.value = i;
+              y.appendChild(pyy);
+          }
+      }
+
+      // 生成月下拉列表
+      function startm(){
+          // 初始化
+          var pmm = document.createElement('option');
+          pmm.innerText = '选择 月';
+          pmm.value = 0;
+          m.appendChild(pmm);
+
+          // 判断是否选择了年
+          if(y.selectedOptions[0].value == 0) return;
+
+          // 循环出所有月
+          for(i=1;i<=12;i++){
+              pmm = document.createElement('option');
+              pmm.innerText = i + ' 月';
+              pmm.value = i;
+              m.appendChild(pmm);
+          }
+      }
+
+      function startd(mm,yy){
+          // 初始化
+          var pdd = document.createElement('option');
+          pdd.innerText = '选择 日';
+          pdd.value = 0;
+          d.appendChild(pdd);
+
+          // 判断是否选择了月
+          if(m.selectedOptions[0].value == 0) return;
+          var day = isadd(mm,yy);
+
+          // 循环出所有日
+          for(i=1;i<=day;i++){
+              pdd = document.createElement('option');
+              pdd.innerText = i + ' 日';
+              pdd.value = i;
+              d.appendChild(pdd);
+          }
+      }
+
+      // 判断并产生该月的天数
+      function isadd(mm,yy){
+          if(marr.indexOf(parseInt(mm)) != -1){
+              add = 31;
+          }
+          else{
+              add = 30;
+              if(mm == 2 && yy % 4 == 0){
+                  add = 29;
+              }
+              else if(mm == 2 && yy % 4 != 0){
+                  add = 28;
+              }
+          }
+          return add;
+      }
+
+      // 年份改变时调用
+      function funy(obj){
+          m.innerHTML = null;
+          d.innerHTML = null;
+          var yy = obj.selectedOptions[0].value;
+          startm();
+          startd(dd,mm,yy);
+      }
+
+      // 月份改变时调用
+      function funm(obj){
+          d.innerHTML = null;
+          var yy = y.selectedOptions[0].value;
+          var mm = obj.selectedOptions[0].value;
+          startd(mm,yy);
+      }
+  // 用户注册
+  // 1.获取用户输入
+      var password =$.trim($("#password").val());
+      var repassword = $.trim($("#repassword").val());
+      var email = $.trim($("#email").val());
+      var checkcode = $.trim($("#checkcode").val());
+      var sex = $.trim($("#sex").val());
+      var name = $.trim($("#name").val());
+      var country = $.trim($("#nation").val());
+      var province = $.trim($("#province").val());
+      var city = $.trim($("#city").val());
+      var phone = $.trim($("#phone").val());
+      var birthYear = $.trim($("#y").val());
+      var birthMonth = $.trim($("#m").val());
+     if($("#accept").prop("checked")==true){
+         alert("请认真阅读使用条款并勾选")
+	 }
+	  var code;
+      function toCode(){
+          var email = $.trim($("#email").val());
+          if(email !=null&&email !=''){
+              $.ajax({
+                  url:"checkEmail",
+                  type:"POST",
+                  data:{
+                      email:function () {
+                          return email;
+                      }
+                  },
+                  success:function (response) {
+                      code=response;
+                  }
+              })
+          }else {
+              alert("请先输入邮箱地址")
+          }
+
+      }
+      $("#registerform").validate({
+          rules:{
+              username:{
+                  required: true,
+                  // minlength: 8,
+                  // maxlength: 20,
+                  remote: {
+                      url:"checkUserName",     //后台处理程序
+                      type:"POST", //数据发送方式
+                      data:{
+                         username:function () {
+                              var username = $("#username").val();
+                              return username;
+                          }
+					  },//要传递的参数
+				   }
+                  },
+              password:{
+                  required: true,
+                  minlength: 8,
+                  maxlength: 20
+              },
+			  repassword:{
+                  required: true,
+                  minlength: 8,
+                  maxlength: 20
+			  },
+               name:{
+                  required: true,
+                  minlength: 1,
+                  maxlength: 8
+              },
+              email:{
+                  email:true
+              },
+              checkcode:{
+                  digits:true,
+                  required: true,
+                  rangelength:[4,4],
+                  // remote: {
+                  //     url:"checkUserName",     //后台处理程序
+                  //     type:"POST",            //数据发送方式
+                  //     data:{
+                  //         email:function () {
+                  //             var username = $("#username").val();
+                  //             return username;
+                  //         }
+                  //     },//要传递的参数
+                  // }
+			  },
+             phone:{
+                  digits:true,
+                  required: true,
+                  rangelength:[11,11]
+          }
+          },
+          messages:{
+              username:{
+                  required:"请输入用户名",
+                  // minlength:"至少输入{0}个字符",
+                  // maxlength:"最多输入20个字符",
+                  remote:"用户名相同"
+              },
+              password:{
+                  required:"请输入密码",
+                  minlength:"至少输入{0}个字符",
+                  maxlength:"最多输入{0}个字符"
+              },
+              repassword:{
+                  required: "请输入确认密码",
+                  minlength: "至少输入{0}个字符",
+                  maxlength:"最多输入{0}个字符"
+              },
+              name:{
+                  required: "请输入名字",
+                  minlength: "至少输入{0}个字符",
+                  maxlength: "最多输入{0}个字符"
+              },
+              email:{
+                  email:"请输入正确的邮箱格式"
+              },
+              checkcode:{
+                  digits:"请输入数字",
+                  required:"请输入验证码",
+                  rangelength:"请输入四位数"
+              },
+              phone:{
+                  digits:"请输入数字",
+                  required: "",
+                  rangelength:[11,11]
+              }
+          }
+      })
+
+
+
+  </script>
+
+</html>
