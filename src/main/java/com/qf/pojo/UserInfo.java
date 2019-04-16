@@ -15,12 +15,11 @@ public class UserInfo {
   private String country;
   private String province;
   private String city;
-  private String brief;
+  private long brief;
   private java.sql.Timestamp registrationDate;
   private String birthYear;
   private String birthMonth;
-  private String birthYmd;
-  private String emailCode;
+  private java.sql.Date birthYmd;
   private String flag;
 
 
@@ -132,11 +131,11 @@ public class UserInfo {
   }
 
 
-  public String getBrief() {
+  public long getBrief() {
     return brief;
   }
 
-  public void setBrief(String brief) {
+  public void setBrief(long brief) {
     this.brief = brief;
   }
 
@@ -168,21 +167,12 @@ public class UserInfo {
   }
 
 
-  public String getBirthYmd() {
+  public java.sql.Date getBirthYmd() {
     return birthYmd;
   }
 
-  public void setBirthYmd(String birthYmd) {
+  public void setBirthYmd(java.sql.Date birthYmd) {
     this.birthYmd = birthYmd;
-  }
-
-
-  public String getEmailCode() {
-    return emailCode;
-  }
-
-  public void setEmailCode(String emailCode) {
-    this.emailCode = emailCode;
   }
 
 
@@ -194,28 +184,4 @@ public class UserInfo {
     this.flag = flag;
   }
 
-  @Override
-  public String toString() {
-    return "UserInfo{" +
-            "userInfoId=" + userInfoId +
-            ", username='" + username + '\'' +
-            ", password='" + password + '\'' +
-            ", age=" + age +
-            ", sex='" + sex + '\'' +
-            ", name='" + name + '\'' +
-            ", email='" + email + '\'' +
-            ", phone='" + phone + '\'' +
-            ", headPath='" + headPath + '\'' +
-            ", country='" + country + '\'' +
-            ", province='" + province + '\'' +
-            ", city='" + city + '\'' +
-            ", brief='" + brief + '\'' +
-            ", registrationDate=" + registrationDate +
-            ", birthYear='" + birthYear + '\'' +
-            ", birthMonth='" + birthMonth + '\'' +
-            ", birthYmd='" + birthYmd + '\'' +
-            ", emailCode='" + emailCode + '\'' +
-            ", flag='" + flag + '\'' +
-            '}';
-  }
 }
