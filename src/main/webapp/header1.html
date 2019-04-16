@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="style/loader.css">
 		<link rel="stylesheet" href="style/idangerous.swiper.css">
 		<link rel="stylesheet" href="style/stylesheet.css">
+		<script src="js/tools.js"></script>
 </head>
 <body>
 <!--未登录时的header -->
@@ -116,14 +117,75 @@
 					</ul>
 				</div>
 				<div class="login-header-block">
-					<div class="login_block">
-						<a class="btn-login btn color-1 size-2 hover-2" href="blog-detail-2.html"><i class="fa fa-user"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+					<div class="login_block" id="login">
+						<a class="btn-login btn color-1 size-2 hover-2"><i class="fa fa-user"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
 						登录</font></font></a>
 					</div>	
 				</div>
 			</div>
 		</div>
-		
+	   <div class="large-popup login">
+		   <div class="large-popup-fixed"></div>
+		   <div class="container large-popup-container">
+			   <div class="row">
+				   <div class="col-md-8 col-md-push-2 col-lg-6 col-lg-push-3  large-popup-content">
+					   <div class="row">
+						   <div class="col-md-12">
+							   <i class="fa fa-times close-button"></i>
+							   <h5 class="large-popup-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登录</font></font></h5>
+						   </div>
+						   <form action="./" class="popup-input-search">
+							   <div class="col-md-6">
+								   <input class="input-signtype" type="text" required="" placeholder="Your Username" id="loginUsername">
+							   </div>
+							   <div class="col-md-6">
+								   <input class="input-signtype" type="password" required="" placeholder="Password" id="loginPassword">
+							   </div>
+							   <div class="col-xs-6">
+								   <div class="be-checkbox">
+									   <label class="check-box">
+										   <input id="" class="checkbox-input" type="checkbox" value="" name=""> <span class="check-box-sign"></span>
+									   </label>
+									   <span class="large-popup-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+									保持登录
+								</font></font></span>
+								   </div>
+
+								   <a href="blog-detail-2.html" class="link-large-popup"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">忘记密码？</font></font></a>
+							   </div>
+
+
+							   <div class="col-xs-6 for-signin">
+								   <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><input type="button" class="be-popup-sign-button" id="loginCheck1" value="登入"></font></font>
+							   </div>
+							   <script>
+                                   $("#loginCheck1").click(function () {
+                                       $.ajax({
+                                           type: "POST",
+                                           url: "LoginCheck",
+                                           contentType: "application/json",
+                                           data: JSON.stringify({
+                                               username: $("#loginUsername").val(),
+                                               password: $("#loginPassword").val()
+                                           }),
+                                           dataType: "json",
+                                           success: function (data) {
+                                               if (data == true) {
+                                                   window.location.reload();
+                                               } else {
+                                                   alert("账号或密码错误！");
+                                               }
+                                           }
+                                       })
+
+                                   })
+							   </script>
+						   </form>
+					   </div>
+				   </div>
+			   </div>
+		   </div>
+	   </div>
 	</header>
 	<script>
 		$(function () {
@@ -148,6 +210,5 @@
 				}
             });
         })
-
 	</script>
 </body></html>

@@ -50,7 +50,18 @@
 	    <div id="headLoad">	</div>
 	<script src="js/jquery-1.8.2.js"></script>
 		<script>
-			$("#headLoad").load("header1.html")
+            $.ajax({
+                type: "GET",
+                url: "getSessionLoginInfo",
+                success: function (data) {
+                    // alert(data)
+                    if (data!=null) {
+                        $("#headLoad").load("header2.html")
+                    } else {
+                        $("#headLoad").load("header1.html")
+                    }
+                }
+            })
 		</script>
 
 <!-- MAIN CONTENT -->

@@ -49,4 +49,8 @@
     <select id="checkUserName" parameterType="java.lang.String" resultType="int">
         select count(1) from userInfo where username = #{username}
     </select>
+
+    <select id="LoginCheck" parameterType="com.qf.vo.UserInfoVo" resultType="com.qf.dto.LoginInfoDto">
+        select * from userInfo where username=#{username} and password=#{password} and flag=1
+    </select>
 </mapper>
