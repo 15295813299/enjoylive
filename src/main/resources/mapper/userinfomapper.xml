@@ -3,11 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.mapper.UserInfoMapper">
     <insert id="insertRegister" parameterType="com.qf.vo.UserInfoVo">
-        insert into userInfo(username,password,email,age,sex,country,name,birthMonth,phone,province,city,birthYear)
+        insert into userInfo(username,password,email,sex,country,name,birthMonth,phone,province,city,birthYear,birthYMD)
         values (<trim suffixOverrides=",">
-       <if test="username !=null and username !=''">
-           #{username},
-       </if>
+        <if test="username !=null and username !=''">
+            #{username},
+        </if>
         <if test="password !=null and password !=''">
             #{password},
         </if>
@@ -42,8 +42,11 @@
         <if test="birthYear !=null and birthYear !=''">
             #{birthYear},
         </if>
+        <if test="birthYMD !=null and birthYMD !=''">
+            #{birthYMD}
+        </if>
     </trim>
-     )
+        )
     </insert>
 
     <select id="checkUserName" parameterType="java.lang.String" resultType="int">
