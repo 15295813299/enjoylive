@@ -15,7 +15,7 @@ public class UserInfoVo {
   private String city;
   private String birthYear;
   private String birthMonth;
-  private String birthYmd;
+  private String birthYMD;
   private String flag;
 
 
@@ -126,15 +126,15 @@ public class UserInfoVo {
     this.birthMonth = birthMonth;
   }
 
-  public String getBirthYmd() {
-    return birthYmd;
-  }
+    public String getBirthYMD() {
+        return birthYMD;
+    }
 
-  public void setBirthYmd(String birthYmd) {
-    this.birthYmd = birthYmd;
-  }
+    public void setBirthYMD(String birthYMD) {
+        this.birthYMD = birthYMD;
+    }
 
-  public String getFlag() {
+    public String getFlag() {
     return flag;
   }
 
