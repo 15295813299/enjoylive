@@ -1,7 +1,6 @@
 package com.qf.vo;
 
 
-import java.sql.Date;
 
 public class UserInfoVo {
   private String username;
@@ -16,7 +15,7 @@ public class UserInfoVo {
   private String city;
   private String birthYear;
   private String birthMonth;
-//  private java.sql.Date birthYmd;
+  private String birthYMD;
   private String flag;
 
 
@@ -127,15 +126,15 @@ public class UserInfoVo {
     this.birthMonth = birthMonth;
   }
 
-//  public Date getBirthYmd() {
-//    return birthYmd;
-//  }
-//
-//  public void setBirthYmd(Date birthYmd) {
-//    this.birthYmd = birthYmd;
-//  }
+    public String getBirthYMD() {
+        return birthYMD;
+    }
 
-  public String getFlag() {
+    public void setBirthYMD(String birthYMD) {
+        this.birthYMD = birthYMD;
+    }
+
+    public String getFlag() {
     return flag;
   }
 
