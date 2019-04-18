@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.JxTagMapper">
+    <resultMap id="TagMap" type="com.qf.pojo.JxTag">
+        <id column="tagId" property="tagId" javaType="java.lang.Integer"/>
+        <result column="tagName" property="tagName" javaType="java.lang.String"/>
+        <result column="total" property="total" javaType="java.lang.Integer"/>
+    </resultMap>
+    <select id="getPage" resultMap="TagMap">
+        SELECT tag.tagId, tag.tagName, tag.total
+        FROM tag
+        WHERE tag.flag = 1
+        LIMIT #{skipNum},#{num};
+    </select>
+    <select id="getArticleInfoIds" resultType="java.lang.Integer" parameterType="java.util.List">
+        SELECT articleInfo.articleId FROM articleInfo
+        <if test="list != null and list.size > 0">
+            WHERE
+            <foreach collection="list" item="tagName" separator="AND">
+                articleInfo.title LIKE #{tagName}
+            </foreach>
+        </if>
+    </select>
+</mapper>
