@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="style/loader.css">
 		<link rel="stylesheet" href="style/idangerous.swiper.css">
 		<link rel="stylesheet" href="style/stylesheet.css">
+	    <script src="script/jquery-2.1.4.min.js"></script>
 		<script src="js/tools.js"></script>
 </head>
 <body>
@@ -39,59 +40,10 @@
 								</li>
 							</ul>
 						</li>
-						<li ><a href="activity.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">板块</font></font></a>
-							<ul>
+						<li ><a href="activity.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">版块</font></font></a>
+							<ul id="club">
                             <li>
-                                <a href="activity.html"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">游戏</font></font></a>
-                                <i class="fa fa-angle-right"></i><i class="fa fa-angle-down"></i>
-                                <ul>
-                                    <li><a href="page1.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">LOL</font></font></a></li>
-                                    <li><a href="page2.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">DNF</font></font></a></li>
-                                    <li><a href="page3.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">王者荣耀</font></font></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="activity.html"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">数码</font></font></a>
-                                <i class="fa fa-angle-right"></i><i class="fa fa-angle-down"></i>
-                                <ul>
-                                    <li><a href="page1.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">手机</font></font></a></li>
-                                    <li><a href="page2.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">电脑配置</font></font></a></li>
-                                    <li><a href="page3.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">摄影</font></font></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="activity.html"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">体育</font></font></a>
-                                <i class="fa fa-angle-right"></i><i class="fa fa-angle-down"></i>
-                                <ul>
-                                    <li><a href="page1.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">NBA</font></font></a></li>
-                                    <li><a href="page2.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">世界杯</font></font></a></li>
-                                    <li><a href="page3.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">田径</font></font></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="activity.html"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">情感生活</font></font></a>
-                                <i class="fa fa-angle-right"></i><i class="fa fa-angle-down"></i>
-                                <ul>
-                                    <li><a href="page1.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">爱情</font></font></a></li>
-                                    <li><a href="page2.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">亲情</font></font></a></li>
-                                    <li><a href="page3.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">基情</font></font></a></li>
-                                </ul>
+
                             </li>
                         </ul>
 						</li>
@@ -179,6 +131,7 @@
                                        })
 
                                    })
+
 							   </script>
 						   </form>
 					   </div>
@@ -188,6 +141,7 @@
 	   </div>
 	</header>
 	<script>
+        init();
 		$(function () {
 			var href = window.location.href.split("/");
 			var hr=href[href.length-1];
@@ -207,8 +161,44 @@
                 var a = $(item).attr("href");
                	if (hr==a){
                     $(item).parent().addClass("active-header");
+
 				}
             });
         })
+
+        function init() {
+            $.ajax({
+               type:"post",
+               url:"getHeaderCategoryInfo",
+               contentType:"application/json",
+               dataType:"json",
+               success:function (data) {
+                   console.log(data)
+                   $(data).each(function (index,item) {
+                       // $("#club").empty();
+                       $(" <li id='categroy"+index+"'>\n" +
+                           "                                <a href='javascript:void(0)' onclick='goCategroy("+item.categoryId+")'><font style=\"vertical-align: inherit;\"><font\n" +
+                           "                                        style=\"vertical-align: inherit;\">"+item.categoryName+"</font></font></a>\n" +
+                           "                                <i class=\"fa fa-angle-right\"></i><i class=\"fa fa-angle-down\"></i>\n" +
+                           "                                <ul>\n" +
+                           "                                    <li></li>\n" +
+                           "                                </ul>\n" +
+                           "                            </li>").insertAfter("#club>li:eq("+(index)+")");
+                        $(item.childCategoryInfo).each(function (index1,citem) {
+                            $(" <li><a href=\"page1.html\"><font style=\"vertical-align: inherit;\"><font\n" +
+                                "                                            style=\"vertical-align: inherit;\">"+citem.categoryName+"</font></font></a></li>").insertAfter("#"+"categroy"+index+" ul>li:eq("+(index1)+")");
+                        })
+
+
+                   })
+               },
+               error:function () {
+                   console.error()
+               }
+            })
+        }
+         function goCategroy(id) {
+			window.location.href = "activity_on.html?id="+id;
+        }
 	</script>
 </body></html>
