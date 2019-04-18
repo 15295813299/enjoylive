@@ -1,5 +1,8 @@
 package com.qf.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.qf.service.JxIArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,40 +39,56 @@ public class JxArticleInfoController {
     }
 
     @RequestMapping("getArticleIdByCategoryName")
-    public Object getArticleIdByCategoryName(@RequestParam String categoryName) {
-        return jxIArticleService.getArticleIdByCategoryName(categoryName);
+    public Object getArticleIdByCategoryName(@RequestParam String categoryName,@RequestParam int pageNum,@RequestParam int pageSize) {
+        Page<Integer> page = PageHelper.startPage(pageNum,pageSize);
+        jxIArticleService.getArticleIdByCategoryName(categoryName);
+        return new PageInfo<>(page);
     }
 
     @RequestMapping("getIdBySupport")
-    public Object getIdBySupport() {
-        return jxIArticleService.getIdBySupport();
+    public Object getIdBySupport()
+    {
+        Page<Integer> page = PageHelper.startPage(0,10);
+        jxIArticleService.getIdBySupport();
+        return new PageInfo<>(page);
     }
 
     @RequestMapping("getIdByBrowse")
     public Object getIdByBrowse() {
-        return jxIArticleService.getIdByBrowse();
+
+        Page<Integer> page = PageHelper.startPage(0,10);
+        jxIArticleService.getIdByBrowse();
+        return new PageInfo<>(page);
     }
 
     @RequestMapping("getIdByComment")
     public Object getIdByComment() {
-        return jxIArticleService.getIdByComment();
+        Page<Integer> page = PageHelper.startPage(0,10);
+        jxIArticleService.getIdByComment();
+        return new PageInfo<>(page);
     }
 
     @RequestMapping("getIdByTime")
     public Object getIdByTime() {
-        return jxIArticleService.getIdByTime();
+        Page<Integer> page = PageHelper.startPage(0,10);
+        jxIArticleService.getIdByTime();
+        return new PageInfo<>(page);
     }
 
     @RequestMapping("getIdByTimestamp")
-    public Object getIdByTimestamp(@RequestParam int dayBefore) {
-        return jxIArticleService.getIdByTimestamp(dayBefore);
+    public Object getIdByTimestamp(@RequestParam int dayBefore, @RequestParam int pageNum, @RequestParam int pageSize) {
+        Page<Integer> page = PageHelper.startPage(pageNum, pageSize);
+        jxIArticleService.getIdByTimestamp(dayBefore);
+        return new PageInfo<>(page);
     }
 
     @RequestMapping("getIdByTitleDim")
-    public Object getIdByTitleDim(@RequestParam String text) {
+    public Object getIdByTitleDim(@RequestParam String text, @RequestParam int pageNum, @RequestParam int pageSize) {
         //查看查询条件是否在热门标签表,如果在则其次数加一,不在则创建
         jxIArticleService.checkHotTag(text);
         text = "%" + text + "%";
-        return jxIArticleService.getIdByTitleDim(text);
+        Page<Integer> page = PageHelper.startPage(pageNum, pageSize);
+        jxIArticleService.getIdByTitleDim(text);
+        return new PageInfo<>(page);
     }
 }

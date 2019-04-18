@@ -18,5 +18,10 @@ public interface JxTagMapper {
      */
     List<JxTag> getPage(@Param("skipNum") int skipNum,@Param("num") int num);
 
+    /**
+     * 根据标签集合查出文章id数组
+     * @param tagNameList 标签集合
+     * @return id数组
+     */
     int[] getArticleInfoIds(List<String> tagNameList);
 }

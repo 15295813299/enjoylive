@@ -5,9 +5,38 @@ $("#jx_submit").click(function (event) {
     $.ajax({
         type: 'POST',
         url: 'article/getIdByTitleDim',
-        data: "text=" + text,
+        data: "text=" + text + "&pageNum=0&pageSize=10",
         success: function (response) {
-            change(response, "搜索:" + text)
+            change(response.list, "搜索:" + text);
+            layui.use(['laypage', 'layer'], function () {
+                var laypage = layui.laypage
+                    , layer = layui.layer;
+                laypage.render({
+                    elem: 'pageHelper'
+                    , count: response.total
+                    , limit: response.pageSize
+                    , curr: response.pageNum
+                    , layout:
+                        ['count', 'prev', 'page', 'next', 'skip']
+                    , jump:
+                        function (obj) {
+                            console.log(obj);
+                            $.ajax({
+                                type: 'POST',
+                                url: 'article/getIdByTitleDim',
+                                data: "text=" + text + "&pageNum=" + obj.curr + "&pageSize=10",
+                                success: function (response) {
+                                    change(response.list, "搜索:" + text);
+                                },
+                                error: function (response) {
+                                    console.log(response)
+                                }
+                            })
+                        }
+                })
+                ;
+
+            });
         },
         error: function (response) {
             console.log(response)
@@ -27,9 +56,38 @@ $(function () {
         $.ajax({
             type: 'POST',
             url: 'article/getArticleIdByCategoryName',
-            data: "categoryName=" + category,
+            data: "categoryName=" + category+"&pageNum=1&pageSize=10",
             success: function (response) {
-                change(response, category);
+                change(response.list, category);
+                layui.use(['laypage', 'layer'], function () {
+                    var laypage = layui.laypage
+                        , layer = layui.layer;
+                    laypage.render({
+                        elem: 'pageHelper'
+                        , count: response.total
+                        , limit: response.pageSize
+                        , curr: response.pageNum
+                        , layout:
+                            ['count', 'prev', 'page', 'next', 'skip']
+                        , jump:
+                            function (obj) {
+                                console.log(obj);
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'article/getArticleIdByCategoryName',
+                                    data: "categoryName=" + category+"&pageNum="+obj.curr+"&pageSize=10",
+                                    success: function (response) {
+                                        change(response.list, category);
+                                    },
+                                    error: function (response) {
+                                        console.log(response)
+                                    }
+                                })
+                            }
+                    })
+                    ;
+
+                });
             },
             error: function (response) {
                 console.log(response)
@@ -39,6 +97,7 @@ $(function () {
 
 
 });
+//热门标签
 $(function () {
     //热门标签初始化,前十
     $.ajax({
@@ -72,9 +131,38 @@ function query(tagName) {
     $.ajax({
         type: 'POST',
         url: 'tag/getArticleInfoIds',
-        data: "tagName=" + string,
+        data: "tagName=" + string + "&pageNum=1",
         success: function (response) {
-            change(response, tagName);
+            change(response.list, "标签查询");
+            layui.use(['laypage', 'layer'], function () {
+                var laypage = layui.laypage
+                    , layer = layui.layer;
+                laypage.render({
+                    elem: 'pageHelper'
+                    , count: response.total
+                    , limit: response.pageSize
+                    , curr: response.pageNum
+                    , layout:
+                        ['count', 'prev', 'page', 'next', 'skip']
+                    , jump:
+                        function (obj) {
+                            console.log(obj);
+                            $.ajax({
+                                type: 'POST',
+                                url: 'tag/getArticleInfoIds',
+                                data: "tagName=" + string + "&pageNum=" + obj.curr,
+                                success: function (response) {
+                                    change(response.list, "标签查询");
+                                },
+                                error: function (response) {
+                                    console.log(response)
+                                }
+                            })
+                        }
+                })
+                ;
+
+            });
         },
         error: function (response) {
             console.log(response)
@@ -186,6 +274,7 @@ function getIdBySupport(tagName) {
         url: 'article/getIdBySupport',
         success: function (response) {
             change(response, tagName);
+            changePage(response.list,'article/getIdBySupport',tagName)
         },
         error: function (response) {
             console.log(response)
@@ -203,6 +292,7 @@ function getIdByBrowse(tagName) {
         url: 'article/getIdByBrowse',
         success: function (response) {
             change(response, tagName);
+            changePage(response.list,'article/getIdByBrowse',tagName)
         },
         error: function (response) {
             console.log(response)
@@ -220,6 +310,7 @@ function getIdByTime(tagName) {
         url: 'article/getIdByTime',
         success: function (response) {
             change(response, tagName);
+            changePage(response.list,'article/getIdByTime',tagName)
         },
         error: function (response) {
             console.log(response)
@@ -231,12 +322,44 @@ function getIdByTime(tagName) {
  * 获取评论数前十的文章信息并显示
  * @param tagName 标题
  */
+
+function changePage(response,url,tagName) {
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage
+            , layer = layui.layer;
+        laypage.render({
+            elem: 'pageHelper'
+            , count: response.total
+            , limit: response.pageSize
+            , curr: response.pageNum
+            , layout:
+                ['count', 'prev', 'page', 'next', 'skip']
+            , jump:
+                function (obj) {
+                    console.log(obj);
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        success: function (response) {
+                            change(response.list,tagName);
+                        },
+                        error: function (response) {
+                            console.log(response)
+                        }
+                    })
+                }
+        })
+        ;
+
+    });
+}
 function getIdByComment(tagName) {
     $.ajax({
         type: 'POST',
         url: 'article/getIdByComment',
         success: function (response) {
             change(response, tagName);
+            changePage(response.list,'article/getIdByComment',tagName)
         },
         error: function (response) {
             console.log(response)
@@ -253,9 +376,38 @@ function getIdByTimestamp(tagName, dayBefore) {
     $.ajax({
         type: 'POST',
         url: 'article/getIdByTimestamp',
-        data: "dayBefore=" + dayBefore,
+        data: "dayBefore=" + dayBefore+"&pageNum=1&pageSize=10",
         success: function (response) {
-            change(response, tagName);
+            change(response.list, tagName);
+            layui.use(['laypage', 'layer'], function () {
+                var laypage = layui.laypage
+                    , layer = layui.layer;
+                laypage.render({
+                    elem: 'pageHelper'
+                    , count: response.total
+                    , limit: response.pageSize
+                    , curr: response.pageNum
+                    , layout:
+                        ['count', 'prev', 'page', 'next', 'skip']
+                    , jump:
+                        function (obj) {
+                            console.log(obj);
+                            $.ajax({
+                                type: 'POST',
+                                url: 'article/getIdByTimestamp',
+                                data: "dayBefore=" + dayBefore+"&pageNum="+obj.curr+"&pageSize=10",
+                                success: function (response) {
+                                    change(response.list, tagName);
+                                },
+                                error: function (response) {
+                                    console.log(response)
+                                }
+                            })
+                        }
+                })
+                ;
+
+            });
         },
         error: function (response) {
             console.log(response)

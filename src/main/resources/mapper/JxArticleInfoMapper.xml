@@ -28,16 +28,15 @@
           AND support.flag = 1
         group by articleInfo.articleId
         Order by count(*) DESC
-        LIMIT 0,10
     </select>
     <select id="getIdByBrowse" resultType="java.lang.Integer">
         SELECT articleInfo.articleId
         FROM articleInfo,
              browseInfo
         WHERE articleInfo.articleId = browseInfo.articleId
+          AND browseInfo.flag = 1
         group by articleInfo.articleId
         Order by count(*) DESC
-        LIMIT 0,10
     </select>
     <select id="getIdByComment" resultType="java.lang.Integer">
         SELECT articleInfo.articleId
@@ -47,19 +46,18 @@
           AND commentInfo.flag = 1
         group by articleInfo.articleId
         Order by count(*) DESC
-        LIMIT 0,10
     </select>
     <select id="getIdByTime" resultType="java.lang.Integer">
         SELECT articleInfo.articleId
         FROM articleInfo
         WHERE articleInfo.flag = 1
         Order by articleInfo.articleInfoDate DESC
-        LIMIT 0,10
     </select>
     <select id="getIdByTimestamp" resultType="java.lang.Integer" parameterType="java.sql.Timestamp">
         SELECT articleInfo.articleId
         FROM articleInfo
         WHERE articleInfo.articleInfoDate &gt; #{articleInfoDate}
+          AND articleInfo.flag = 1
     </select>
     <select id="getIdByTitleDim" resultType="java.lang.Integer">
         SELECT articleId, articleId
@@ -87,6 +85,8 @@
         FROM category,
              articleInfo
         WHERE category.categoryId = articleInfo.categoryId
+          AND category.flag = 1
+          AND articleInfo.flag = 1
           AND articleInfo.articleId = #{articleId}
     </select>
 
