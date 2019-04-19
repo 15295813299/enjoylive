@@ -443,5 +443,5 @@
 
 
 .w-e-text-container{
-    height: 700px !important;/*!important是重点，因为原div是行内样式设置的高度300px*/
+    height: 600px !important;/*!important是重点，因为原div是行内样式设置的高度300px*/
 }
