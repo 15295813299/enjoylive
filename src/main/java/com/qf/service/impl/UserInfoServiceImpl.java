@@ -1,8 +1,7 @@
-package com.qf.service.imp;
+package com.qf.service.impl;
 
 import com.qf.dto.LoginInfoDto;
 import com.qf.mapper.UserInfoMapper;
-import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
 import com.qf.vo.UserInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 
 @Service
-public class UserInfoServiceImp implements UserInfoService {
+public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     UserInfoMapper userInfoMapper;
     public Integer insertRegister(UserInfoVo userInfoVo) {

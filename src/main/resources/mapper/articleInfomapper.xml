@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.ArticleInfoMapper">
+    <!--添加文章并将主键赋值给传入对象的articleId属性-->
+    <insert id="addArticle" parameterType="com.qf.pojo.ArticleInfo" keyProperty="articleId" useGeneratedKeys="true">
+        insert into articleInfo values(default ,#{userInfoId},#{categoryId},#{title},#{content},#{articleInfoDate},default)
+    </insert>
+
+    <!--将文章的第一张图片存储到文章图片库-->
+    <insert id="addArticlePoto" parameterType="Map">
+        insert into articlePoto values (default ,#{articleId},#{potoPath},default )
+    </insert>
+</mapper>

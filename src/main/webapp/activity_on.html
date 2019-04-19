@@ -882,7 +882,9 @@
         </svg>
     </div>
 </div>
+<!-按大版块查询-->
 <script type="text/javascript">
+    var id = window.location.search.split("=")[1];
     var startPage = 1;
     var showNum = 4;
     var page = $("#pagination");
@@ -894,7 +896,7 @@
             url: "getCategoryInfo",
             contentType: "application/json",
             dataType: "json",
-            data:JSON.stringify({"currentPage":currentPage,"pageSize":pageSize}),
+            data:JSON.stringify({"currentPage":currentPage,"pageSize":pageSize,"categoryId":id}),
             success: function (response) {
                 console.log(response)
              $(response.list).each(function (index,item) {
