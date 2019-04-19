@@ -1186,7 +1186,6 @@
               var sex = $("#sex option:selected").val();
               var name = $.trim($("#name").val());
               var phone = $.trim($("#phone").val());
-              alert('恭喜你，验证通过了！');
               $.ajax({
                   type:"POST",
                   url:"insertRegister",
@@ -1209,6 +1208,7 @@
                   success:function (response) {
                       console.log(response)
                       if(response>=1){
+                          alert('恭喜你，验证通过了！');
                          window.location.href="index.html";
                       }
                   },
