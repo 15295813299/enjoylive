@@ -15,11 +15,11 @@ public class UserInfo {
   private String country;
   private String province;
   private String city;
-  private long brief;
-  private java.sql.Timestamp registrationDate;
+  private String brief;
+  private String registrationDate;
   private String birthYear;
   private String birthMonth;
-  private java.sql.Date birthYmd;
+  private String birthYMD;
   private String flag;
 
 
@@ -130,23 +130,14 @@ public class UserInfo {
     this.city = city;
   }
 
-
-  public long getBrief() {
+  public String getBrief() {
     return brief;
   }
 
-  public void setBrief(long brief) {
+  public void setBrief(String brief) {
     this.brief = brief;
   }
 
-
-  public java.sql.Timestamp getRegistrationDate() {
-    return registrationDate;
-  }
-
-  public void setRegistrationDate(java.sql.Timestamp registrationDate) {
-    this.registrationDate = registrationDate;
-  }
 
 
   public String getBirthYear() {
@@ -167,16 +158,17 @@ public class UserInfo {
   }
 
 
-  public java.sql.Date getBirthYmd() {
-    return birthYmd;
-  }
+    public String getRegistrationDate() {
+        return registrationDate;
+    }
 
-  public void setBirthYmd(java.sql.Date birthYmd) {
-    this.birthYmd = birthYmd;
-  }
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
+    }
 
 
-  public String getFlag() {
+
+    public String getFlag() {
     return flag;
   }
 
@@ -184,4 +176,35 @@ public class UserInfo {
     this.flag = flag;
   }
 
+  public String getBirthYMD() {
+    return birthYMD;
+  }
+
+  public void setBirthYMD(String birthYMD) {
+    this.birthYMD = birthYMD;
+  }
+
+  @Override
+  public String toString() {
+    return "UserInfo{" +
+            "userInfoId=" + userInfoId +
+            ", username='" + username + '\'' +
+            ", password='" + password + '\'' +
+            ", age=" + age +
+            ", sex='" + sex + '\'' +
+            ", name='" + name + '\'' +
+            ", email='" + email + '\'' +
+            ", phone='" + phone + '\'' +
+            ", headPath='" + headPath + '\'' +
+            ", country='" + country + '\'' +
+            ", province='" + province + '\'' +
+            ", city='" + city + '\'' +
+            ", brief=" + brief +
+            ", registrationDate='" + registrationDate + '\'' +
+            ", birthYear='" + birthYear + '\'' +
+            ", birthMonth='" + birthMonth + '\'' +
+            ", birthYmd='" + birthYMD + '\'' +
+            ", flag='" + flag + '\'' +
+            '}';
+  }
 }

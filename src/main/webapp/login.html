@@ -6,6 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<link rel="shortcut icon" href="img/favicon.png">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="script/jquery-2.1.4.min.js"></script>
 		<link rel="stylesheet" href="style/bootstrap.min.css">
 		<link rel="stylesheet" href="font-awesome/4.3.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="style/icon.css">
@@ -52,7 +53,6 @@
 	
 	<!--引入头部-->
 	    <div id="headLoad">	</div>
-	<script src="js/jquery-1.8.2.js"></script>
 		<script>
             $.ajax({
                 type: "GET",
@@ -67,343 +67,32 @@
                 }
             })
 		</script>
-	<!-- MAIN CONTENT -->
+	<!--文章展示页面-->
 	<div id="content-block">
 		<div class="container-fluid custom-container be-detail-container">
-			<div class="row">
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p1.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">EngineThemes Re-design</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a1.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
+			<div class="row" id="show">
+				<div>
+
 				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p2.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">Mochiice ne concept</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a1.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p3.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">Kross.pl redesign</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a2.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p4.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">Surf Board</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a3.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p5.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">Iniq-x</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a4.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p6.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">Ink UI Kit - iOS Screens for Photoshop & Sketch</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a5.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p7.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">Ex Machina Social</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a6.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p8.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">National Geographic - The Endangered Species (Concept)</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a7.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p9.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">Viber Brand Identity and not only</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a7.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p10.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">Vespa - Responsive Redesign</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a8.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p11.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">Bukku - Free HTML/CSS Book/eBook Template</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a5.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p12.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">Watch it - Concept</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a6.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p13.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">Market - Highly Selective Marketplace for Creatives</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a5.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p14.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">REIS FREE FONT BY MARCELO REIS MELO</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a1.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
-				<div class="col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-					<div class="be-post">
-						<a href="blog-detail-2.html"class="be-img-block">
-						<img src="img/p15.jpg" alt="omg">
-						</a>
-						<a href="blog-detail-2.html" class="be-post-title">Mad Max Fury Road - Official Site and Vehicle Showcase</a>
-						<span>
-							<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>, 
-							<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,  
-							<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-						</span>
-						<div class="author-post">
-							<img src="img/a9.png" alt="" class="ava-author">
-							<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-						</div>
-						<div class="info-block">
-							<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-							<span><i class="fa fa-eye"></i> 789</span>
-							<span><i class="fa fa-comment-o"></i> 20</span>
-						</div>
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</div>
+
+
+	<!--分页-->
+	<style>
+		table tbody tr:nth-child(odd){background:#F4F4F4;}
+	</style>
+
+	<table class="table  table-bordered">
+		<tr >
+			<td align="center">
+				<ul class="pagination" id="pagination">
+				</ul>
+			</td>
+		</tr>
+	</table>
 	<!-- THE FOOTER -->
 	<footer>
 		<div class="footer_slider">
@@ -759,10 +448,118 @@
 			</div>
 		</div>
 	</div>
+	<script language="JavaScript">
+        var id = window.location.search.split("=")[1];
+        var startPage = 1;
+        var showNum = 4;
+            var page = $("#pagination");
+            function initShowArticle(currentPage,pageSize) {
+                $("#show>div").empty();
+                $("#pagination").empty();
+                $.ajax({
+                    type:"post",
+                    url:"categoryArticleList",
+                    contentType:"application/json",
+                    data:JSON.stringify({"categoryId":id,"currentPage":currentPage,"pageSize":pageSize}),
+                    dataType:"json",
+                    success:function (data) {
+                        console.log(data)
+                        $(data.list).each(function (index,item) {
+                            $("<div class=\"col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2\">\n" +
+                                "\t\t\t\t\t<div class=\"be-post\">\n" +
+                                "\t\t\t\t\t\t<a href='javascript:void(0)' onclick='lookArticle("+item.articleId+")' class=\"be-img-block\">\n" +
+                                "\t\t\t\t\t\t<img src='"+item.potoPath+"' alt=\"omg\">\n" +
+                                "\t\t\t\t\t\t</a>\n" +
+                                "\t\t\t\t\t\t<a href='javascript:void(0)' onclick='lookArticle("+item.articleId+")' class=\"be-post-title\">'"+item.title+"'</a>\n" +
+                                "\t\t\t\t\t\t<span>\n" +
+                                "\t\t\t\t\t\t\t<a href='javascript:void(0)' onclick='lookArticle("+item.articleId+")' class=\"be-post-tag\">'"+item.categoryName+"'</a>, \n" +
+                                "\t\t\t\t\t\t</span>\n" +
+                                "\t\t\t\t\t\t<div class=\"author-post\">\n" +
+                                "\t\t\t\t\t\t\t<img src=\"img/a1.png\" alt=\"\" class=\"ava-author\">\n" +
+                                "\t\t\t\t\t\t\t<span>by <a href=\"author.html?id="+item.userInfoId+"\">'"+item.name+"'</a></span>\n" +
+                                "\t\t\t\t\t\t</div>\n" +
+                                "\t\t\t\t\t\t<div class=\"info-block\">\n" +
+                                "\t\t\t\t\t\t\t<span><i class=\"fa fa-thumbs-o-up\"></i><span id='thumbsCount"+index+"'></span></span>\n" +
+                                "\t\t\t\t\t\t\t<span><i class=\"fa fa-eye\"></i><span id='eyeCount"+index+"'></span></span>\n" +
+                                "\t\t\t\t\t\t\t<span><i class=\"fa fa-comment-o\"></i><span id='cCount"+index+"'></span></span>\n" +
+                                "\t\t\t\t\t\t</div>\n" +
+                                "\t\t\t\t\t</div>\n" +
+                                "\t\t\t\t</div>").insertAfter("#show>div:eq("+(index)+")")
 
+                            //初始化点赞数
+							var id = item.articleId;
+                            initShowThumbsCount(id);
+                            function initShowThumbsCount(articleId) {
+                                $.ajax({
+                                    type: "post",
+                                    url: "getSupportCount",
+                                    contentType: "application/json",
+                                    dataType: "json",
+                                    data: JSON.stringify({"articleId":articleId}),
+                                    success:function (dataCount) {
+                                        $("#thumbsCount"+index+"").html(dataCount);
+                                    },
+                                    error:function () {
+                                        console.log("请求错误")
+                                    }
+                                })
+                            }
+
+                            <!--初始化浏览数-->
+                            initBrowselnCount(id)
+                            function initBrowselnCount(articleId) {
+                                $.ajax({
+                                    type: "post",
+                                    url: "getBrowselnCount",
+                                    contentType: "application/json",
+                                    dataType: "json",
+                                    data: JSON.stringify({"articleId": articleId}),
+                                    success:function (dataCount) {
+                                        $("#eyeCount"+index+"").html(dataCount);
+                                    },
+                                    error:function () {
+                                        console.log("请求错误")
+                                    }
+                                })
+                            }
+                            //初始化评论数
+                            initCommentCount(id)
+                            function initCommentCount(articleId) {
+                                $.ajax({
+                                    type:"get",
+                                    url:"getAllComments?articleId="+articleId,
+                                    success:function(data){
+                                        $("#cCount"+index+"").html(data);
+                                    }
+                                })
+                            }
+                        })
+
+                        if(currentPage==1){
+                            page.append("<li class=\"disabled\"><a href=\"#\">上一页</a></li>")
+                        }else {
+                            page.append("<li><a href='javascript:initShowArticle("+(data.pageNum-1)+","+showNum+")'>上一页</a></li>");
+                        }
+
+                        for(var i=1;i<=data.pages;i++){
+                            page.append("<li><a href='javascript:initShowArticle("+i+","+showNum+")'>"+i+"</a></li>");
+                        }
+                        if(currentPage==data.lastPage){
+                            page.append("<li class=\"disabled\"><a href=\"#\">下一页</a></li>")
+                        }else {
+                            page.append("<li><a href='javascript:initShowArticle("+(data.pageNum+1)+","+showNum+")'>下一页</a></li>");
+                        }
+                    }
+                })
+            }
+        initShowArticle(startPage,showNum);
+        function lookArticle(articleId) {
+			window.location.href = "blog-detail-2.html?articleId="+articleId;
+        }
+
+	</script>
 
 	<!-- SCRIPTS	 -->
-	<script src="script/jquery-2.1.4.min.js"></script>
 	<script src="script/bootstrap.min.js"></script>		
 	<script src="script/idangerous.swiper.min.js"></script>
 	<script src="script/isotope.pkgd.min.js"></script>	

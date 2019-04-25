@@ -18,8 +18,8 @@
 
     <link rel="stylesheet" href="css/style2.css">
 
-    <link rel="stylesheet" href="plugins/wangeditor/min/wangEditor.min.css" />
-    <script src="plugins/wangeditor/min/wangEditor.min.js"></script>
+    <link rel="stylesheet" href="plugins/wangeditor/wangEditor.min.css" />
+    <script src="plugins/wangeditor/wangEditor.js"></script>
     <script src="js/jquery-1.8.2.js"></script>
 </head>
 
@@ -48,7 +48,7 @@
                 </h1>
                 <form class="form-default form-create-topic">
                     <div class="form-group"><label for="inputTopicTitle"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">博客标题</font></font></label>
-                        <div class="tt-value-wrapper"><input type="text" name="name" class="form-control" id="inputTopicTitle" placeholder="请输入标题"><span class="tt-value-input"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">99</font></font></span></div>
+                        <div class="tt-value-wrapper"><input type="text" name="name" class="form-control" id="inputTopicTitle" placeholder="请输入标题" maxlength="20" ><span class="tt-value-input"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最大输入长度为20</font></font></span></div>
                         <div class="tt-note">
                             <font style="vertical-align: inherit;">
                                 <font style="vertical-align: inherit;">请描述您博客主题，同时尽可能缩短主题。</font>
@@ -202,7 +202,7 @@
 
 
 <script type="text/javascript">
-    debugger;
+
     $.ajax({
         type:'GET',
         url:'getCategoryIdList',
@@ -271,7 +271,7 @@
             }),
             success:function (responseText) {
                 if(responseText==true){
-                    alert("发布成功，页面将在1秒后跳转到首页");
+                    document.write("发布成功，页面将在1秒后跳转到首页");
                     setTimeout(function(){
                         window.location.href = "index.html";
                     },1000)

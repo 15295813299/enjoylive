@@ -278,46 +278,46 @@ $(function() {
 		$(this).toggleClass("be-dropdown-active");
 		$(this).find(".drop-down-list").stop().slideToggle();
 	});
-	$(".drop-down-list li").on("click", function(){
-		var new_value = $(this).find("a").text();
-		$(this).parent().parent().find(".be-dropdown-content").text(new_value);
-			$.ajax({
-	     type:"GET",
-	     async:true,
-	     url:'ajax_for_index.html',
-	     success:function(msg){
-	      $("._post-container_").html(msg).delay(100).animate({'opacity':1}, 500, function(){
-	       updateContentFinish = 0;
-	      });
-	     }
-	    });
-			return false;
-	});
-	$(".left-feild .creative_filds_block").on("click",function(){
-		$.ajax({
-	     type:"GET",
-	     async:true,
-	     url:'ajax_for_index.html',
-	     success:function(msg){
-	      $("._post-container_").html(msg).delay(100).animate({'opacity':1}, 500, function(){
-	      });
-	     }
-	    });
-	    return false;
-	})
-	$(".left-feild .tags_block a").on("click",function(){
-		$.ajax({
-	     type:"GET",
-	     async:true,
-	     url:'ajax_for_index.html',
-	     success:function(msg){
-	      $("._post-container_").html(msg).delay(100).animate({'opacity':1}, 500, function(){
-	      });
-	     }
-	    });
-	    $(this).toggleClass("active");
-	    return false;
-	})
+	// $(".drop-down-list li").on("click", function(){
+	// 	var new_value = $(this).find("a").text();
+	// 	$(this).parent().parent().find(".be-dropdown-content").text(new_value);
+	// 		$.ajax({
+	//      type:"GET",
+	//      async:true,
+	//      url:'ajax_for_index.html',
+	//      success:function(msg){
+	//       $("._post-container_").html(msg).delay(100).animate({'opacity':1}, 500, function(){
+	//        updateContentFinish = 0;
+	//       });
+	//      }
+	//     });
+	// 		return false;
+	// });
+	// $(".left-feild .creative_filds_block").on("click",function(){
+	// 	$.ajax({
+	//      type:"GET",
+	//      async:true,
+	//      url:'ajax_for_index.html',
+	//      success:function(msg){
+	//       $("._post-container_").html(msg).delay(100).animate({'opacity':1}, 500, function(){
+	//       });
+	//      }
+	//     });
+	//     return false;
+	// })
+	// $(".left-feild .tags_block a").on("click",function(){
+	// 	$.ajax({
+	//      type:"GET",
+	//      async:true,
+	//      url:'ajax_for_index.html',
+	//      success:function(msg){
+	//       $("._post-container_").html(msg).delay(100).animate({'opacity':1}, 500, function(){
+	//       });
+	//      }
+	//     });
+	//     $(this).toggleClass("active");
+	//     return false;
+	// })
 	
 	//
 	$(document).on('mouseleave', '.be-drop-down.be-dropdown-active', function(){
@@ -392,30 +392,30 @@ $(function() {
 		});
 
 	/*COLOR PICKER*/
-	$(".cfix li").on("click",function(){
-			$.ajax({
-	     type:"GET",
-	     async:true,
-	     url:'ajax_for_index.html',
-	     success:function(msg){
-	      $("._post-container_").html(msg).delay(100).animate({'opacity':1}, 500, function(){
-	       updateContentFinish = 0;
-	      });
-	     }
-	    });
-	})
-	$(".cfix li").on("click",function(){
-			$.ajax({
-	     type:"GET",
-	     async:true,
-	     url:'ajax_for_index.html',
-	     success:function(msg){
-	      $("._post-container_").html(msg).delay(100).animate({'opacity':1}, 500, function(){
-	       updateContentFinish = 0;
-	      });
-	     }
-	    });
-	})	
+	// $(".cfix li").on("click",function(){
+	// 		$.ajax({
+	//      type:"GET",
+	//      async:true,
+	//      url:'ajax_for_index.html',
+	//      success:function(msg){
+	//       $("._post-container_").html(msg).delay(100).animate({'opacity':1}, 500, function(){
+	//        updateContentFinish = 0;
+	//       });
+	//      }
+	//     });
+	// })
+	// $(".cfix li").on("click",function(){
+	// 		$.ajax({
+	//      type:"GET",
+	//      async:true,
+	//      url:'ajax_for_index.html',
+	//      success:function(msg){
+	//       $("._post-container_").html(msg).delay(100).animate({'opacity':1}, 500, function(){
+	//        updateContentFinish = 0;
+	//       });
+	//      }
+	//     });
+	// })
 
 	$(".s_keywords a").eq(0).on("click",function(){
 		$(this).parent().find(".color-6").fadeOut();

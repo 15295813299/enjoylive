@@ -15,11 +15,11 @@ public class LoginInfoDto {
     private String country;
     private String province;
     private String city;
-    private long brief;
+    private String brief;
     private String registrationDate;
     private String birthYear;
     private String birthMonth;
-    private String birthYmd;
+    private String birthYMD;
 
     public long getUserInfoId() {
         return userInfoId;
@@ -109,11 +109,11 @@ public class LoginInfoDto {
         this.city = city;
     }
 
-    public long getBrief() {
+    public String getBrief() {
         return brief;
     }
 
-    public void setBrief(long brief) {
+    public void setBrief(String brief) {
         this.brief = brief;
     }
 
@@ -142,11 +142,11 @@ public class LoginInfoDto {
     }
 
     public String getBirthYmd() {
-        return birthYmd;
+        return birthYMD;
     }
 
     public void setBirthYmd(String birthYmd) {
-        this.birthYmd = birthYmd;
+        this.birthYMD = birthYmd;
     }
 
     @Override
@@ -167,7 +167,7 @@ public class LoginInfoDto {
                 ", registrationDate='" + registrationDate + '\'' +
                 ", birthYear='" + birthYear + '\'' +
                 ", birthMonth='" + birthMonth + '\'' +
-                ", birthYmd='" + birthYmd + '\'' +
+                ", birthYmd='" + birthYMD + '\'' +
                 '}';
     }
 }

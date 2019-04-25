@@ -53,4 +53,9 @@ WHERE
 AND c1.flag = 1
 AND c2.flag = 1
     </select>
+
+    <!--查询小版块对应的文章条数-->
+    <select id="getCountCategoryArticle" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT count(1) count from articleInfo a WHERE a.categoryId = #{id} and flag=1
+    </select>
 </mapper>

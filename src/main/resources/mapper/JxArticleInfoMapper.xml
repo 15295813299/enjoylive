@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.JxArticleInfoMapper">
+    <select id="getInfo" resultType="java.util.HashMap">
+        SELECT userInfo.username, userInfo.headPath, articleInfo.title,articleInfo.articleId
+        FROM userInfo,
+             articleInfo
+        WHERE articleInfo.articleId = #{articleId}
+          AND userInfo.userInfoId = articleInfo.userInfoId
+          AND userInfo.flag = 1
+          AND articleInfo.flag = 1
+    </select>
+    <select id="getArticleIdByCategoryName" resultType="java.lang.Integer">
+        SELECT category.categoryId
+        FROM (SELECT categoryId FROM category WHERE categoryName = #{categoryName}
+                                                AND parentId = 0) AS main,
+             category
+        WHERE category.parentId = main.categoryId
+           OR main.categoryId = category.categoryId
+    </select>
+    <select id="getIdBySupport" resultType="java.lang.Integer">
+        SELECT articleInfo.articleId
+        FROM articleInfo,
+             support
+        WHERE articleInfo.articleId = support.articleId
+          AND support.flag = 1
+        group by articleInfo.articleId
+        Order by count(*) DESC
+    </select>
+    <select id="getIdByBrowse" resultType="java.lang.Integer">
+        SELECT articleInfo.articleId
+        FROM articleInfo,
+             browseInfo
+        WHERE articleInfo.articleId = browseInfo.articleId
+          AND browseInfo.flag = 1
+        group by articleInfo.articleId
+        Order by count(*) DESC
+    </select>
+    <select id="getIdByComment" resultType="java.lang.Integer">
+        SELECT articleInfo.articleId
+        FROM articleInfo,
+             commentInfo
+        WHERE articleInfo.articleId = commentInfo.articleId
+          AND commentInfo.flag = 1
+        group by articleInfo.articleId
+        Order by count(*) DESC
+    </select>
+    <select id="getIdByTime" resultType="java.lang.Integer">
+        SELECT articleInfo.articleId
+        FROM articleInfo
+        WHERE articleInfo.flag = 1
+        Order by articleInfo.articleInfoDate DESC
+    </select>
+    <select id="getIdByTimestamp" resultType="java.lang.Integer" parameterType="java.sql.Timestamp">
+        SELECT articleInfo.articleId
+        FROM articleInfo
+        WHERE articleInfo.articleInfoDate &gt; #{articleInfoDate}
+          AND articleInfo.flag = 1
+    </select>
+    <select id="getIdByTitleDim" resultType="java.lang.Integer">
+        SELECT articleId, articleId
+        FROM articleInfo
+        WHERE articleInfo.flag = 1
+          AND articleInfo.title Like #{test}
+    </select>
+
+    <select id="getSupportCountByArticleId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM support
+        WHERE articleId = #{articleId}
+          AND flag = 1;
+    </select>
+
+    <select id="getCommentCountByArticleId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM commentInfo
+        WHERE articleId = #{articleId}
+          AND flag = 1;
+    </select>
+
+    <select id="getCategoryNameByArticleId" resultType="java.util.HashMap">
+        SELECT category.categoryName
+        FROM category,
+             articleInfo
+        WHERE category.categoryId = articleInfo.categoryId
+          AND category.flag = 1
+          AND articleInfo.flag = 1
+          AND articleInfo.articleId = #{articleId}
+    </select>
+
+    <select id="getBrowseCountByArticleId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM browseInfo
+        WHERE articleId = #{articleId}
+          AND flag = 1;
+    </select>
+
+    <select id="getPotoPathByArticleId" resultType="java.util.HashMap">
+        SELECT articlePoto.potoPath
+        FROM articlePoto
+        WHERE articlePoto.flag = 1
+          AND articlePoto.articleId = #{articleId}
+    </select>
+
+    <update id="increaseTagTotalByName" parameterType="java.lang.String">
+        UPDATE tag
+        SET tag.total = tag.total + 1
+        WHERE tag.tagName = #{text}
+    </update>
+
+    <insert id="addTag" parameterType="java.lang.String">
+        INSERT INTO tag (tagName, total)
+        VALUES (#{text}, 0)
+    </insert>
+
+    <!--标签的Map-->
+    <resultMap id="TagMap" type="com.qf.pojo.JxTag">
+        <id column="tagId" property="tagId" javaType="java.lang.Integer"/>
+        <result column="tagName" property="tagName" javaType="java.lang.String"/>
+        <result column="total" property="total" javaType="java.lang.Integer"/>
+    </resultMap>
+    <!--查询所有标签-->
+    <select id="selectAllTag" resultMap="TagMap">
+        SELECT tag.tagId, tag.tagName, tag.total
+        FROM tag
+        WHERE tag.flag = 1 order by total desc
+    </select>
+    <!--根据标签名查询文章id-->
+    <select id="selectArticleInfoIdByTagName" resultType="java.lang.Integer" parameterType="java.util.List">
+        SELECT articleInfo.articleId FROM articleInfo
+        <if test="list != null and list.size > 0">
+            WHERE
+            <foreach collection="list" item="tagName" separator="AND">
+                articleInfo.title LIKE #{tagName}
+            </foreach>
+        </if>
+        AND articleInfo.flag = 1
+    </select>
+</mapper>

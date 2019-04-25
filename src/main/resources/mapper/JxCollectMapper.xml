@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.JxCollectMapper">
+    <resultMap id="collectMap" type="com.qf.pojo.JxCollect">
+        <id column="collectId" property="collectId" javaType="java.lang.Integer"/>
+        <result column="userInfoId" property="userInfoId" javaType="java.lang.Integer"/>
+        <result column="articleId" property="articleId" javaType="java.lang.Integer"/>
+        <result column="collectTime" property="collectTime" javaType="java.sql.Timestamp"/>
+        <result column="flag" property="flag" javaType="java.lang.Integer"/>
+    </resultMap>
+    <select id="getCollectByUserId" parameterType="com.qf.pojo.JxCollect" resultMap="collectMap">
+        SELECT collect.collectId, collect.userInfoId, collect.articleId, collect.collectTime, collect.flag
+        FROM collect
+        WHERE articleId = #{articleId}
+          AND userInfoId = #{userInfoId}
+          AND flag = 1
+    </select>
+    <update id="del" parameterType="com.qf.pojo.JxCollect">
+        UPDATE collect
+        SET flag        = 0,
+            collectTime = now()
+        WHERE articleId = #{articleId}
+          AND userInfoId = #{userInfoId}
+          AND flag = 1
+    </update>
+    <update id="change" parameterType="com.qf.pojo.JxCollect">
+        UPDATE collect
+        SET flag = 1
+        WHERE articleId = #{articleId}
+          AND userInfoId = #{userInfoId}
+          AND flag = 0
+    </update>
+    <insert id="add" parameterType="com.qf.pojo.JxCollect">
+        INSERT INTO collect (articleId, userInfoId)
+        VALUES (#{articleId}, #{userInfoId})
+    </insert>
+    <select id="getArticleIdByUserId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT collect.articleId
+        FROM collect
+        WHERE userInfoId = #{userInfoId}
+          AND flag = 1
+    </select>
+</mapper>

@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+
+    <link type="text/css" rel="stylesheet" href="css/style3.css">
+
+    <script src="script/jquery-2.1.4.min.js"></script>
+    <script src="js/img_ver.js"></script>
+
+
+    <style>
+        .bxs-row {
+            margin-bottom:12px;
+        }
+        .logo-box {
+            width:404px;
+            margin:100px auto;
+            border:1px solid #e5e5e5;
+            border-radius:4px;
+            box-shadow:0 4px 18px rgba(0,0,0,0.2);
+            position:relative;
+            overflow:hidden;
+            height:580px;
+        }
+        .login {
+            position:absolute;
+            width:320px;left:0;
+            top:0;
+            padding: 42px 42px 36px;
+            transition:all 0.8s;
+        }
+        .username,.password,.btn {
+            height: 44px;
+            width: 100%;
+            padding: 0 10px;
+            border: 1px solid #9da3a6;
+            background: #fff;
+            text-overflow: ellipsis;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -khtml-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            color: #000;
+            font-size: 1em;
+            font-family: Helvetica,Arial,sans-serif;
+            font-weight: 400;
+            direction: ltr;
+            font-size:13px;
+        }
+        .submit {
+            background-color: #0070ba;
+            color:#fff;
+            border:1px solid #0070ba;
+        }
+        .submit:hover {
+            background-color:#005ea6;
+        }
+        .verBox {
+            position:absolute;
+            width:100%;
+            text-align:center;
+            left:404px;
+            top:0;
+            opacity:0;
+            transition:all 0.8s;
+            padding-top:55px;
+        }
+        .err {
+            margin:12px 0 0;
+            line-height:12px;
+            height:12px;
+            font-size:12px;
+            color:red;
+        }
+
+        .magin{
+            margin-top: 30px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="logo-box">
+        <div class="login" style="">
+            <div class="bxs-row" style="text-align:center;">
+                <span class="tips" style="color:red;">输入帐号密码</span>
+            </div>
+            <div class="bxs-row">
+                <input type="text" class="username" placeholder="用户名" id="usernameText">
+                <p class=" err err-username"></p>
+            </div>
+            <div class="bxs-row">
+                <input type="password" class="password" placeholder="密码" id="passwordText">
+                <p class="err err-password"></p>
+            </div>
+            <div id="imgVer" style="display:inline-block;">
+
+            </div>
+
+            <div class="bxs-row magin">
+                <input type="submit" class=" btn" id="deng" value="请先完成验证">
+            </div>
+
+            <div class="fix">
+                <input type="radio" id="fixPa" checked="checked" name="mima" style="width: 20px;height: 20px">记住密码
+                <input type="radio" id="fixZh" name="mima" style="width: 20px;height: 20px">记住帐号
+                <a href="index.html">点此注册</a>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+
+
+
+    </script>
+
+
+    <script type="text/javascript">
+        imgVer({
+            el: '$("#imgVer")',
+            width: '260',
+            height: '116',
+            img: [
+                'img/bk_img/ver.png',
+                'img/bk_img/ver-1.png',
+                'img/bk_img/ver-2.png',
+                'img/bk_img/ver-3.png'
+            ],
+            success: function () {
+            },
+            error: function () {
+
+            }
+        });
+
+        onload=function () {
+            var cook=document.cookie;
+            var arr = cook.split(";");
+            $("#usernameText").val( arr[0].split("=")[1]);
+            $("#passwordText").val( arr[1].split("=")[1]);
+
+        }
+
+    </script>
+
+</body>
+</html>
+

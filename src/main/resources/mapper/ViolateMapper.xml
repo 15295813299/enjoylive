@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.ViolateMapper">
+    <insert id="AddViolateContext" parameterType="com.qf.vo.ViolateVo">
+        INSERT INTO violate (userInfoId,articleId,reportToUserId,violateContent,violateHref)
+        VALUES(<trim suffixOverrides=",">
+        <choose>
+        <when test="userInfoId !=null and userInfoId !=''">
+            #{userInfoId},
+        </when>
+        <otherwise>
+            null,
+        </otherwise>
+        </choose>
+        <if test="articleId !=null and articleId !=''">
+            #{articleId},
+        </if>
+        <if test="reportToUserId !=null and reportToUserId !=''">
+            #{reportToUserId},
+        </if>
+        <if test="violateContent !=null and violateContent !=''">
+            #{violateContent},
+        </if>
+        <if test="violateHref !=null and violateHref !=''">
+            #{violateHref}
+        </if>
+    </trim>
+    )
+    </insert>
+</mapper>

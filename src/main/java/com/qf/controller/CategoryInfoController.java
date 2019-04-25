@@ -5,10 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.qf.dto.CategoryInfoDto;
 import com.qf.service.CategoryInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +16,6 @@ public class CategoryInfoController {
 
     @RequestMapping(value = "getCategoryInfo",method = RequestMethod.POST)
     public Object getCategoryInfo(@RequestBody CategoryInfoDto categoryInfoDto){
-        System.out.println(categoryInfoDto);
         PageHelper.startPage(categoryInfoDto.getCurrentPage(),categoryInfoDto.getPageSize());
         List<CategoryInfoDto> categoryInfo = categoryInfoService.getCategoryInfo(categoryInfoDto);
         PageInfo pageInfo= new PageInfo(categoryInfo);
@@ -29,5 +25,11 @@ public class CategoryInfoController {
     public Object getHeaderCategoryInfo(){
         List<CategoryInfoDto> headerCategoryInfo = categoryInfoService.getHeaderCategoryInfo();
         return headerCategoryInfo;
+    }
+
+    @RequestMapping(value ="getCountCategoryArticle",method = RequestMethod.POST)
+    public Integer getCountCategoryArticle(@RequestParam Integer categoryId){
+        Integer countCategoryArticle = categoryInfoService.getCountCategoryArticle(categoryId);
+        return countCategoryArticle;
     }
 }

@@ -12,7 +12,6 @@
 		<link rel="stylesheet" href="style/loader.css">
 		<link rel="stylesheet" href="style/idangerous.swiper.css">
 		<link rel="stylesheet" href="style/stylesheet.css">
-	    <script src="script/jquery-2.1.4.min.js"></script>
 		<script src="js/tools.js"></script>
 </head>
 <body>
@@ -42,17 +41,19 @@
 						</li>
 						<li ><a href="activity.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">版块</font></font></a>
 							<ul id="club">
-                            <li>
+								<li>
 
-                            </li>
-                        </ul>
+								</li>
+
+                                </ul>
+
 						</li>
-						<li id="ul1" disabled="disabled"><a href="author-login.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">个人</font></font></a><i class="fa fa-angle-down"></i>
+						<li id="ul1" disabled="disabled"><a href='javascript:void(0)' onclick="isLogin()"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">个人</font></font></a><i class="fa fa-angle-down"></i>
 							<ul>
 								<li><a href="pageload.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文章发布</font></font></a></li>
-								<li><a href="author-login.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">个人信息</font></font></a></li>
-								<li><a href="messages.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">留言</font></font></a></li>
-								<li><a href="messages-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">消息2</font></font></a></li>
+								<li hidden="hidden"><a href="author-login.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">个人信息</font></font></a></li>
+								<li hidden="hidden"><a href="messages.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">留言</font></font></a></li>
+								<li hidden="hidden"><a href="messages-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">消息2</font></font></a></li>
 							</ul>
 						</li>
 						<li id="ul2"><a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">社区</font></font></a><i class="fa fa-angle-down"></i>
@@ -60,7 +61,7 @@
 							<!--<li><a href="blog.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">博客</font></font></a></li>-->							
 							<!--<li><a href="blog-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">博客2</font></font></a></li>-->						
 							<!--<li><a href="blog-3.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">博客3</font></font></a></li>-->
-							<li><a href="statictics.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">统计</font></font></a></li>
+							<li hidden="hidden"><a href="statictics.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">统计</font></font></a></li>
 							<li><a href="faq.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">常问问题</font></font></a></li>
 							<li><a href="about-us.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">关于我们</font></font></a></li>
 							<!--<li><a href="contact-us.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">联系我们</font></font></a></li>-->
@@ -68,137 +69,84 @@
 						</ul></li>
 					</ul>
 				</div>
-				<div class="login-header-block">
-					<div class="login_block" id="login">
-						<a class="btn-login btn color-1 size-2 hover-2"><i class="fa fa-user"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-						登录</font></font></a>
-					</div>	
-				</div>
+				<!--<div class="login-header-block">-->
+					<!--<div class="login_block" id="login" >-->
+						<!--<a  href="index1.html" class="btn-login btn color-1 size-2 hover-2" ><i class="fa fa-user"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-->
+						<!--登录</font></font></a>-->
+					<!--</div>	-->
+				<!--</div>-->
+                <div class="login-header-block" >
+                    <div class="login_block" id="login" >
+                        <button  onclick="toLogin()"  class="btn-login btn color-1 size-2 hover-2" ><i class="fa fa-user"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                            登录</font></font></button>
+                    </div>
+                </div>
 			</div>
 		</div>
-	   <div class="large-popup login">
-		   <div class="large-popup-fixed"></div>
-		   <div class="container large-popup-container">
-			   <div class="row">
-				   <div class="col-md-8 col-md-push-2 col-lg-6 col-lg-push-3  large-popup-content">
-					   <div class="row">
-						   <div class="col-md-12">
-							   <i class="fa fa-times close-button"></i>
-							   <h5 class="large-popup-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登录</font></font></h5>
-						   </div>
-						   <form action="./" class="popup-input-search">
-							   <div class="col-md-6">
-								   <input class="input-signtype" type="text" required="" placeholder="Your Username" id="loginUsername">
-							   </div>
-							   <div class="col-md-6">
-								   <input class="input-signtype" type="password" required="" placeholder="Password" id="loginPassword">
-							   </div>
-							   <div class="col-xs-6">
-								   <div class="be-checkbox">
-									   <label class="check-box">
-										   <input id="" class="checkbox-input" type="checkbox" value="" name=""> <span class="check-box-sign"></span>
-									   </label>
-									   <span class="large-popup-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-									保持登录
-								</font></font></span>
-								   </div>
 
-								   <a href="blog-detail-2.html" class="link-large-popup"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">忘记密码？</font></font></a>
-							   </div>
-
-
-							   <div class="col-xs-6 for-signin">
-								   <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><input type="button" class="be-popup-sign-button" id="loginCheck1" value="登入"></font></font>
-							   </div>
-							   <script>
-                                   $("#loginCheck1").click(function () {
-                                       $.ajax({
-                                           type: "POST",
-                                           url: "LoginCheck",
-                                           contentType: "application/json",
-                                           data: JSON.stringify({
-                                               username: $("#loginUsername").val(),
-                                               password: $("#loginPassword").val()
-                                           }),
-                                           dataType: "json",
-                                           success: function (data) {
-                                               if (data == true) {
-                                                   window.location.reload();
-                                               } else {
-                                                   alert("账号或密码错误！");
-                                               }
-                                           }
-                                       })
-
-                                   })
-
-							   </script>
-						   </form>
-					   </div>
-				   </div>
-			   </div>
-		   </div>
-	   </div>
 	</header>
 	<script>
-        init();
-		$(function () {
-			var href = window.location.href.split("/");
-			var hr=href[href.length-1];
 
-            $("#one>li").each(function (index, item) {
-                $(item).removeClass("active-header");
-            });
+		//点击个人信息页面  先判断是否为空
+        function isLogin(){
+           $.ajax({
+			  type:"get",
+			  url:"getSessionLoginInfo",
+			  success:function(data){
+			      if(data==null&&data==''){
+			          var choose = window.confirm("请您先登录");
+			          if(choose==true){
+			              window.location.href = "userlogin.html"
+					  }else {
+			              window.location.href = "author-login.html"
+					  }
+				  }
+			  },
+		   })
+		}
 
-            if (hr.indexOf("author-edit") !=-1|| hr.indexOf("author-login")!=-1||hr.indexOf("messages")!=-1){
-                $("#ul1").addClass("active-header");
-            }
-            if (hr.indexOf("statictics") !=-1|| hr.indexOf("faq")!=-1||hr.indexOf("about-us")!=-1||hr.indexOf("contact-us")!=-1){
-                $("#ul2").addClass("active-header")
-            }
 
-            $("#one li>a").each(function (index, item) {
-                var a = $(item).attr("href");
-               	if (hr==a){
-                    $(item).parent().addClass("active-header");
+        initHeader();
+		function toLogin() {
+            window.location.href="userlogin.html";
+        }
 
-				}
-            });
-        })
-
-        function init() {
+        function initHeader() {
             $.ajax({
-               type:"post",
-               url:"getHeaderCategoryInfo",
-               contentType:"application/json",
-               dataType:"json",
-               success:function (data) {
-                   console.log(data)
-                   $(data).each(function (index,item) {
-                       // $("#club").empty();
-                       $(" <li id='categroy"+index+"'>\n" +
-                           "                                <a href='javascript:void(0)' onclick='goCategroy("+item.categoryId+")'><font style=\"vertical-align: inherit;\"><font\n" +
-                           "                                        style=\"vertical-align: inherit;\">"+item.categoryName+"</font></font></a>\n" +
-                           "                                <i class=\"fa fa-angle-right\"></i><i class=\"fa fa-angle-down\"></i>\n" +
-                           "                                <ul>\n" +
-                           "                                    <li></li>\n" +
-                           "                                </ul>\n" +
-                           "                            </li>").insertAfter("#club>li:eq("+(index)+")");
+                type:"post",
+                url:"getHeaderCategoryInfo",
+                contentType:"application/json",
+                dataType:"json",
+                success:function (data) {
+                    console.log(data)
+                    $(data).each(function (index,item) {
+                         // $("#club").empty();
+                        $(" <li id='categroy"+index+"'>\n" +
+                            "                                <a href='javascript:void(0)' onclick='goCategroy("+item.categoryId+")'><font style=\"vertical-align: inherit;\"><font\n" +
+                            "                                        style=\"vertical-align: inherit;\">"+item.categoryName+"</font></font></a>\n" +
+                            "                                <i class=\"fa fa-angle-right\"></i><i class=\"fa fa-angle-down\"></i>\n" +
+                            "                                <ul>\n" +
+                            "                                    <li></li>\n" +
+                            "                                </ul>\n" +
+                            "                            </li>").insertAfter("#club>li:eq("+(index)+")");
                         $(item.childCategoryInfo).each(function (index1,citem) {
-                            $(" <li><a href=\"page1.html\"><font style=\"vertical-align: inherit;\"><font\n" +
+                            $(" <li><a href='javascript:void(0)' onclick='goSmallCategroy("+citem.categoryId+")'><font style=\"vertical-align: inherit;\"><font\n" +
                                 "                                            style=\"vertical-align: inherit;\">"+citem.categoryName+"</font></font></a></li>").insertAfter("#"+"categroy"+index+" ul>li:eq("+(index1)+")");
                         })
 
 
-                   })
-               },
-               error:function () {
-                   console.error()
-               }
+                    })
+                },
+                error:function () {
+                    console.error()
+                }
             })
         }
-         function goCategroy(id) {
-			window.location.href = "activity_on.html?id="+id;
+        function goCategroy(id) {
+            window.location.href = "activity_on.html?id="+id;
+        }
+        function goSmallCategroy(sid) {
+            window.location.href ="login.html?sid="+sid;
         }
 	</script>
 </body></html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.AttentionMapper">
+    <!--添加关注-->
+    <insert id="addAttention" parameterType="com.qf.pojo.Attention">
+        insert into attention values(default ,#{userInfoId},#{authorId},flag)
+    </insert>
+    <!--取消关注-->
+    <update id="deleteAttention" parameterType="com.qf.pojo.Attention">
+        update attention set flag = 0 where userInfoId=#{userInfoId} and authorId=#{authorId}
+    </update>
+    <!--获取所有的关注对象的头像，id,姓名-->
+    <select id="getAttention1" parameterType="Integer" resultType="com.qf.dto.MyAttention">
+       select u.userInfoId,u.name,u.headPath FROM attention as a , userInfo as  u
+        where  a.authorId = u.userInfoId and a.flag=1 and u.flag = 1
+         and a.userInfoId=#{userInfoId}
+    </select>
+    <!--获取单个关注对象的人气量-->
+    <select id="getAttention2" parameterType="Integer" resultType="Integer">
+        SELECT COUNT(b.browseInfoId) from  articleInfo a  ,browseInfo b
+        where  b.articleId = a.articleId and b.flag = 1
+         and a.flag = 1 and  a.userInfoId = #{userInfoId}
+    </select>
+    <!--获取单个关注对象的被点赞数-->
+    <select id="getAttention3" parameterType="Integer" resultType="Integer">
+         SELECT COUNT(s.supportId) from  articleInfo a  ,support s
+        where  s.articleId = a.articleId and s.flag = 1
+         and a.flag = 1 and  a.userInfoId = #{userInfoId}
+    </select>
+    <!--获取单个关注对象的粉丝数-->
+    <select id="getAttention4" parameterType="Integer" resultType="Integer">
+          SELECT COUNT(attentionId) FROM attention WHERE authorId = #{userInfoId}
+    </select>
+
+    <!--判断用户是否已关注-->
+    <select id="judgeAttention" parameterType="com.qf.pojo.Attention" resultType="Integer">
+        SELECT COUNT(attentionId) from attention where userInfoId=31 and authorId=10 and flag = 1
+    </select>
+</mapper>

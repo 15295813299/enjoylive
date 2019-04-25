@@ -5,4 +5,295 @@
     <select id="getCategoryIdList" resultType="com.qf.pojo.Category">
           select categoryId,categoryName from category where parentId != 0 and flag = 1
     </select>
+
+    <select id="getBigCategoryList" resultType="com.qf.pojo.Category">
+        SELECT categoryId,categoryName from category WHERE flag= 1 and parentId = 0
+    </select>
+
+    <select id="getHotCategory" parameterType="java.lang.String" resultType="com.qf.dto.HotListDto">
+SELECT
+	tb5.*, u.`name`,
+	ar.potoPath
+FROM
+	(
+		SELECT
+			tb4.*, c4.categoryName bigName
+		FROM
+			(
+				SELECT
+					*
+				FROM
+					(
+						SELECT
+							c1.categoryPoto,
+							c1.categoryLogo,
+							c1.parentId,
+							tb2.*
+						FROM
+							category c1
+						LEFT JOIN (
+							SELECT
+								tb1.*, a.userInfoId,
+								a.categoryId,
+								a.title,
+								a.content,
+								a.articleInfoDate,
+								c.categoryName
+							FROM
+								(
+									SELECT
+										supportId,
+										articleId,
+										supportCount,
+										count(1) AS count
+									FROM
+										support
+									WHERE
+										supportCount = 1
+									AND flag = 1
+									GROUP BY
+										articleId
+									ORDER BY
+										count
+								) tb1,
+								articleInfo a,
+								category c
+							WHERE
+								tb1.articleId = a.articleId
+							AND a.categoryId = c.categoryId
+							AND c.flag = 1
+							AND a.flag = 1
+						) tb2 ON c1.categoryId = tb2.categoryId
+					) tb3
+				WHERE
+					tb3.parentId != 0
+			) tb4,
+			category c4
+		WHERE
+			tb4.parentId = c4.categoryId
+		AND c4.categoryName = #{categoryName}
+		ORDER BY
+			tb4.count DESC
+	) tb5,
+	userInfo u,
+	articlePoto ar
+WHERE
+	tb5.userInfoId = u.userInfoId
+AND tb5.articleId = ar.articleId
+LIMIT 0,
+ 1
+    </select>
+
+<select id="getBrowseCategory"  parameterType="java.lang.String" resultType="com.qf.dto.BrowselnfoListDto">
+    SELECT
+	tb5.*, u.`name`,
+	ar.potoPath
+FROM
+	(
+		SELECT
+			tb4.*, c4.categoryName bigName
+		FROM
+			(
+				SELECT
+					*
+				FROM
+					(
+						SELECT
+							c1.categoryPoto,
+							c1.categoryLogo,
+							c1.parentId,
+							tb2.*
+						FROM
+							category c1
+						LEFT JOIN (
+							SELECT
+								tb1.*, a.userInfoId,
+								a.categoryId,
+								a.title,
+								a.content,
+								a.articleInfoDate,
+								c.categoryName
+							FROM
+								(
+									SELECT
+										browseInfoId,
+										articleId,
+										browseCount,
+										count(1) AS count
+									FROM
+										browseInfo
+									WHERE
+										browseCount = 1
+									AND flag = 1
+									GROUP BY
+										articleId
+									ORDER BY
+										count
+								) tb1,
+								articleInfo a,
+								category c
+							WHERE
+								tb1.articleId = a.articleId
+							AND a.categoryId = c.categoryId
+							AND c.flag = 1
+							AND a.flag = 1
+						) tb2 ON c1.categoryId = tb2.categoryId
+					) tb3
+				WHERE
+					tb3.parentId != 0
+			) tb4,
+			category c4
+		WHERE
+			tb4.parentId = c4.categoryId
+		AND c4.categoryName = #{categoryName}
+		ORDER BY
+			tb4.count DESC
+	) tb5,
+	userInfo u,
+	articlePoto ar
+WHERE
+	tb5.userInfoId = u.userInfoId
+AND tb5.articleId = ar.articleId
+LIMIT 0,
+ 1
+</select>
+
+    <select id="getNoneSupportCategory" parameterType="java.lang.String" resultType="com.qf.dto.NoneSupportCategory">
+ SELECT
+	tb1.categoryId,
+	tb1.categoryPoto
+FROM
+	(
+		SELECT
+			c.*, c1.categoryId cid,
+			c1.categoryName cname
+		FROM
+			category c,
+			category c1
+		WHERE
+			c.categoryId = c1.parentId
+		AND c.flag = 1
+		AND c1.flag = 1
+	) tb1
+LEFT JOIN articleInfo a ON tb1.cid = a.categoryId
+AND tb1.flag = 1
+AND tb1.flag = 1
+WHERE
+	tb1.categoryName = #{categoryName}
+LIMIT 0,
+ 1
+    </select>
+
+    <select id="getArticleCountToCategory" parameterType="java.lang.String" resultType="com.qf.dto.NoneSupportCategory">
+ SELECT count(1) as count FROM(
+		SELECT
+			c.*, c1.categoryId cid,
+			c1.categoryName cname
+		FROM
+			category c,
+			category c1
+		WHERE
+			c.categoryId = c1.parentId
+		AND c.flag = 1
+		AND c1.flag = 1) tb1 RIGHT JOIN  articleInfo a on tb1.cid=a.categoryId and a.flag =1
+WHERE tb1.categoryName = #{categoryName}
+    </select>
+
+	<select id="getUserInfoToShowArticle" parameterType="java.lang.Integer" resultType="com.qf.dto.HotListDto">
+		SELECT
+			tb2.*, c.categoryName
+		FROM
+			(
+				SELECT
+					tb1.*, ar.potoPath
+				FROM
+					(
+						SELECT
+							u.userInfoId,
+							u.`name`,
+							a.articleId,
+							a.categoryId,
+							a.title
+						FROM
+							userInfo u
+						LEFT JOIN articleInfo a ON u.userInfoId = a.userInfoId
+						AND a.flag = 1
+						AND u.flag = 1
+					) tb1
+				LEFT JOIN articlePoto ar ON tb1.articleId = ar.articleId
+				AND ar.flag = 1
+			) tb2
+		LEFT JOIN category c ON c.categoryId = tb2.categoryId WHERE tb2.userInfoId = #{userInfoId}
+	</select>
+
+	<select id="getCommentCategory" parameterType="java.lang.String" resultType="com.qf.dto.BrowselnfoListDto">
+		SELECT
+	tb5.*, u.`name`,
+	ar.potoPath
+FROM
+	(
+		SELECT
+			tb4.*, c4.categoryName bigName
+		FROM
+			(
+				SELECT
+					*
+				FROM
+					(
+						SELECT
+							c1.categoryPoto,
+							c1.categoryLogo,
+							c1.parentId,
+							tb2.*
+						FROM
+							category c1
+						LEFT JOIN (
+							SELECT
+								tb1.*, a.userInfoId,
+								a.categoryId,
+								a.title,
+								a.content,
+								a.articleInfoDate,
+								c.categoryName
+							FROM
+								(
+									SELECT
+										articleId,
+										count(1) AS count
+									FROM
+										commentInfo
+									WHERE
+                   flag = 1
+									GROUP BY
+										articleId
+									ORDER BY
+										count
+								) tb1,
+								articleInfo a,
+								category c
+							WHERE
+								tb1.articleId = a.articleId
+							AND a.categoryId = c.categoryId
+							AND c.flag = 1
+							AND a.flag = 1
+						) tb2 ON c1.categoryId = tb2.categoryId
+					) tb3
+				WHERE
+					tb3.parentId != 0
+			) tb4,
+			category c4
+		WHERE
+			tb4.parentId = c4.categoryId
+		AND c4.categoryName = #{names}
+		ORDER BY
+			tb4.count DESC
+	) tb5,
+	userInfo u,
+	articlePoto ar
+WHERE
+	tb5.userInfoId = u.userInfoId
+AND tb5.articleId = ar.articleId
+LIMIT 0,
+ 1
+	</select>
 </mapper>

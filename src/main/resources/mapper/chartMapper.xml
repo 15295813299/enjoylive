@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.ChartMapper">
+    
+    <select id="getWeekCount" parameterType="com.qf.vo.ChartVo" resultType="com.qf.dto.IntsDto">
+        SELECT * from
+        <foreach collection = "mai" item="max" index="min" separator= ",">
+            (SELECT count(flag) c${max}  from browseInfo b
+            WHERE b.articleId IN (
+            SELECT a1.articleId
+            FROM articleInfo a1
+            WHERE a1.userInfoId = #{userInfoId}
+            ) and
+            to_days(now())-to_days(browseTime) >= #{min} and  #{max}>to_days(now())-to_days(browseTime))
+            w${min}
+        </foreach>
+    </select>
+
+
+    <select id="getWeekLike" parameterType="com.qf.vo.ChartVo" resultType="com.qf.dto.IntsDto">
+        SELECT * from
+        <foreach collection = "mai" item="max" index="min" separator= ",">
+            (SELECT count(flag) c${max}  from support b
+            WHERE b.articleId IN (
+            SELECT a1.articleId
+            FROM articleInfo a1
+            WHERE a1.userInfoId = #{userInfoId}
+            ) and
+            to_days(now())-to_days(supportTime) >= #{min} and  #{max}>to_days(now())-to_days(supportTime))
+            w${min}
+        </foreach>
+    </select>
+
+
+    <select id="getWeekComment" parameterType="com.qf.vo.ChartVo" resultType="com.qf.dto.IntsDto">
+        SELECT * from
+        <foreach collection = "mai" item="max" index="min" separator= ",">
+            (SELECT count(flag) c${max}  from commentInfo b
+            WHERE b.articleId IN (
+            SELECT a1.articleId
+            FROM articleInfo a1
+            WHERE a1.userInfoId = #{userInfoId}
+            ) and
+            to_days(now())-to_days(commentDate) >= #{min} and  #{max}>to_days(now())-to_days(commentDate))
+            w${min}
+        </foreach>
+    </select>
+
+
+    <select id="getComment" parameterType="com.qf.vo.ChartVo" resultType="com.qf.dto.IntsDto">
+        SELECT count(flag) c1  from commentInfo c
+            WHERE c.articleId IN (
+            SELECT a1.articleId
+            FROM articleInfo a1
+            WHERE a1.userInfoId =#{userInfoId})
+    </select>
+
+
+
+</mapper>

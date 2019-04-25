@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.LeaveMessageMapper">
+    <insert id="addLeaveMessageByUserInfoId" parameterType="com.qf.vo.LeaveMessageVo">
+        INSERT INTO leaveMessage(userInfoId,leaveMessageToUser,leaveMessageText)
+        values(#{userInfoId},#{leaveMessageToUser},#{leaveMessageText})
+    </insert>
+    <select id="selectLeaveMessageByUserInfoId" parameterType="java.lang.Integer" resultType="com.qf.dto.LeaveMessageDto">
+        SELECT lm.leaveMessageId,u.headPath,u.`name`,lm.leaveMessageTime,lm.leaveMessageText FROM userInfo u,leaveMessage lm
+        WHERE lm.userInfoId=u.userInfoId and lm.leaveMessageToUser=#{leaveMessageToUser} ORDER BY lm.leaveMessageTime
+    </select>
+    <select id="selectLeaveMessageCountIfNoRead" resultType="INTEGER" parameterType="com.qf.pojo.LeaveMessage">
+        SELECT COUNT(*) FROM leaveMessage WHERE flag=1 and leaveMessageToUser=#{leaveMessageToUser}
+    </select>
+    <select id="selectLeaveMessageByUserInfoIdNoRead" parameterType="java.lang.Integer" resultType="com.qf.dto.LeaveMessageDto">
+        SELECT lm.leaveMessageId,u.headPath,u.`name`,lm.leaveMessageTime,lm.leaveMessageText,lm.userInfoId FROM userInfo u,leaveMessage lm
+        WHERE lm.userInfoId=u.userInfoId and lm.leaveMessageToUser=#{leaveMessageToUser} and lm.flag=1 ORDER BY lm.leaveMessageTime
+    </select>
+    <select id="selectLeaveMessageByUserInfoIdReaded" parameterType="java.lang.Integer" resultType="com.qf.dto.LeaveMessageDto">
+        SELECT lm.leaveMessageId,u.headPath,u.`name`,lm.leaveMessageTime,lm.leaveMessageText,lm.userInfoId FROM userInfo u,leaveMessage lm
+        WHERE lm.userInfoId=u.userInfoId and lm.leaveMessageToUser=#{leaveMessageToUser} and lm.flag=0 ORDER BY lm.leaveMessageTime
+    </select>
+    <update id="ReadedMessages" parameterType="com.qf.dto.LeaveMessageDto">
+        UPDATE leaveMessage set flag=0 WHERE leaveMessageId in
+        <foreach collection="array" item="leaveMessageId" separator="," open="(" close=")">
+            #{leaveMessageId}
+        </foreach>
+    </update>
+
+    <update id="DeleteMessages" parameterType="com.qf.dto.LeaveMessageDto">
+        UPDATE leaveMessage set flag=2 WHERE leaveMessageId in
+        <foreach collection="array" item="leaveMessageId" separator="," open="(" close=")">
+            #{leaveMessageId}
+        </foreach>
+    </update>
+</mapper>

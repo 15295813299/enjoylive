@@ -1,7 +1,9 @@
 package com.qf.service.impl;
 
 import com.qf.dto.LoginInfoDto;
+import com.qf.mapper.LevelMapper;
 import com.qf.mapper.UserInfoMapper;
+import com.qf.pojo.LevelInfo;
 import com.qf.service.UserInfoService;
 import com.qf.vo.UserInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,14 @@ import javax.servlet.http.HttpSession;
 public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     UserInfoMapper userInfoMapper;
+    @Autowired
+    LevelMapper levelMapper;
     public Integer insertRegister(UserInfoVo userInfoVo) {
-       return userInfoMapper.insertRegister(userInfoVo);
+        Integer  count = userInfoMapper.insertRegister(userInfoVo);
+        if(count>0){
+          levelMapper.giveDefaultLevelScore(userInfoVo.getUsername());
+        }
+        return count;
     }
 
     public Integer checkUserName(String username) {

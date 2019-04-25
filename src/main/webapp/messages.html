@@ -1,7 +1,9 @@
 ﻿<!DOCTYPE html>
-<html class="translated-ltr"><head>
+<html class="translated-ltr">
+<head>
 	<title>NGRNetwork</title>
 	<meta charset="utf-8">
+    <script src="script/jquery-2.1.4.min.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="shortcut icon" href="img/favicon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +20,9 @@
 	<script src="script/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="script/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-	<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"></head>
+	<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css">
+
+</head>
 <body>
 
 <!-- THE LOADER -->
@@ -48,21 +52,372 @@
 <!-- THE HEADER -->
 <!--引入头部-->
 	    <div id="headLoad">	</div>
-	<script src="js/jquery-1.8.2.js"></script>
-		<script>
+
+<script>
+    var flags = false;
+    $.ajax({
+        type: "GET",
+        url: "getSessionLoginInfo",
+        success: function (data) {
+            // alert(data)
+            if (data) {
+                $("#headLoad").load("header2.html")
+            } else {
+                $("#headLoad").load("header1.html")
+            }
+        }
+    })
+    var userinfoid;
+    //统计用户勾选个数
+    var count = 0;
+    $(function(){
+        $.ajax({
+            type: "GET",
+            url: "getSessionLoginInfo",
+            success: function (data) {
+                // alert(data.userInfoId);
+                userinfoid=data.userInfoId;
+                getLeaveMessage(userinfoid);
+            }
+        })
+        //获取未读留言信息
+        function getLeaveMessage(userinfoid) {
             $.ajax({
-                type: "GET",
-                url: "getSessionLoginInfo",
-                success: function (data) {
-                    // alert(data)
-                    if (data) {
-                        $("#headLoad").load("header2.html")
-                    } else {
-                        $("#headLoad").load("header1.html")
-                    }
+                type: 'POST',
+                url: 'getLeaveMessageNoRead?leaveMessageToUser='+userinfoid,
+                contentType: "application/json; charset=utf-8",
+                async:false,
+                dataType: 'json',
+                // data:JSON.stringify({ "leaveMessageToUser": userinfoid}),
+                success: function (responseText) {
+                    console.log(responseText);
+                    var len = responseText.length;
+                    $(responseText).each(function(index,item){
+                        $("<div class=\"noto-entry style-3\">"+
+                            "<div class=\"noto-content clearfix\">"+
+                            "<div class=\"form-checkbox\">"+
+                            "<input type=\"checkbox\" value='"+item.leaveMessageId+"' name='"+item.userInfoId+"' class=\"checkMessage\" onclick='isChecked(this)'>"+"<span class=\"check\">"+"<i class=\"fa fa-check\">"+"</i>"+"</span>"+
+                            "</div>"+
+                            "<div class=\"noto-img\">"+
+                            "<a href=\"author.html?id="+item.userInfoId+"\">"+
+                            "<img src='"+item.headPath+"'alt=\"\" class=\"be-ava-comment\">"+
+                            "</a>"+
+                            "</div>"+
+                            "<div class=\"noto-text\">"+
+                            "<div class=\"noto-text-top\">"+
+                            "<span class=\"noto-name\">"+"<a href=\"author.html?id="+item.userInfoId+"\">"+"<font style=\"vertical-align: inherit;\">"+"<font style=\"vertical-align: inherit;\">"+item.name+"</font>"+"</font>"+"</a>"+"</span>"+
+                            "<span class=\"noto-date\">"+"<i class=\"fa fa-clock-o\">"+"</i>"+"<font style=\"vertical-align: inherit;\">"+"<font style=\"vertical-align: inherit;\">"+item.leaveMessageTime+"</font>"+"</font>"+"</span>"+
+                            "</div>"+
+                            "<div class=\"noto-message\">"+"<font style=\"vertical-align: inherit;\">"+"<font style=\"vertical-align: inherit;\">"+item.leaveMessageText+"</font>"+"</font>"+"</div>"+
+                            "</div>"+
+                            "</div>"+
+                            "</div>"
+                        ).insertAfter($("#noto-Message"));
+                    });
+                    $(responseText).each(function (index, item) {
+                        $("<div class=\"be-comment\">"+
+                            "<div class=\"be-img-comment\">"+
+                            "<a href=\"author.html?id="+item.userInfoId+"\">"+
+                            "<img src='"+item.headPath+"' alt=\"\" class=\"be-ava-comment\">"+
+                            "</a>"+
+                            "</div>"+
+                            "<div class=\"be-comment-content\">"+
+                            "<span class=\"be-comment-name\">"+
+                            "<a href=\"author.html?id="+item.userInfoId+"\">"+"<font style=\"vertical-align: inherit;\">"+"<font style=\"vertical-align: inherit;\">"+item.name+"</font>"+"</font>"+"</a>"+
+                            "</span>"+
+                            "<span class=\"be-comment-time\">"+
+                            "<i class=\"fa fa-clock-o\">"+"</i>"+"<font style=\"vertical-align: inherit;\">"+"<font style=\"vertical-align: inherit;\">"+
+                            item.leaveMessageTime+ "</font>"+"</font>"+"</span>"+
+                            "<p class=\"be-comment-text\">"+"<font style=\"vertical-align: inherit;\">"+"<font style=\"vertical-align: inherit;\">"+
+                            item.leaveMessageText+
+                            "</font>"+"</font>"+"</p>"+
+                            "</div>"+
+                            "</div>"
+                        ).insertBefore($("#noto-context"));
+                    })
+                },
+                error: function (message) {
+                    // alert("获取失败");
+                },
+            });
+        }
+
+
+        //全选的点击事件
+        $("#ch1").click(function () {
+            //获取全选按钮的状态
+            var flag = $(this).prop("checked");
+            //判断是否选中全选按钮
+            if(flag){
+                //选中,计数器则为展示数的长度
+                count = $(".checkMessage").length;
+                if(count==1){
+                    flags=true;
+                }else {
+                    flags =false;
                 }
+            }else{
+                count = 0;
+            }
+            //获取每个用户选中框对象并且进行选中
+            $(".checkMessage").each(function () {
+                $(this).prop("checked",flag);
             })
-		</script>
+        })
+    })
+    //用户选中状态
+    function isChecked(obj) {
+        // debugger;
+        if (obj.checked) {
+            count++;
+            if (count == 1) {
+                flags = true;
+            } else {
+                flags = false;
+            }
+            if (count == $(".checkMessage").length) {
+                $("#ch1").prop("checked", true);
+            }
+        } else {
+            count--;
+            if (count == 1) {
+                flags = true;
+            } else {
+                flags = false;
+            }
+            $("#ch1").prop("checked", false);
+        }
+    }
+        //将未读留言设置为已读
+        function ReadedMessage() {
+            //1.创建存放id的数组
+            var idList = new Array;
+            //2.获取选中状态的用户id
+            $(".checkMessage:checked").each(function () {
+                //获取id值(value属性值)存放到数组中
+                idList.push($(this).val());
+            })
+            $.ajax({
+                type: 'POST',
+                url: 'ReadedMyMessages',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(idList),
+                success: function (responseText) {
+                    console.log(responseText);
+                    if (responseText == true) {
+                        window.location.reload();
+                    } else {
+                        alert("数据错误");
+                    }
+                },
+                error: function (message) {
+                    alert(message);
+                    console.log(message);
+                },
+                dataType: 'json'
+            });
+        }
+
+        //删除留言信息
+        function DeleteMessage() {
+            //1.创建存放id的数组
+            var idList1 = new Array;
+            //2.获取选中状态的用户id
+            $(".checkMessage:checked").each(function () {
+                //获取id值(value属性值)存放到数组中
+                idList1.push($(this).val());
+            })
+            $.ajax({
+                type: 'POST',
+                url: 'DeletedMyMessages',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(idList1),
+                success: function (responseText) {
+                    console.log(responseText);
+                    if (responseText == true) {
+                        window.location.reload();
+                    } else {
+                        alert("数据错误");
+                    }
+                },
+                error: function (message) {
+                    alert(message);
+                    console.log(message);
+                },
+                dataType: 'json'
+            });
+        }
+        //展示已读信息
+        function MessagesIsReaded() {
+            $(".noto-entry").remove();
+            $(".be-comment").remove();
+            $.ajax({
+                type: 'POST',
+                url: 'getLeaveMessageReaded?leaveMessageToUser=' + userinfoid,
+                contentType: "application/json; charset=utf-8",
+                // async: false,
+                dataType: 'json',
+                // data:JSON.stringify({ "leaveMessageToUser": userinfoid}),
+                success: function (responseText) {
+                    var len = responseText.length;
+                    $(responseText).each(function (index, item) {
+                        $("<div class=\"noto-entry style-3\">" +
+                            "<div class=\"noto-content clearfix\">" +
+                            "<div class=\"form-checkbox\">" +
+                            "<input type=\"checkbox\" value='" + item.leaveMessageId + "' name=\"\" class=\"checkMessage\" onclick='isChecked(this)'>" + "<span class=\"check\">" + "<i class=\"fa fa-check\">" + "</i>" + "</span>" +
+                            "</div>" +
+                            "<div class=\"noto-img\">" +
+                            "<a href=\"author.html?id=" + item.userInfoId + "\">" +
+                            "<img src='" + item.headPath + "'alt=\"\" class=\"be-ava-comment\">" +
+                            "</a>" +
+                            "</div>" +
+                            "<div class=\"noto-text\">" +
+                            "<div class=\"noto-text-top\">" +
+                            "<span class=\"noto-name\">" + "<a href=\"author.html?id=" + item.userInfoId + "\">" + "<font style=\"vertical-align: inherit;\">" + "<font style=\"vertical-align: inherit;\">" + item.name + "</font>" + "</font>" + "</a>" + "</span>" +
+                            "<span class=\"noto-date\">" + "<i class=\"fa fa-clock-o\">" + "</i>" + "<font style=\"vertical-align: inherit;\">" + "<font style=\"vertical-align: inherit;\">" + item.leaveMessageTime + "</font>" + "</font>" + "</span>" +
+                            "</div>" +
+                            "<div class=\"noto-message\">" + "<font style=\"vertical-align: inherit;\">" + "<font style=\"vertical-align: inherit;\">" + item.leaveMessageText + "</font>" + "</font>" + "</div>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>"
+                        ).insertAfter($("#noto-Message"));
+                    });
+                    $(responseText).each(function (index, item) {
+                        $("<div class=\"be-comment\">" +
+                            "<div class=\"be-img-comment\">" +
+                            "<a href=\"author.html?id=" + item.userInfoId + "\">" +
+                            "<img src='" + item.headPath + "' alt=\"\" class=\"be-ava-comment\">" +
+                            "</a>" +
+                            "</div>" +
+                            "<div class=\"be-comment-content\">" +
+                            "<span class=\"be-comment-name\">" +
+                            "<a href=\"author.html?id=" + item.userInfoId + "\">" + "<font style=\"vertical-align: inherit;\">" + "<font style=\"vertical-align: inherit;\">" + item.name + "</font>" + "</font>" + "</a>" +
+                            "</span>" +
+                            "<span class=\"be-comment-time\">" +
+                            "<i class=\"fa fa-clock-o\">" + "</i>" + "<font style=\"vertical-align: inherit;\">" + "<font style=\"vertical-align: inherit;\">" +
+                            item.leaveMessageTime + "</font>" + "</font>" + "</span>" +
+                            "<p class=\"be-comment-text\">" + "<font style=\"vertical-align: inherit;\">" + "<font style=\"vertical-align: inherit;\">" +
+                            item.leaveMessageText +
+                            "</font>" + "</font>" + "</p>" +
+                            "</div>" +
+                            "</div>"
+                        ).insertBefore($("#noto-context"));
+                    })
+                },
+                error: function (message) {
+                    // alert("获取失败");
+                },
+            });
+    }
+        //展示未读信息
+        function NoReadedMessage() {
+            $(".noto-entry").remove();
+            $(".be-comment").remove();
+            $.ajax({
+                type: 'POST',
+                url: 'getLeaveMessageNoRead?leaveMessageToUser=' + userinfoid,
+                contentType: "application/json; charset=utf-8",
+                // async: false,
+                dataType: 'json',
+                // data:JSON.stringify({ "leaveMessageToUser": userinfoid}),
+                success: function (responseText) {
+                    var len = responseText.length;
+                    console.log(responseText);
+                    $(responseText).each(function (index, item) {
+                        $("<div class=\"noto-entry style-3\">" +
+                            "<div class=\"noto-content clearfix\">" +
+                            "<div class=\"form-checkbox\">" +
+                            "<input type=\"checkbox\" value='" + item.leaveMessageId + "' name=\"\" class=\"checkMessage\" onclick='isChecked(this)'>" + "<span class=\"check\">" + "<i class=\"fa fa-check\">" + "</i>" + "</span>" +
+                            "</div>" +
+                            "<div class=\"noto-img\">" +
+                            "<a href=\"author.html?id="+item.userInfoId+"\">" +
+                            "<img src='" + item.headPath + "'alt=\"\" class=\"be-ava-comment\">" +
+                            "</a>" +
+                            "</div>" +
+                            "<div class=\"noto-text\">" +
+                            "<div class=\"noto-text-top\">" +
+                            "<span class=\"noto-name\">" + "<a href=\"author.html?id="+item.userInfoId+"\">" + "<font style=\"vertical-align: inherit;\">" + "<font style=\"vertical-align: inherit;\">" + item.name + "</font>" + "</font>" + "</a>" + "</span>" +
+                            "<span class=\"noto-date\">" + "<i class=\"fa fa-clock-o\">" + "</i>" + "<font style=\"vertical-align: inherit;\">" + "<font style=\"vertical-align: inherit;\">" + item.leaveMessageTime + "</font>" + "</font>" + "</span>" +
+                            "</div>" +
+                            "<div class=\"noto-message\">" + "<font style=\"vertical-align: inherit;\">" + "<font style=\"vertical-align: inherit;\">" + item.leaveMessageText + "</font>" + "</font>" + "</div>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>"
+                        ).insertAfter($("#noto-Message"));
+                    });
+                    $(responseText).each(function (index, item) {
+                        $("<div class=\"be-comment\">" +
+                            "<div class=\"be-img-comment\">" +
+                            "<a href=\"author.html?id="+item.userInfoId+"\">" +
+                            "<img src='" + item.headPath + "' alt=\"\" class=\"be-ava-comment\">" +
+                            "</a>" +
+                            "</div>" +
+                            "<div class=\"be-comment-content\">" +
+                            "<span class=\"be-comment-name\">" +
+                            "<a href=\"author.html?id="+item.userInfoId+"\">" + "<font style=\"vertical-align: inherit;\">" + "<font style=\"vertical-align: inherit;\">" + item.name + "</font>" + "</font>" + "</a>" +
+                            "</span>" +
+                            "<span class=\"be-comment-time\">" +
+                            "<i class=\"fa fa-clock-o\">" + "</i>" + "<font style=\"vertical-align: inherit;\">" + "<font style=\"vertical-align: inherit;\">" +
+                            item.leaveMessageTime + "</font>" + "</font>" + "</span>" +
+                            "<p class=\"be-comment-text\">" + "<font style=\"vertical-align: inherit;\">" + "<font style=\"vertical-align: inherit;\">" +
+                            item.leaveMessageText +
+                            "</font>" + "</font>" + "</p>" +
+                            "</div>" +
+                            "</div>"
+                        ).insertBefore($("#noto-context"));
+                    })
+                },
+                error: function (message) {
+                    // alert("获取失败");
+                },
+            });
+
+    }
+    //回复留言
+    function reply() {
+        if (!flags) {
+            window.confirm("请选择一个用户进行回复")
+        } else if (flags) {
+            // alert("开始回复")
+            $(".checkMessage:checked").each(function () {
+                //获取name值(name属性值)
+                var message = $(this).prop("name");
+                var replyMessageArea = $("#ReplymessageArea").val();
+                if(replyMessageArea==''||replyMessageArea==null){
+                    alert("留言内容不能为空")
+                }else {
+
+                    $.ajax({
+                        async:false,
+                        type: 'POST',
+                        url: 'addLeaveMessage',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({//没有stringify,则方法无法执行
+                            "userInfoId":userinfoid,
+                            "leaveMessageToUser":message,
+                            "leaveMessageText":replyMessageArea
+                        }),
+                        success: function(responseText){
+                            console.log(responseText);
+                            if(responseText==true){
+                                alert("留言成功")
+                            }else {
+                                alert("添加留言失败");
+                            }
+                        },
+                        error: function (message) {
+                            alert("添加失败");
+                            console.log(message);
+                        },
+                        dataType: 'json'
+                    });
+                }
+
+            })
+        }
+    }
+</script>
+
 <!-- MAIN CONTENT -->
 <div id="content-block">
 	<div class="container be-detail-container">
@@ -71,99 +426,23 @@
 				<a href="author-login.html" class="btn color-4 size-1 hover-7"><i class="fa fa-chevron-left"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 返回至个人档案</font></font></a>
 				<a href="blog-detail-2.html" class="btn btn-right color-1 size-1 hover-1"><i class="fa fa-envelope-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 撰写</font></font></a>
 
-				<form>
+				<form id="noto-Message">
 					<div class="noto-header clearfix">
 						<div class="form-checkbox">
 							<input id="ch1" class="select-all" type="checkbox" value="" name=""> <span class="check"><i class="fa fa-check"></i></span>
 							<label for="ch1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选择所有</font></font></label>
 						</div>
 						<div class="stat-sort be-drop-down">
-							<span class="be-dropdown-content"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">行动</font></font></span>
+							<span class="be-dropdown-content"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未读留言</font></font></span>
 							<ul class="drop-down-list">
-								<li><a>Featured</a></li>
-								<li><a>Most Appreciated</a></li>
-								<li><a>Most Viewed</a></li>
-								<li><a>Most Discussed</a></li>
-								<li><a>Most Recent</a></li>
+								<li onclick="ReadedMessage()"><a>点此已读</a></li>
+								<li onclick="MessagesIsReaded()"><a>已读留言</a></li>
+								<li onclick="NoReadedMessage()"><a>未读留言</a></li>
+                                <li onclick="DeleteMessage()"><a>删除留言</a></li>
 							</ul>
 						</div>
 					</div>
-					<div class="noto-entry style-3">
-						<div class="noto-content clearfix">
-							<div class="form-checkbox">
-								<input type="checkbox" value="" name=""> <span class="check"><i class="fa fa-check"></i></span>
-							</div>
-							<div class="noto-img">
-								<a href="blog-detail-2.html">
-									<img src="img/c1.png" alt="" class="be-ava-comment">
-								</a>
-							</div>
-							<div class="noto-text">
-								<div class="noto-text-top">
-									<span class="noto-name"><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">拉维，萨</font></font></a></span>
-									<span class="noto-date"><i class="fa fa-clock-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 5月27日2015年</font></font></span>
-								</div>
-								<div class="noto-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PROIN accumsan，枕坐阿梅特生活，需要的accumsan，枕阿梅特坐accumsan简历，egestas</font></font></div>
-							</div>
-						</div>
-					</div>
-					<div class="noto-entry style-3">
-						<div class="noto-content clearfix">
-							<div class="form-checkbox">
-								<input type="checkbox" value="" name=""> <span class="check"><i class="fa fa-check"></i></span>
-							</div>
-							<div class="noto-img">
-								<a href="blog-detail-2.html">
-									<img src="img/ava_3.jpg" alt="" class="be-ava-comment">
-								</a>
-							</div>
-							<div class="noto-text">
-								<div class="noto-text-top">
-									<span class="noto-name"><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">圣路易斯帕凯</font></font></a></span>
-									<span class="noto-date"><i class="fa fa-clock-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 5月27日2015年</font></font></span>
-								</div>
-								<div class="noto-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">可悲的老年和疾病，营养居民netus ...</font></font></div>
-							</div>
-						</div>
-					</div>
-					<div class="noto-entry style-3">
-						<div class="noto-content clearfix">
-							<div class="form-checkbox">
-								<input type="checkbox" value="" name=""> <span class="check"><i class="fa fa-check"></i></span>
-							</div>
-							<div class="noto-img">
-								<a href="blog-detail-2.html">
-									<img src="img/ava_5.jpg" alt="" class="be-ava-comment">
-								</a>
-							</div>
-							<div class="noto-text">
-								<div class="noto-text-top">
-									<span class="noto-name"><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">参议员cuneyt</font></font></a></span>
-									<span class="noto-date"><i class="fa fa-clock-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 5月27日2015年</font></font></span>
-								</div>
-								<div class="noto-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">然而，所说的话以及大量免费的花生malesuada的</font></font></div>
-							</div>
-						</div>
-					</div>
-					<div class="noto-entry style-3">
-						<div class="noto-content clearfix">
-							<div class="form-checkbox">
-								<input type="checkbox" value="" name=""> <span class="check"><i class="fa fa-check"></i></span>
-							</div>
-							<div class="noto-img">
-								<a href="blog-detail-2.html">
-									<img src="img/ava_8.jpg" alt="" class="be-ava-comment">
-								</a>
-							</div>
-							<div class="noto-text">
-								<div class="noto-text-top">
-									<span class="noto-name"><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">托马斯Mazurczak</font></font></a></span>
-									<span class="noto-date"><i class="fa fa-clock-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 5月27日2015年</font></font></span>
-								</div>
-								<div class="noto-message"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谁法无免费足球纺织马阿员工</font></font></div>
-							</div>
-						</div>
-					</div>
+
 				</form>
 			</div>
 			<div class="col-xs-12 col-sm-7">
@@ -171,100 +450,17 @@
 					<div class="info-block style-2">
 						<div class="be-large-post-align">
 							<div class="info-block-right"><a class="settings" href="blog-detail-2.html"><i class="fa fa-cog"></i></a></div>
-							<h3 class="info-block-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">消息路易斯帕凯</font></font></h3>
+							<h3 class="info-block-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复中心</font></font></h3>
 						</div>
 					</div>
-					<div class="be-large-post-align">
-						<div class="be-comment">
-							<div class="be-img-comment">
-								<a href="blog-detail-2.html">
-									<img src="img/ava_3.jpg" alt="" class="be-ava-comment">
-								</a>
-							</div>
-							<div class="be-comment-content">
+					<div class="be-large-post-align" id="noto-context">
 
-										<span class="be-comment-name">
-											<a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">圣路易斯帕凯</font></font></a>
-											</span>
-								<span class="be-comment-time">
-											<i class="fa fa-clock-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-											5月27日，2015年在上午03时14
-										</font></font></span>
-
-								<p class="be-comment-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-									但是，现在智能足球和房地产。</font><font style="vertical-align: inherit;">热镦房地产聚光灯，但最大的花生方便。</font><font style="vertical-align: inherit;">明天非常好，但是哀悼，潜水或悲或丑午的运行纸箱。
-								</font></font></p>
-							</div>
-						</div>
-						<div class="be-comment">
-							<div class="be-img-comment">
-								<a href="blog-detail-2.html">
-									<img src="img/ava_10.jpg" alt="" class="be-ava-comment">
-								</a>
-							</div>
-							<div class="be-comment-content">
-
-										<span class="be-comment-name">
-											<a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">LEIGH TAYLOR</font></font></a>
-											</span>
-								<span class="be-comment-time">
-											<i class="fa fa-clock-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-											5月27日，2015年在上午03时14
-										</font></font></span>
-
-								<p class="be-comment-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-									谁法无免费的员工。</font><font style="vertical-align: inherit;">但是，这将是自由人的简历malesuada
-								</font></font></p>
-							</div>
-						</div>
-						<div class="be-comment">
-							<div class="be-img-comment">
-								<a href="blog-detail-2.html">
-									<img src="img/ava_10.jpg" alt="" class="be-ava-comment">
-								</a>
-							</div>
-							<div class="be-comment-content">
-
-										<span class="be-comment-name">
-											<a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">LEIGH TAYLOR</font></font></a>
-											</span>
-								<span class="be-comment-time">
-											<i class="fa fa-clock-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-											5月27日，2015年在上午03时14
-										</font></font></span>
-
-								<p class="be-comment-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-									Fusce placerat QUIS lectus坐阿梅德molestie。</font><font style="vertical-align: inherit;">在之前一个枕头，但味道NIBH。</font><font style="vertical-align: inherit;">即使是怀孕的温度，使开发人员提高。</font><font style="vertical-align: inherit;">评级机构枕，SEM简历facilisis placerat普鲁斯自由人consequat ERAT。</font><font style="vertical-align: inherit;">现在有一个湖，山谷和局
-								</font></font></p>
-							</div>
-						</div>
-						<div class="be-comment">
-							<div class="be-img-comment">
-								<a href="blog-detail-2.html">
-									<img src="img/ava_3.jpg" alt="" class="be-ava-comment">
-								</a>
-							</div>
-							<div class="be-comment-content">
-
-										<span class="be-comment-name">
-											<a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">圣路易斯帕凯</font></font></a>
-											</span>
-								<span class="be-comment-time">
-											<i class="fa fa-clock-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-											5月27日，2015年在上午03时14
-										</font></font></span>
-
-								<p class="be-comment-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-									刚刚在英国，但整个时间制造。</font><font style="vertical-align: inherit;">信用评级机构燕雀accumsan发酵甚至不是。</font><font style="vertical-align: inherit;">不过那个时候锅。</font><font style="vertical-align: inherit;">有时他们malesuada饥饿，并在第一次品尝。
-								</font></font></p>
-							</div>
-						</div>
 						<form>
 							<div class="form-group">
 								<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您的留言</font></font></div>
-								<textarea class="form-input" required="" placeholder="Reply to Louise Paquet"></textarea>
+								<textarea class="form-input" required="" placeholder="Reply to Louise Paquet" id="ReplymessageArea"></textarea>
 							</div>
-							<button class="btn btn-right color-1 size-2 hover-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复</font></font></button>
+							<button onclick="reply()" class="btn btn-right color-1 size-2 hover-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回复</font></font></button>
 						</form>
 					</div>
 				</div>
@@ -707,7 +903,7 @@
 </div>
 
 <!-- SCRIPT	-->
-<script src="script/jquery-2.1.4.min.js"></script>
+
 <script src="script/bootstrap.min.js"></script>
 <script src="script/idangerous.swiper.min.js"></script>
 <script src="script/isotope.pkgd.min.js"></script>
@@ -715,4 +911,6 @@
 <script src="script/jquery.countTo.js"></script>
 <script src="script/global.js"></script><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google 翻译"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">提供更好的翻译建议</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div>
+
+</body></html>

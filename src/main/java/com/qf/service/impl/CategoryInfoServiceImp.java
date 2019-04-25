@@ -1,4 +1,4 @@
-package com.qf.service.imp;
+package com.qf.service.impl;
 
 import com.qf.dto.CategoryInfoDto;
 import com.qf.mapper.CategoryInfoMapper;
@@ -19,5 +19,9 @@ public class CategoryInfoServiceImp implements CategoryInfoService {
 
     public List<CategoryInfoDto> getHeaderCategoryInfo() {
         return categoryInfoMapper.getHeaderCategoryInfo();
+    }
+
+    public Integer getCountCategoryArticle(Integer id) {
+        return categoryInfoMapper.getCountCategoryArticle(id);
     }
 }

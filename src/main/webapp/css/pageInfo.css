@@ -1,0 +1,17 @@
+
+/*设置div样式的整体布局*/
+.page-icon{
+    margin:20px 0 0 0;/*设置距离顶部20像素*/
+    font-size:0;/*修复行内元素之间空隙间隔*/
+    text-align:center;/*设置内容居中显示*/
+}
+
+/*设置共有的的样式布局，主要是进行代码优化，提高运行效率*/
+.page-icon a{
+    border:1px solid #ccc;
+    border-radius:3px;
+    padding:4px 10px 5px;
+    font-size:14PX;/*修复行内元素之间空隙间隔*/
+    margin-right:10px;
+}
+

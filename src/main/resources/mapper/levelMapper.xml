@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.LevelMapper">
+
+
+    <select id="getLevel" resultType="com.qf.pojo.LevelInfo" parameterType="com.qf.pojo.LevelInfo">
+       select * from LV where userInfoId= #{userInfoId} ORDER BY lvScore desc LIMIT 1
+    </select>
+
+    <insert id="giveDefaultLevelScore" parameterType="String">
+        INSERT into LV(userinfoId,flag) VALUES((SELECT u.userInfoId FROM userInfo u WHERE u.username = #{username}),1);
+    </insert>
+</mapper>

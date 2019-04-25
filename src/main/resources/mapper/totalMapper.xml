@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.TotalMapper">
+
+
+    <select id="getTotalById" resultType="com.qf.pojo.Total" parameterType="com.qf.pojo.Total">
+        select max(loginTime) AS 'lateTime' from total where userInfoId=#{userInfoId}
+    </select>
+    
+    <insert id="addTotal" parameterType="com.qf.pojo.Total">
+        insert into total (userInfoId,loginIp) values (#{userInfoId},#{loginIp})
+    </insert>
+
+</mapper>
