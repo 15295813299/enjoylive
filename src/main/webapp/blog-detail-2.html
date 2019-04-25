@@ -1169,21 +1169,17 @@
 
     var page = 1;
     var articleId =cutUrl("articleId");
-    if(typeof(articleId)=="undefined"){
-        articleId=69;
-    }
-    var userInfoid;
+
+    var userInfoId;
     $.ajax({
         type:"get",
+		async:false,
         url:"getSessionLoginInfo",
         success:function (data) {
-            userInfoid = data.userInfoId;
+            userInfoId = data.userInfoId;
         }
     })
-    var userInfoId = userInfoid;
-    if(typeof(userInfoId)=="undefined"){
-        userInfoId=7;
-    }
+
     var receiverId;
     var commentId;
 
