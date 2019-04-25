@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.MzhArticleInfoMapper">
+    <select id="getArticleByCid" resultType="com.qf.dto.MzhArticleInfoDto" parameterType="int">
+        select ar.articleId,u.username,u.userInfoId,ar.title,ap.potoPath,c.categoryName from
+        articleInfo ar,articlePoto ap,userInfo u,category c
+        where ar.userInfoId=u.userInfoId and ar.articleId=ap.articleId
+        and ar.flag=1 and ap.flag=1 and u.flag=1 and c.flag=1 and c.categoryId=ar.categoryId and ar.categoryId
+        in (SELECT ca.categoryId from category c,category ca where c.categoryId=ca.parentId and c.categoryId=#{categoryId})
+        limit 0,2
+    </select>
+    <select id="getArticle" resultType="com.qf.dto.MzhArticleInfoDto" parameterType="int">
+    SELECT
+u.`name` ,
+u.username,
+  u.userInfoId,
+	ar.title,
+  ar.articleId,
+	c.categoryName,
+	ar.content,
+	ar.articleInfoDate
+FROM
+	articleInfo ar,
+	articlePoto ap,
+	userInfo u,
+	category c
+WHERE
+	ar.userInfoId = u.userInfoId
+AND ar.flag = 1
+AND ap.flag = 1
+AND u.flag = 1
+AND c.flag = 1
+AND ar.categoryId = c.categoryId
+AND ar.articleId = #{articleId}
+GROUP BY
+	u.username
+    </select>
+</mapper>

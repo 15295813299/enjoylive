@@ -9,6 +9,7 @@ public class PersonageDto {
     int praise;
     int userInfoId;
     ArrayList<Integer> ids;
+    Integer lvScore;
 
     public ArrayList<Integer> getIds() {
         return ids;
@@ -47,7 +48,16 @@ public class PersonageDto {
         this.ids = ids;
     }
 
+    public Integer getLvScore() {
+        return lvScore;
+    }
+
+    public void setLvScore(Integer lvScore) {
+        this.lvScore = lvScore;
+    }
+
     @Override
+
     public String toString() {
         return "PersonageDto{" +
                 "visit=" + visit +

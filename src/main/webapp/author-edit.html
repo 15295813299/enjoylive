@@ -1,7 +1,8 @@
 ﻿<!DOCTYPE html>
-<html class="translated-ltr"><head><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"></head><body data-spy="scroll" data-target="blog-detail-2.htmlscrollspy"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">F
+<html class="translated-ltr"><head>
 
-
+<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css">
+</head><body data-spy="scroll" data-target="blog-detail-2.htmlscrollspy"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">F
 </font></font><title>NGRNetwork</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +21,71 @@
 <script src="script/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="script/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+<script type="text/javascript">
+    window.onload = function() {
+        var CJPCD1 = new CJPCD("province", "city", "district");
 
+        //设置值
+        document.getElementById('setValue').onclick = function () {
+            CJPCD1.setUp("广东省", "广州市", "天河区");
+        }
+
+        //获取地址
+        document.getElementById('getValue').onclick = function () {
+            var value = CJPCD1.getValue();//json对象
+            console.log(value);
+            if (!value) {
+                console.log("暂时未设置地址");
+                alert("暂时未设置地址");
+                return false;
+            }
+            alert(value.province + "," + value.city + "," + value.district)
+        }
+
+        //自定义分割结果
+        document.getElementById('getCustomValue').onclick = function () {
+            var customChar = document.getElementById('customChar').value;
+            console.log(CJPCD1.getValue(customChar))
+        }
+        //重置
+        document.getElementById('resetValue').onclick = function () {
+            CJPCD1.reSet();//重置
+        }
+
+        document.getElementById('newcase').onclick = function () {
+            document.getElementById('btn-group2').style = "display:block";
+            document.getElementById('row2').style = "display:block";
+        }
+
+
+        //实例 2
+        var CJPCD2 = new CJPCD("province1", "city1", "district1");
+        document.getElementById('setValue1').onclick = function () {
+            CJPCD2.setUp("广东省", "广州市", "越秀区");
+        }
+
+        //获取地址
+        document.getElementById('getValue1').onclick = function () {
+            var value = CJPCD2.getValue();//json对象
+            console.log(value);
+            if (!value) {
+                console.log("暂时未设置地址");
+                alert("暂时未设置地址");
+                return false;
+            }
+            alert(value.province + "," + value.city + "," + value.district);
+        }
+        //自定义分割结果
+        document.getElementById('getCustomValue1').onclick = function () {
+            var customChar = document.getElementById('customChar1').value;
+            alert(CJPCD2.getValue(customChar))
+        }
+        //重置
+        document.getElementById('resetValue1').onclick = function () {
+            CJPCD2.reSet();
+        }
+    }
+</script>
 
 
 <!-- THE LOADER -->
@@ -67,14 +132,21 @@
             })
 		</script>
 
-
+<style type="text/css">
+	.be-large-post-align {
+		margin: 24px 65px;
+	}
+	.social-input .social-bars {
+		margin-right: 2px;
+	}
+</style>
 <!-- MAIN CONTENT -->
 <div id="content-block">
 	<div class="container be-detail-container">
 		<div class="row">
 			<div class="col-xs-12 col-md-3 left-feild">
 				<div class="be-vidget back-block">
-					<a class="btn full color-1 size-1 hover-1"><i class="fa fa-chevron-left"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回到个人资料</font></font></a>
+					<a href="author-login.html" class="btn full color-1 size-1 hover-1"><i class="fa fa-chevron-left"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">回到个人资料</font></font></a>
 				</div>
 				<div class="be-vidget hidden-xs hidden-sm affix-top" id="scrollspy">
 					<h3 class="letf-menu-article"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
@@ -101,10 +173,12 @@
 						</div>
 						<div class="be-large-post-align">
 							<div class="be-change-ava">
-								<a class="be-ava-user style-2" href="blog-detail-2.html">
-									<img src="img/ava_10.jpg" alt="">
+								<a class="be-ava-user style-2"  href="blog-detail-2.html">
+									<img src="img/" id="headPath" alt="">
+									<input type="file" style="display:none;" id="file">
 								</a>
-								<a class="btn color-4 size-2 hover-7"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">替换图像</font></font></a>
+								<a class="btn color-4 size-2 hover-7" onclick="files()"><font>替换头像</font></a>
+								<a class="btn color-4 size-2 hover-7" id="file2" onclick="upimg()" style="display:none"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">确定更换</font></font></a>
 							</div>
 						</div>
 						<div class="be-large-post-align">
@@ -112,51 +186,86 @@
 								<div class="input-col col-xs-12 col-sm-6">
 									<div class="form-group fg_icon focus-2">
 										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">名字</font></font></div>
-										<input class="form-input" type="text" value="Taylor">
+										<input class="form-input" type="text" id="name" value="Taylor">
 									</div>
 								</div>
 								<div class="input-col col-xs-12 col-sm-6">
 									<div class="form-group focus-2">
-										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">姓</font></font></div>
-										<input class="form-input" type="text" value="Leight">
+										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">手机号</font></font></div>
+										<input class="form-input" type="text" id="phone" value="Leight">
 									</div>
 								</div>
 								<div class="input-col col-xs-12">
 									<div class="form-group focus-2">
-										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">占用</font></font></div>
-										<input class="form-input" type="text" value="UI/UX, Web Design, Art Direction">
+										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">出生年月日</font></font></div>
+									<div class="col-md-4" style="margin-bottom: 15px">
+										<select id="y" name="year" onchange="funy(this)" class="form-control">
+											<!--<option value="year" disabled="disabled">请选择 年</option>-->
+										</select>
+									</div>
+									<div class="col-md-4">
+										<select id="m" name="m" onchange="funm(this)" class="form-control">
+											<!--<option value="月" disabled="disabled">选择 月</option>-->
+										</select>
+									</div>
+									<div class="col-md-4">
+										<select id="d"  name="d" onChange="DDD(this.value)" class="form-control">
+											<!--<option value="day" disabled="disabled">选择 日</option>-->
+										</select>
+									</div>
 									</div>
 								</div>
-								<div class="input-col col-xs-12">
-									<div class="form-group focus-2">
-										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">公司</font></font></div>
-										<input class="form-input" type="text" placeholder="">
+								<div class="input-col  col-xs-12 col-sm-6">
+									<div class="be-custom-select-block ">
+										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">性别</font></font></div>
+										<select name="nation" id="sex" class="be-custom-select" style="border: #b4b7c1 1px solid" >
+											<option disabled="" selected=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+												性别
+											</font></font></option>
+											<option value="男"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">男</font></font></option>
+											<option value="女"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">女</font></font></option>
+										</select>
 									</div>
 								</div>
 								<div class="input-col col-xs-12 col-sm-6">
-									<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">国家</font></font></div>
-									<div class="be-drop-down icon-none">
-										<span class="be-dropdown-content"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 英国 </font></font></span>
-										<ul class="drop-down-list">
-											<li><a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">美国</font></font></a></li>
-											<li><a>India</a></li>
-											<li><a>Mexica</a></li>
-											<li><a>Russia</a></li>
-											<li><a>Italy</a></li>
-										</ul>
+									<div class="form-group fg_icon focus-2" >
+										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">邮箱</font></font></div>
+										<input class="form-input" type="text" id="email" value="" style="border: #b4b7c1 1px solid;height: 46px;">
 									</div>
 								</div>
-								<div class="input-col col-xs-12 col-sm-6">
-									<div class="form-group focus-2">
-										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">市</font></font></div>
-										<input class="form-input" type="text" value="Barnsley">
+								<div class="input-col col-xs-12 col-sm-12">
+									<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">地址</font></font></div>
+									<div class="col-md-4">
+										<div class="">
+											<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" id="nation2">中国</font></font></div>
+											<select name="nation" id="nation" class="be-custom-select" onchange="guo(this)"  style="border: #b4b7c1 1px solid">
+												<option disabled="" selected=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+													国家
+												</font></font></option>
+												<option value="中国"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">中国</font></font></option>
+												<option value="外国"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">外国</font></font></option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group col-md-4">
+										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" id="province2">北京</font></font></div>
+										<select onblur="shen()" id="province"  name="province" class="form-control  be-custom-select" style="border: #b4b7c1 1px solid" >
+
+										</select>
+									</div>
+									<div class="form-group col-md-4 " >
+										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" id="city2">某地</font></font></div>
+										<select id="city" name="city" onblur="di()" class="form-control be-custom-select" style="border: #b4b7c1 1px solid" ></select>
 									</div>
 								</div>
 								<div class="input-col col-xs-12">
 									<div class="form-group focus-2">
-										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网站网址</font></font></div>
-										<input class="form-input" type="text" value="http:// www.phoenix.cool">
+										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">个人说明</font></font></div>
+										<input class="form-input" id="brief" type="text" id="brief" value="个人说明" style="border: #b4b7c1 1px solid; color: #333333">
 									</div>
+								</div>
+								<div class="col-xs-12">
+									<a onclick="setInfo()" class="btn color-1 size-2 hover-1 btn-right" ><font style="vertical-align: inherit;"><font  style="vertical-align: inherit;">保存更改</font></font></a>
 								</div>
 							</div>
 						</div>
@@ -172,23 +281,23 @@
 								<div class="input-col col-xs-12 col-sm-4">
 									<div class="form-group focus-2">
 										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">旧密码</font></font></div>
-										<input class="form-input" type="password" placeholder="">
+										<input class="form-input" type="password" id="passwrod" placeholder="">
 									</div>
 								</div>
 								<div class="input-col col-xs-12 col-sm-4">
 									<div class="form-group focus-2">
 										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">新密码</font></font></div>
-										<input class="form-input" type="password" placeholder="">
+										<input class="form-input" type="password" id="newPassword" placeholder="">
 									</div>
 								</div>
 								<div class="input-col col-xs-12 col-sm-4">
 									<div class="form-group focus-2">
 										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">重复输入密码</font></font></div>
-										<input class="form-input" type="password" placeholder="">
+										<input class="form-input" type="password" id="rePassword" placeholder="">
 									</div>
 								</div>
 								<div class="col-xs-12">
-									<a class="btn color-1 size-2 hover-1 btn-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">更改密码</font></font></a>
+									<a class="btn color-1 size-2 hover-1 btn-right" onclick="upPassword()"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">更改密码</font></font></a>
 								</div>
 							</div>
 						</div>
@@ -197,108 +306,57 @@
 				<div class="affix-block" id="on-the-web">
 					<div class="be-large-post">
 						<div class="info-block style-2">
-							<div class="be-large-post-align"><h3 class="info-block-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在网上</font></font></h3></div>
+							<div class="be-large-post-align"><h3 class="info-block-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">擅长领域</font></font></h3></div>
 						</div>
 						<div class="be-large-post-align">
 							<div class="social-input form-group focus-2">
 								<div class="s_icon">
-									<div class="social-bars"><i class="fa fa-bars"></i></div>
-									<div class="social-btn color-1" href="blog-detail-2.html"><i class="fa fa-facebook"></i></div>
+									<div class="social-bars">领域1</div>
+									<div class="social-btn color-3"><i class="fa fa-instagram"></i></div>
 								</div>
 								<div class="s_input">
-									<input class="form-input" type="text" value="http:// facebook.com/taylor">
+									<select  name="province" class="form-control  be-custom-select adept one0" style="border: #b4b7c1 1px solid" >
+
+										<option value="无"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">无</font></font></option>
+									</select>
 								</div>
 							</div>
+						</div>
+						<div class="be-large-post-align">
 							<div class="social-input form-group focus-2">
 								<div class="s_icon">
-									<div class="social-bars"><i class="fa fa-bars"></i></div>
-									<div class="social-btn color-2" href="blog-detail-2.html"><i class="fa fa-twitter"></i></div>
+									<div class="social-bars">领域2</i></div>
+									<div class="social-btn color-3"><i class="fa fa-twitter "></i></div>
 								</div>
 								<div class="s_input">
-									<input class="form-input" type="text" value="http:// twitter.com/taylor">
+									<select  name="province" class="form-control  be-custom-select adept one1" style="border: #b4b7c1 1px solid" >
+										<option value="无"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">无</font></font></option>
+									</select>
 								</div>
 							</div>
+						</div>
+						<div class="be-large-post-align">
 							<div class="social-input form-group focus-2">
 								<div class="s_icon">
-									<div class="social-bars"><i class="fa fa-bars"></i></div>
-									<div class="social-btn color-3" href="blog-detail-2.html"><i class="fa fa-google-plus"></i></div>
+									<div class="social-bars">领域3</div>
+									<div class="social-btn color-3"><i class="fa fa-pinterest-p" ></i></div>
 								</div>
 								<div class="s_input">
-									<input class="form-input" type="text" value="http:// googleplus.com/taylor">
+									<select  name="province" class="form-control  be-custom-select adept one2" style="border: #b4b7c1 1px solid" >
+										<option value="0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">无</font></font></option>
+									</select>
 								</div>
 							</div>
-							<div class="social-input form-group focus-2">
-								<div class="s_icon">
-									<div class="social-bars"><i class="fa fa-bars"></i></div>
-									<div class="social-btn color-4" href="blog-detail-2.html"><i class="fa fa-pinterest-p"></i></div>
-								</div>
-								<div class="s_input">
-									<input class="form-input" type="text" value="http:// pinterest.com/taylor">
-								</div>
-							</div>
-							<div class="social-input form-group focus-2">
-								<div class="s_icon">
-									<div class="social-bars"><i class="fa fa-bars"></i></div>
-									<div class="social-btn color-5" href="blog-detail-2.html"><i class="fa fa-instagram"></i></div>
-								</div>
-								<div class="s_input">
-									<input class="form-input" type="text" value="http:// instagram.com/taylor">
-								</div>
-							</div>
+
+
+							<a onclick="upAdept()" class="btn color-1 size-2 hover-1 btn-right" ><font style="vertical-align: inherit;"><font  style="vertical-align: inherit;">保存更改</font></font></a>
+
 						</div>
 					</div>
 				</div>
 
-				<div class="affix-block" id="about-me">
-					<div class="be-large-post">
-						<div class="info-block style-2">
-							<div class="be-large-post-align"><h3 class="info-block-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">关于我</font></font></h3></div>
-						</div>
-						<div class="be-large-post-align">
-							<div class="row">
-								<div class="input-col col-xs-12">
-									<div class="form-group focus-2">
-										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">章节标题</font></font></div>
-										<input class="form-input" type="text" placeholder="About Me">
-									</div>
-								</div>
-								<div class="input-col col-xs-12">
-									<div class="form-group focus-2">
-										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">描述</font></font></div>
-										<textarea class="form-input" required="" placeholder="Something about you"></textarea>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 
-				<div class="affix-block" id="web-references">
-					<div class="be-large-post">
-						<div class="info-block style-2">
-							<div class="be-large-post-align"><h3 class="info-block-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网络参考</font></font></h3></div>
-						</div>
-						<div class="be-large-post-align">
-							<div class="row">
-								<div class="input-col col-xs-12 col-sm-5">
-									<div class="form-group focus-2">
-										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">链接标题</font></font></div>
-										<input class="form-input" type="text" placeholder="Enter title">
-									</div>
-								</div>
-								<div class="input-col col-xs-12 col-sm-5">
-									<div class="form-group focus-2">
-										<div class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">链接描述</font></font></div>
-										<input class="form-input" type="text" placeholder="Enter descriprion">
-									</div>
-								</div>
-								<div class="col-xs-12 col-sm-2">
-									<a href="blog-detail-2.html" class="btn full btn-input color-1 size-4 hover-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">加</font></font></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+
 				<a class="btn full color-1 size-1 hover-1 add_section"><i class="fa fa-plus"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">添加部分</font></font></a>
 			</div>
 		</div>
@@ -581,7 +639,7 @@
 						<div class="col-xs-6">
 							<div class="be-checkbox">
 								<label class="check-box">
-									<input id="" class="checkbox-input" type="checkbox" value="" name=""> <span class="check-box-sign"></span>
+									<input  class="checkbox-input" type="checkbox" value="" name=""> <span class="check-box-sign"></span>
 								</label>
 								<span class="large-popup-text">
 									Stay signed in
@@ -618,7 +676,7 @@
 						</div>
 						<div class="col-md-6">
 							<div class="be-custom-select-block">
-								<select name="" id="" class="be-custom-select">
+								<select name="" class="be-custom-select">
 									<option value="" disabled="" selected="">
 										Country
 									</option>
@@ -642,7 +700,7 @@
 								Date of birth
 							</span>
 							<div class="be-custom-select-block mounth">
-								<select name="" id="" class="be-custom-select">
+								<select name="" class="be-custom-select">
 									<option value="" disabled="" selected="">
 										Mounth
 									</option>
@@ -661,7 +719,7 @@
 								</select>
 							</div>
 							<div class="be-custom-select-block">
-								<select name="" id="" class="be-custom-select">
+								<select name=""  class="be-custom-select">
 									<option value="" disabled="" selected="">
 										Day
 									</option>
@@ -711,7 +769,7 @@
 						<div class="col-md-6">
 							<div class="be-checkbox">
 								<label class="check-box">
-									<input id="" class="checkbox-input" type="checkbox" required="" value="" name=""> <span class="check-box-sign"></span>
+									<input  class="checkbox-input" type="checkbox" required="" value="" name=""> <span class="check-box-sign"></span>
 								</label>
 								<span class="large-popup-text">
 									I have read and agree to the <a class="be-popup-terms" href="blog-detail-2.html">Terms of Use</a> and <a class="be-popup-terms" href="blog-detail-2.html">Privacy Policy</a>.
@@ -719,7 +777,7 @@
 							</div>
 							<div class="be-checkbox">
 								<label class="check-box">
-									<input id="" class="checkbox-input" type="checkbox" value="" name=""> <span class="check-box-sign"></span>
+									<input  class="checkbox-input" type="checkbox" value="" name=""> <span class="check-box-sign"></span>
 								</label>
 								<span class="large-popup-text">
 									Send me notifications
@@ -737,11 +795,443 @@
 </div>
 
 <!-- SCRIPT	-->
+<script type="text/javascript" src="./dist/cj-pcd-1.0.1.min.js"></script>
 <script src="script/jquery-2.1.4.min.js"></script>
 <script src="script/bootstrap.min.js"></script>
 <script src="script/idangerous.swiper.min.js"></script>
 <script src="script/isotope.pkgd.min.js"></script>
 <script src="script/jquery.viewportchecker.min.js"></script>
-<script src="script/global.js"></script><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google 翻译"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">提供更好的翻译建议</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+<script src="script/global.js"></script>
+<div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google 翻译"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">提供更好的翻译建议</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+<script type="text/javascript">
+    //    年月日
+    var y = document.getElementById('y');
+    var m = document.getElementById('m');
+    var d = document.getElementById('d');
+
+    var D = new Date();
+    var yy = D.getFullYear();               //年
+    var mm = parseInt(D.getMonth()) + 1;    //现在是8月，月份获取是7月。一脸懵逼！
+    var dd = D.getDate();                   //日
+    var oyy = 10 * (yy - 100).toString().substr(0,3);   //计算最小年 o = old
+    var marr = [1,3,5,7,8,10,12];           //列出31天的月份
+    var add;                                //初始化每月天数 a = all
+
+    starty();           //开始生成年下拉列表
+    startm();           //开始生成月下拉列表
+    startd(dd,mm,yy);   //开始生成日下拉列表
+
+    // 生成年下拉列表
+    function starty(){
+        // 初始化
+        var pyy = document.createElement('option');
+        pyy.innerText = '选择 年';
+        pyy.value = "year";
+        pyy.setAttribute("disabled","disabled");
+        pyy.setAttribute("selected","selected");
+        y.appendChild(pyy);
+
+        // 循环出所有年
+        for(i=yy;i>=oyy;i--){
+            pyy = document.createElement('option');
+            pyy.innerText = i + ' 年';
+            pyy.value = i;
+            y.appendChild(pyy);
+        }
+    }
+
+    // 生成月下拉列表
+    function startm(){
+        // 初始化
+        var pmm = document.createElement('option');
+        pmm.innerText = '选择 月';
+        pmm.value = "month";
+        pmm.setAttribute("disabled","disabled");
+        pmm.setAttribute("selected","selected")
+        m.appendChild(pmm);
+
+        // 判断是否选择了年
+        if(y.selectedOptions[0].value == 0) return;
+
+        // 循环出所有月
+        for(i=1;i<=12;i++){
+            pmm = document.createElement('option');
+            pmm.innerText = i + ' 月';
+            pmm.value = i;
+            m.appendChild(pmm);
+        }
+    }
+    function startd(mm,yy){
+        // 初始化
+        var pdd = document.createElement('option');
+        pdd.innerText = '选择 日';
+        pdd.value = "day";
+        pdd.setAttribute("disabled","disabled");
+        pdd.setAttribute("selected","selected");
+        d.appendChild(pdd);
+
+        // 判断是否选择了月
+        if(m.selectedOptions[0].value == 0) return;
+        var day = isadd(mm,yy);
+
+        // 循环出所有日
+        for(i=1;i<=day;i++){
+            pdd = document.createElement('option');
+            pdd.innerText = i + ' 日';
+            pdd.value = i;
+            d.appendChild(pdd);
+        }
+    }
+
+    // 判断并产生该月的天数
+    function isadd(mm,yy){
+        if(marr.indexOf(parseInt(mm)) != -1){
+            add = 31;
+        }
+        else{
+            add = 30;
+            if(mm == 2 && yy % 4 == 0){
+                add = 29;
+            }
+            else if(mm == 2 && yy % 4 != 0){
+                add = 28;
+            }
+        }
+        return add;
+    }
+
+    // 年份改变时调用
+    function funy(obj){
+        m.innerHTML = null;
+        d.innerHTML = null;
+        var yy = obj.selectedOptions[0].value;
+        startm();
+        startd(dd,mm,yy);
+    }
+
+    // 月份改变时调用
+    function funm(obj){
+        d.innerHTML = null;
+        var yy = y.selectedOptions[0].value;
+        var mm = obj.selectedOptions[0].value;
+        startd(mm,yy);
+    }
+
+
+
+
+
+    var userId;
+    init();
+
+    function files(){
+        $("#file").click();
+	}
+
+    $("#file").change(function(){
+        $("#headPath").attr("src",URL.createObjectURL($(this)[0].files[0]));
+        $("#file2").css("display","inline");
+    });
+
+    function upimg(){
+       var dropzFile = new FormData();
+       dropzFile.append("dropzFile",$('#file')[0].files[0]);
+		$.ajax({
+			url:"uploadHead",
+            type: 'POST',
+            data: dropzFile,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+			success: function (resp) {
+				console.log(resp);
+                $("#headPath").attr("src","upload/"+resp.fileName);
+                upSetImg(resp.fileName);
+                $("#file2").css("display","none");
+			},
+			error:function () {
+				alert("失败");
+			}
+		})
+    };
+
+    function upSetImg(fileName) {
+        $.ajax({
+            url: "upPersonageById",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+			data:JSON.stringify({
+				"headPath":fileName,
+				"userInfoId":userId
+			}),
+            success: function (resp) {
+				alert("图片修改成功");
+                coverSession();
+            },
+			error:function (resp) {
+				alert("修改失败")
+            }
+        })
+    }
+
+
+
+    function init() {
+        $.ajax({
+            url:"getSessionLoginInfo",
+            type:"GET",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success:function(resp){
+                console.log(resp);
+                $("#name").val(resp.name);
+                $("#phone").val(resp.phone);
+                $("#brief").val(resp.brief);
+                $("#email").val(resp.email);
+				var year = (resp.birthYear).substr(0,4);
+				var month = resp.birthMonth;
+				var day = resp.birthYmd;
+                var country = resp.country;
+                var province = resp.province;
+                var city = resp.city;
+                var headPath=resp.headPath;
+                var sex = resp.sex;
+                userId=resp.userInfoId;
+                $("#country2").html(country);
+                $("#province2").html(province);
+                $("#city2").html(city);
+                $("#headPath").attr("src","upload/"+headPath);
+                initAdept();
+                xianAdept(userId);
+                $("#sex option[value = '"+sex+"']").attr("selected","selected");
+                $("#y option[value = '"+year+"']").attr("selected","selected");
+                $("#m option[value = '"+month+"']").attr("selected","selected");
+                $("#d option[value = '"+day+"']").attr("selected","selected");
+                $("#nation option[value = '"+country+"']").attr("selected","selected");
+                // $("#province").find("option:contains('"+province+"')").attr("selected","selected");;
+                //$("#province option[contains = '"+province+"']").attr("selected","selected");
+                $("#province").find("option:contains('"+province+"')").attr("selected","selected");
+                $("#city option[value = '"+city+"']").attr("selected","selected");
+            },
+            error:function(responseText){
+                console.log(responseText);
+                alert("获取失败1")
+            }
+        });
+
+    }
+
+    function initAdept() {
+        $.ajax({
+            url:"getCategory",
+            type:"POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success:function(resp){
+                console.log(resp);
+                $(resp).each(function (index, item) {
+                    if (item.parentId!=0){
+                        $(".adept").append($("<option value='"+item.categoryId+"'><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">"+item.categoryName+"</font></font></option>"))
+					}
+                })
+
+            },
+            error:function(resp){
+                alert("初始化擅长失败")
+            }
+        });
+		
+    }
+
+    function xianAdept(userId){
+        $.ajax({
+            url:"getProfessionById",
+            type:"POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data:JSON.stringify({
+                "userInfoId":userId,
+            }),
+            success:function(resp){
+                console.log(resp);
+                $(resp).each(function (index, item) {
+                    $(".one"+index+ " option[value = '"+item.categoryId+"']").attr("selected","selected")
+                });
+            },
+            error:function(resp){
+                alert("回显擅长失败")
+            }
+		})
+	}
+    
+    
+    function guo(obj) {
+        $("#nation2").html($(obj).val());
+    }
+
+    function shen(obj) {
+        $("#province2").html($("#province").val());
+    }
+    function di() {
+        $("#city2").html($("#city").val());
+    }
+
+
+    function setInfo() {
+        var name = $("#name").val();
+        var phone = $("#phone").val();
+        var y = $("#y").val();
+        var m = $("#m").val();
+        var d = $("#d").val();
+        var sex = $("#sex").val();
+        var country = $("#nation2").val();
+        var province = $("#province2").val();
+        var city = $("#city2").val();
+        var brief = $("#brief").val();
+        $.ajax({
+            url:"upPersonageById",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data:JSON.stringify({
+                "userInfoId":userId,
+                "name":name,
+                "phone":phone,
+                "sex":sex,
+                "birthYear":y,
+                "birthMonth":m,
+                "birthYMD":d,
+                "country":country,
+                "province":province,
+                "city":city,
+                "brief":brief,
+            }),
+            dataType: 'json',
+            success: function (resp) {
+                coverSession();
+                alert("修改成功")
+            },
+            error:function (resp) {
+                alert("修改失败")
+            }
+        })
+    }
+
+
+
+    function upPassword() {
+		var password=$("#passwrod").val();
+		var newPassword=$("#newPassword").val();
+		alert(password);
+		$.ajax({
+            url:"rePassword",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+			data:JSON.stringify({
+				"password":password,
+				"userInfoId":userId,
+			}),
+			success:function(resp){
+                console.log(resp);
+                if (resp==true){
+                    setPassword(newPassword)
+				}
+				if (resp==false) {
+				    alert("原密码不正确");
+				}
+
+			},
+			error:function (re) {
+				alert("失败")
+            }
+
+		})
+    }
+    function setPassword(newPassword) {
+        $.ajax({
+            url: "upPersonageById",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                "password": newPassword,
+                "userInfoId": userId,
+            }),
+			success:function () {
+                coverSession();
+				alert("修改成功")
+            },
+			error:function () {
+				alert("修改失败")
+            }
+        })
+    }
+
+
+
+    function coverSession() {
+        $.ajax({
+            url: "coverSession",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+			data:JSON.stringify({
+				"userInfoId":userId
+			}),
+            success:function(resp){
+                console.log(resp);
+                init();
+			}
+        })
+    }
+
+    function upAdept(){
+        $.ajax({
+            url: "upAdept",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data:JSON.stringify({
+                "userInfoId":userId
+            }),
+            success:function(resp){
+                console.log(resp);
+                setAdept();
+            }
+
+		})
+	}
+
+
+	function setAdept(){
+        var ids= new Array();
+        var adept = $(".adept");
+        for (var i=0;i<adept.length;i++){
+            ids.push(adept.eq(i).val());
+		}
+        $.ajax({
+            url: "setAdept",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data:JSON.stringify({
+                "userInfoId":userId,
+				"ids":ids
+            }),
+            success:function(resp){
+                console.log(resp);
+                alert("修改成功");
+                init();
+            }
+
+        })
+	}
+
+
+</script>
+
 
 <div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>
+
+</body>

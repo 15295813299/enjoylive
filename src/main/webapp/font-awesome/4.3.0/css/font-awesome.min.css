@@ -719,6 +719,9 @@
 .fa-thumbs-o-up:before {
 	content: "\f06d"
 }
+.fa-dianZang:before{
+	content: "\f087"
+}
 
 .fa-thumbs-o-down:before {
 	content: "\f088"

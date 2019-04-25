@@ -10,6 +10,7 @@ public class ArticleInfo {
   private String content;
   private java.sql.Timestamp articleInfoDate;
   private String flag;
+  private String name;
 
 
   public long getArticleId() {
@@ -74,6 +75,14 @@ public class ArticleInfo {
     this.flag = flag;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
   @Override
   public String toString() {
     return "ArticleInfo{" +
@@ -84,6 +93,7 @@ public class ArticleInfo {
             ", content='" + content + '\'' +
             ", articleInfoDate=" + articleInfoDate +
             ", flag='" + flag + '\'' +
+            ", name='" + name + '\'' +
             '}';
   }
 }

@@ -1,0 +1,36 @@
+
+.opt-box{
+    vertical-align: top;
+}
+
+.btn.btn-link-blue.btn-report{
+    margin: -3px -3px -7px -3px;
+    color: #79A5E5;
+    display: none;
+}
+
+.btn.btn-link-blue.btn-reply{
+    color: #79A5E5;
+    display: none;
+}
+.btn.btn-link-blue.btn-read-reply{
+    color: #79A5E5;
+    display: inline-block;
+}
+
+.read-reply-left{
+    width: 3%;
+    background-color: #999999;
+    float:left;
+    height: inherit;
+}
+.read-reply-right{
+    width: 96%;
+    float:right;
+}
+.read-reply-box:after{
+    content:""; display:block; clear:both;
+}
+
+
+

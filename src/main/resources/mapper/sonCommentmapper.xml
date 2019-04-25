@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.SonCommentMapper">
+    <insert id="addSonComments" parameterType="com.qf.pojo.SonComment">
+        insert into sonComment values(default ,#{articleId},#{userInfoId},
+        #{receiverId},#{message},default ,#{commentId} ,default )
+    </insert>
+    <!--获取主评论-->
+    <select id="getSonComments" parameterType="Map" resultType="com.qf.pojo.SonComment">
+       SELECT s.* ,u.name username ,u.headPath,u1.name receiverName from sonComment s ,userInfo u,userInfo u1
+        where u.userInfoId = s.userInfoId and s.flag = 1 and u.flag = 1
+		and u1.userInfoId = s.receiverId
+        and s.articleId = #{articleId} and s.commentId = #{commentId}  GROUP BY s.sonCommentTime DESC
+    </select>
+
+    <!--获取文章对应子评论数量-->
+    <select id="sonCommentsCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      SELECT
+	count(1) AS count
+FROM
+	articleInfo a
+,sonComment s WHERE a.articleId = s.articleId
+AND a.flag = 1
+AND s.flag = 1
+and
+	a.articleId = #{id}
+
+    </select>
+</mapper>

@@ -63,7 +63,15 @@
                 }
             })
 		</script>
-
+<style type="text/css">
+    .yuanjiao{
+        border-top-left-radius: 100px;
+        border-top-right-radius: 100px;
+    }
+    .be-post .be-img-block img{
+        height: 140px;
+    }
+</style>
 <!-- MAIN CONTENT -->
 <div id="content-block">
 	<div class="container be-detail-container">
@@ -72,7 +80,7 @@
 				<div class="be-user-block style-3">
 					<div class="be-user-detail">
 						<a class="be-ava-user style-2" href="blog-detail-2.html">
-							<img src="img/ava_10.jpg" alt="">
+							<img id="headPath" src="img/ava_10.jpg" alt="">
 						</a>
 						<a href="author-edit.html" class="be-ava-left btn color-1 size-2 hover-1"><i class="fa fa-pencil"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font></a>
 						<div class="be-ava-right btn btn-share color-4 size-2 hover-7">
@@ -86,47 +94,44 @@
 						</div>
 						<p class="be-use-name"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> <span id="username"></span></font></font></p>
 						<div class="be-user-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-							国家，省份
+							<span id="country">国家</span>，
+							<span id="province">省份</span>
 						</font></font></div>
-						<div class="be-text-tags style-2">
-							<a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">擅长领域1</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，
-						</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">擅长领域2</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，
-						</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">擅长领域3</font></font></a>
-						</div>
-						<div class="be-user-social">
-							<a class="social-btn color-1" href="blog-detail-2.html"><i class="fa fa-facebook"></i></a>
-							<a class="social-btn color-2" href="blog-detail-2.html"><i class="fa fa-twitter"></i></a>
-							<a class="social-btn color-3" href="blog-detail-2.html"><i class="fa fa-google-plus"></i></a>
-							<a class="social-btn color-4" href="blog-detail-2.html"><i class="fa fa-pinterest-p"></i></a>
-							<a class="social-btn color-5" href="blog-detail-2.html"><i class="fa fa-instagram"></i></a>
-							<a class="social-btn color-6" href="blog-detail-2.html"><i class="fa fa-linkedin"></i></a>
-						</div>
-						<a class="be-user-site" href="http://www.phoenix.cool"><i class="fa fa-link"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> www.phoenix.cool</font></font></a>
+						<div class="be-text-tags style-2" id="skilled"></div>
+						<!--<div class="be-user-social">-->
+							<!--<a class="social-btn color-1" href="blog-detail-2.html"><i class="fa fa-facebook"></i></a>-->
+							<!--<a class="social-btn color-2" href="blog-detail-2.html"><i class="fa fa-twitter"></i></a>-->
+							<!--<a class="social-btn color-3" href="blog-detail-2.html"><i class="fa fa-google-plus"></i></a>-->
+							<!--<a class="social-btn color-4" href="blog-detail-2.html"><i class="fa fa-pinterest-p"></i></a>-->
+							<!--<a class="social-btn color-5" href="blog-detail-2.html"><i class="fa fa-instagram"></i></a>-->
+							<!--<a class="social-btn color-6" href="blog-detail-2.html"><i class="fa fa-linkedin"></i></a>-->
+						<!--</div>-->
+						<!--<a class="be-user-site" href="http://www.phoenix.cool"><i class="fa fa-link"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> www.phoenix.cool</font></font></a>-->
 					</div>
 					<div class="be-user-statistic">
-						<div class="stat-row clearfix"><i class="stat-icon icon-views-b"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">人气</font></font><span class="stat-counter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">218098</font></font></span></div>
-						<div class="stat-row clearfix"><i class="stat-icon icon-like-b"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">点赞数</font></font><span class="stat-counter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">14335</font></font></span></div>
-						<div class="stat-row clearfix"><i class="stat-icon icon-followers-b"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">等级</font></font><span class="stat-counter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2208</font></font></span></div>
-						<div class="stat-row clearfix"><i class="stat-icon icon-following-b"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">粉丝</font></font><span class="stat-counter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">0</font></font></span></div>
+						<div class="stat-row clearfix"><i class="stat-icon icon-views-b"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">人气</font></font><span class="stat-counter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" id="visit"> </font></font></span></div>
+						<div class="stat-row clearfix"><i class="stat-icon icon-like-b"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">点赞数</font></font><span class="stat-counter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" id="praise"></font></font></span></div>
+						<div class="stat-row clearfix"><i class="stat-icon icon-followers-b"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">等级</font></font><span class="stat-counter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" id="level"></font></font></span></div>
+						<div class="stat-row clearfix"><i class="stat-icon icon-following-b"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">粉丝</font></font><span class="stat-counter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" id="fans"></font></font></span></div>
 					</div>
 				</div>
-				<div class="be-desc-block">
-					<div class="be-desc-author">
-						<div class="be-desc-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">关于我</font></font></div>
-						<div class="clearfix"></div>
-						<div class="be-desc-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-							胡萝卜质量的方便，三重恐惧的ID。</font><font style="vertical-align: inherit;">笔者Vulputate只是软。</font><font style="vertical-align: inherit;">前庭sagittis tortor。</font><font style="vertical-align: inherit;">DUIS tristique suscipit risus，QUIS facilisis nisl congue简历。</font><font style="vertical-align: inherit;">现在，各种热营养。</font><font style="vertical-align: inherit;">他也毕业了投资的ullamcorper孩子或任何球员质量。
-						</font></font></div>
-					</div>
-					<div class="be-desc-author">
-						<div class="be-desc-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我的价值观</font></font></div>
-						<div class="clearfix"></div>
-						<div class="be-desc-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-							然而，热足球的价格。</font><font style="vertical-align: inherit;">无需编程或湖泊现在Laoreet最大的酵母。</font><font style="vertical-align: inherit;">赖斯沙拉成员，但主要的锅。</font><font style="vertical-align: inherit;">微波炉制造，主席团，没有无痛足球的成员。
-						</font></font></div>
-					</div>
-				</div>
-				<a class="btn full color-1 size-1 hover-1"><i class="fa fa-plus"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">添加章节</font></font></a>
+				<!--<div class="be-desc-block">-->
+					<!--<div class="be-desc-author">-->
+						<!--<div class="be-desc-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">关于我</font></font></div>-->
+						<!--<div class="clearfix"></div>-->
+						<!--<div class="be-desc-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-->
+							<!--胡萝卜质量的方便，三重恐惧的ID。</font><font style="vertical-align: inherit;">笔者Vulputate只是软。</font><font style="vertical-align: inherit;">前庭sagittis tortor。</font><font style="vertical-align: inherit;">DUIS tristique suscipit risus，QUIS facilisis nisl congue简历。</font><font style="vertical-align: inherit;">现在，各种热营养。</font><font style="vertical-align: inherit;">他也毕业了投资的ullamcorper孩子或任何球员质量。-->
+						<!--</font></font></div>-->
+					<!--</div>-->
+					<!--<div class="be-desc-author">-->
+						<!--<div class="be-desc-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我的价值观</font></font></div>-->
+						<!--<div class="clearfix"></div>-->
+						<!--<div class="be-desc-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-->
+							<!--然而，热足球的价格。</font><font style="vertical-align: inherit;">无需编程或湖泊现在Laoreet最大的酵母。</font><font style="vertical-align: inherit;">赖斯沙拉成员，但主要的锅。</font><font style="vertical-align: inherit;">微波炉制造，主席团，没有无痛足球的成员。-->
+						<!--</font></font></div>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<a class="btn full color-1 size-1 hover-1"><i class="fa fa-plus"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">添加章节</font></font></a>-->
 			</div>
 			<div class="col-xs-12 col-md-8">
 				<div class="tab-wrapper style-1">
@@ -136,7 +141,7 @@
 								<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">个人作品</font></font></span>
 							</div>
 							<div class="nav-tab-item ">
-								<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">草稿</font></font></span>
+								<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">个人关注</font></font></span>
 							</div>
 							<div class="nav-tab-item ">
 								<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">粉丝</font></font></span>
@@ -146,796 +151,23 @@
 							</div>
 						</div>
 					</div>
+
+					<!--文章展示-->
 					<div class="tabs-content clearfix">
 						<div class="tab-info active">
-							<div class="row">
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p1.jpg" alt="OMG">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我们的世界的媚俗破坏</font></font></a>
-										<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
-												<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
-											</span>
-										<div class="author-post">
-											<img src="img/a1.png" alt="" class="ava-author">
-											<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">由</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">晃阮</font></font></a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
-											<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
-											<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p2.jpg" alt="OMG">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">树胡</font></font></a>
-										<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
-												<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
-											</span>
-										<div class="author-post">
-											<img src="img/a2.png" alt="" class="ava-author">
-											<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">由</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">晃阮</font></font></a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
-											<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
-											<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p3.jpg" alt="OMG">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">斋月的颜色，</font></font></a>
-										<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
-												<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
-											</span>
-										<div class="author-post">
-											<img src="img/a3.png" alt="" class="ava-author">
-											<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">由</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">晃阮</font></font></a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
-											<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
-											<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p6.jpg" alt="OMG">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">弗兰克·埃瓦尔德日记项目的</font></font></a>
-										<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
-												<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
-											</span>
-										<div class="author-post">
-											<img src="img/a6.png" alt="" class="ava-author">
-											<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">由</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">晃阮</font></font></a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
-											<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
-											<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p7.jpg" alt="OMG">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">雨滴单色</font></font></a>
-										<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
-												<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
-											</span>
-										<div class="author-post">
-											<img src="img/a7.png" alt="" class="ava-author">
-											<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">由</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">晃阮</font></font></a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
-											<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
-											<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p8.jpg" alt="OMG">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">昆赛车</font></font></a>
-										<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
-												<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
-											</span>
-										<div class="author-post">
-											<img src="img/a7.png" alt="" class="ava-author">
-											<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">由</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">晃阮</font></font></a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
-											<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
-											<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p13.jpg" alt="OMG">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">保持领先一系列</font></font></a>
-										<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
-												<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
-											</span>
-										<div class="author-post">
-											<img src="img/a6.png" alt="" class="ava-author">
-											<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">由</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">晃阮</font></font></a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
-											<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
-											<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p14.jpg" alt="OMG">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">辉柏嘉/心理问题</font></font></a>
-										<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">的交互设计</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">用户界面/ UX</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
-												<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
-											</span>
-										<div class="author-post">
-											<img src="img/a5.png" alt="" class="ava-author">
-											<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">由</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">晃阮</font></font></a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
-											<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
-											<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p15.jpg" alt="OMG">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">加里·辛普森-桥-智能生活Magazinen </font></font></a>
-										<font style="vertical-align: inherit;"><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">交互设计</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">UI / UX</font></a></span><span><font style="vertical-align: inherit;">，
-												 </font></span><span><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;">网页设计</font></a></span></font><span>
-												<a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font><a href="blog-detail-2.html" class="be-post-tag"><font style="vertical-align: inherit;"></font></a>
-											</span>
-										<div class="author-post">
-											<img src="img/a1.png" alt="" class="ava-author">
-											<span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">由</font></font><a href="blog-detail-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">晃阮</font></font></a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 360</font></font></span>
-											<span><i class="fa fa-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 789</font></font></span>
-											<span><i class="fa fa-comment-o"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 20</font></font></span>
-										</div>
-									</div>
-								</div>
+							<div class="row" id="rowId">
+								<div></div>
 							</div>
 						</div>
 						<div class="tab-info">
-							<div class="row">
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p8.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Racing Queensland</a>
-										<span>
-												<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-											</span>
-										<div class="author-post">
-											<img src="img/a7.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-											<span><i class="fa fa-eye"></i> 789</span>
-											<span><i class="fa fa-comment-o"></i> 20</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p12.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Face</a>
-										<span>
-												<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-											</span>
-										<div class="author-post">
-											<img src="img/a6.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-											<span><i class="fa fa-eye"></i> 789</span>
-											<span><i class="fa fa-comment-o"></i> 20</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p2.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Treebeard</a>
-										<span>
-												<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-											</span>
-										<div class="author-post">
-											<img src="img/a1.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-											<span><i class="fa fa-eye"></i> 789</span>
-											<span><i class="fa fa-comment-o"></i> 20</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p3.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Colors of Ramadan</a>
-										<span>
-												<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-											</span>
-										<div class="author-post">
-											<img src="img/a2.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-											<span><i class="fa fa-eye"></i> 789</span>
-											<span><i class="fa fa-comment-o"></i> 20</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p4.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Leaving Home - L'Officiel Ukraine</a>
-										<span>
-												<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-											</span>
-										<div class="author-post">
-											<img src="img/a3.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-											<span><i class="fa fa-eye"></i> 789</span>
-											<span><i class="fa fa-comment-o"></i> 20</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p7.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">raindrops monochrome</a>
-										<span>
-												<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-											</span>
-										<div class="author-post">
-											<img src="img/a6.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-											<span><i class="fa fa-eye"></i> 789</span>
-											<span><i class="fa fa-comment-o"></i> 20</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p9.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">NAHA Finalist Hairstylist of the Year Allen Ruiz</a>
-										<span>
-												<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-											</span>
-										<div class="author-post">
-											<img src="img/a7.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-											<span><i class="fa fa-eye"></i> 789</span>
-											<span><i class="fa fa-comment-o"></i> 20</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p13.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Stay Ahead Series</a>
-										<span>
-												<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-											</span>
-										<div class="author-post">
-											<img src="img/a5.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-											<span><i class="fa fa-eye"></i> 789</span>
-											<span><i class="fa fa-comment-o"></i> 20</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p14.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Faber-Castell / Psychological Problems</a>
-										<span>
-												<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-												<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-											</span>
-										<div class="author-post">
-											<img src="img/a1.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-										</div>
-										<div class="info-block">
-											<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-											<span><i class="fa fa-eye"></i> 789</span>
-											<span><i class="fa fa-comment-o"></i> 20</span>
-										</div>
-									</div>
-								</div>
+							<div class="row" id="attention">
 							</div>
+						</div>
+						<div class="tab-info" id="fensi">
 						</div>
 						<div class="tab-info">
 							<div class="row">
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post style-4">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p16.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Wisdom For My Children, Life Lessons Through</a>
-
-										<div class="author-post clearfix">
-											<img src="img/a1.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-											<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post style-4">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p17.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Créations Namale</a>
-										<div class="author-post clearfix">
-											<img src="img/a2.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-											<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post style-4">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p18.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Crossfit : 15.4 Open Workout</a>
-										<div class="author-post clearfix">
-											<img src="img/a3.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-											<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post style-4">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p15.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Garry Simpson - Bridges - Intelligent Life Magazine</a>
-										<div class="author-post clearfix">
-											<img src="img/a6.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-											<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post style-4">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p14.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Faber-Castell / Psychological Problems</a>
-										<div class="author-post clearfix">
-											<img src="img/a7.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-											<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post style-4">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p13.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Stay Ahead Series</a>
-										<div class="author-post clearfix">
-											<img src="img/a7.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-											<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post style-4">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p12.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Face</a>
-										<div class="author-post clearfix">
-											<img src="img/a6.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-											<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post style-4">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p19.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Promoção Facas Extra</a>
-										<div class="author-post clearfix">
-											<img src="img/a5.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-											<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post style-4">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p11.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Tropicalia</a>
-										<div class="author-post clearfix">
-											<img src="img/a1.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-											<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post style-4">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p10.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">tomorrow</a>
-										<div class="author-post clearfix">
-											<img src="img/a1.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-											<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post style-4">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p9.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">NAHA Finalist Hairstylist of the Year Allen Ruiz</a>
-										<div class="author-post clearfix">
-											<img src="img/a1.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-											<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-ml-12 col-xs-6 col-sm-4">
-									<div class="be-post style-4">
-										<a href="blog-detail-2.html" class="be-img-block">
-											<img src="img/p8.jpg" alt="omg">
-										</a>
-										<a href="blog-detail-2.html" class="be-post-title">Racing Queensland</a>
-										<div class="author-post clearfix">
-											<img src="img/a1.png" alt="" class="ava-author">
-											<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-											<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="tab-info">
-							<div class="collection">
-								<h3 class="menu-article">Creative Ideas</h3>
-								<div class="collection-header">
-									<span><i class="fa fa-user"></i>by <a href="blog-detail-2.html">Leigh Taylor</a> </span>
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<div class="edit-collection">
-										<i class="fa fa-pencil"></i>
-										<div class="c_edit">
-											<div class="btn-rename" href="blog-detail-2.html">
-												rename
-												<div class="message-popup">
-													<div class="message-popup-inner container">
-														<div class="row">
-															<div class="col-xs-12 col-sm-8 col-sm-offset-2">
-																<i class="fa fa-times close-button"></i>
-																<h5 class="large-popup-title">Rename</h5>
-																<div class="form-group">
-																	<input class="form-input" required="" placeholder="Your text">
-																</div>
-																<button class="btn btn-right color-1 size-1 hover-1">OK</button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<a href="blog-detail-2.html">delete</a>
-
-										</div>
-									</div>
-								</div>
-								<div class="collection-entry">
-									<a href="blog-detail-2.html" class="portfolio-link type-2 clearfix">
-										<img src="img/collection_1.jpg" alt="">
-										<img src="img/collection_2.jpg" alt="">
-										<img src="img/collection_3.jpg" alt="">
-										<img src="img/collection_4.jpg" alt="">
-										<img src="img/collection_5.jpg" alt="">
-										<div class="color_bg">
-											<span>view gallery</span>
-											<span class="child"></span>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="collection">
-								<h3 class="menu-article">Creative Agency</h3>
-								<div class="collection-header">
-									<span><i class="fa fa-user"></i>by <a href="blog-detail-2.html">Leigh Taylor</a> </span>
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<div class="edit-collection">
-										<i class="fa fa-pencil"></i>
-										<div class="c_edit">
-											<div class="btn-rename" href="blog-detail-2.html">
-												rename
-												<div class="message-popup">
-													<div class="message-popup-inner container">
-														<div class="row">
-															<div class="col-xs-12 col-sm-8 col-sm-offset-2">
-																<i class="fa fa-times close-button"></i>
-																<h5 class="large-popup-title">Rename</h5>
-																<div class="form-group">
-																	<input class="form-input" required="" placeholder="Your text">
-																</div>
-																<button class="btn btn-right color-1 size-1 hover-1">OK</button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<a href="blog-detail-2.html">delete</a>
-
-										</div>
-									</div>
-								</div>
-								<div class="collection-entry">
-									<a href="blog-detail-2.html" class="portfolio-link type-2 clearfix">
-										<img src="img/collection_6.jpg" alt="">
-										<img src="img/collection_7.jpg" alt="">
-										<img src="img/collection_8.jpg" alt="">
-										<img src="img/collection_9.jpg" alt="">
-										<img src="img/collection_10.jpg" alt="">
-										<div class="color_bg">
-											<span>view gallery</span>
-											<span class="child"></span>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="collection">
-								<h3 class="menu-article">Creative Agency</h3>
-								<div class="collection-header">
-									<span><i class="fa fa-user"></i>by <a href="blog-detail-2.html">Inspiration Art</a> </span>
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<div class="edit-collection">
-										<i class="fa fa-pencil"></i>
-										<div class="c_edit">
-											<div class="btn-rename" href="blog-detail-2.html">
-												rename
-												<div class="message-popup">
-													<div class="message-popup-inner container">
-														<div class="row">
-															<div class="col-xs-12 col-sm-8 col-sm-offset-2">
-																<i class="fa fa-times close-button"></i>
-																<h5 class="large-popup-title">Rename</h5>
-																<div class="form-group">
-																	<input class="form-input" required="" placeholder="Your text">
-																</div>
-																<button class="btn btn-right color-1 size-1 hover-1">OK</button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<a href="blog-detail-2.html">delete</a>
-
-										</div>
-									</div>
-								</div>
-								<div class="collection-entry">
-									<a href="blog-detail-2.html" class="portfolio-link type-2 clearfix">
-										<img src="img/collection_11.jpg" alt="">
-										<img src="img/collection_12.jpg" alt="">
-										<img src="img/collection_13.jpg" alt="">
-										<img src="img/collection_14.jpg" alt="">
-										<img src="img/collection_15.jpg" alt="">
-										<div class="color_bg">
-											<span>view gallery</span>
-											<span class="child"></span>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="collection">
-								<h3 class="menu-article">Ideas For Personal Site</h3>
-								<div class="collection-header">
-									<span><i class="fa fa-user"></i>by <a href="blog-detail-2.html">Inspiration Art</a> </span>
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<div class="edit-collection">
-										<i class="fa fa-pencil"></i>
-										<div class="c_edit">
-											<div class="btn-rename" href="blog-detail-2.html">
-												rename
-												<div class="message-popup">
-													<div class="message-popup-inner container">
-														<div class="row">
-															<div class="col-xs-12 col-sm-8 col-sm-offset-2">
-																<i class="fa fa-times close-button"></i>
-																<h5 class="large-popup-title">Rename</h5>
-																<div class="form-group">
-																	<input class="form-input" required="" placeholder="Your text">
-																</div>
-																<button class="btn btn-right color-1 size-1 hover-1">OK</button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<a href="blog-detail-2.html">delete</a>
-
-										</div>
-									</div>
-								</div>
-								<div class="collection-entry">
-									<a href="blog-detail-2.html" class="portfolio-link type-2 clearfix">
-										<img src="img/collection_16.jpg" alt="">
-										<img src="img/collection_17.jpg" alt="">
-										<img src="img/collection_18.jpg" alt="">
-										<img src="img/collection_19.jpg" alt="">
-										<img src="img/collection_20.jpg" alt="">
-										<div class="color_bg">
-											<span>view gallery</span>
-											<span class="child"></span>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="collection">
-								<h3 class="menu-article">Inspiration Photos</h3>
-								<div class="collection-header">
-									<span><i class="fa fa-user"></i>by <a href="blog-detail-2.html">Inspiration Art</a> </span>
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<div class="edit-collection">
-										<i class="fa fa-pencil"></i>
-										<div class="c_edit">
-											<div class="btn-rename" href="blog-detail-2.html">
-												rename
-												<div class="message-popup">
-													<div class="message-popup-inner container">
-														<div class="row">
-															<div class="col-xs-12 col-sm-8 col-sm-offset-2">
-																<i class="fa fa-times close-button"></i>
-																<h5 class="large-popup-title">Rename</h5>
-																<div class="form-group">
-																	<input class="form-input" required="" placeholder="Your text">
-																</div>
-																<button class="btn btn-right color-1 size-1 hover-1">OK</button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<a href="blog-detail-2.html">delete</a>
-
-										</div>
-									</div>
-								</div>
-								<div class="collection-entry">
-									<a href="blog-detail-2.html" class="portfolio-link type-2 clearfix">
-										<img src="img/collection_6.jpg" alt="">
-										<img src="img/collection_10.jpg" alt="">
-										<img src="img/collection_8.jpg" alt="">
-										<img src="img/collection_11.jpg" alt="">
-										<img src="img/collection_3.jpg" alt="">
-										<div class="color_bg">
-											<span>view gallery</span>
-											<span class="child"></span>
-										</div>
-									</a>
+								<div id="show">
 								</div>
 							</div>
 						</div>
@@ -944,7 +176,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 
 <footer>
 	<div class="footer_slider">
@@ -1348,29 +579,359 @@
 <script src="script/global.js"></script><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google 翻译"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">提供更好的翻译建议</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
 <script type="text/javascript">
 	init();
+    var userId;
 	function init() {
-        var id=window.location.search.split("=")[1];
-        alert(id);
-		$.ajax({
-            	url:"getUserInfoById",
+        $.ajax({
+            url:"getSessionLoginInfo",
+            type:"GET",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success:function(resp){
+                console.log(resp);
+                $("#username").html(resp.name);
+                $("#country").html(resp.country);
+                $("#province").html(resp.province);
+                $("#headPath").attr("src",resp.headPath);
+				userId=resp.userInfoId;
+				getProfessionById(userId);
+            },
+            error:function(responseText){
+               console.error();
+            }
+        });
+
+        function getProfessionById(userId){
+            $.ajax({
+                url:"getProfessionById",
                 type:"POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 data:JSON.stringify({
-                "userInfoId":id,
-            }),
+                    "userInfoId":userId,
+                }),
                 success:function(resp){
-                console.log(resp);
-                $("#username").val(resp.name)
+                    console.log(resp);
+                    if(resp.length==0){
+                        $("#skilled").html("该用户很懒，没有选择喜欢的版块")
+					}
+                    $(resp).each(function (index, item) {
+                        $("#skilled").append($("<a href=\"login.html?sid="+item.categoryId+"\"><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">"+item.categoryName+"、</font></font></a>"));
+                    });
+
+                },
+                error:function(resp){
+                    alert("获取失败2")
+                }
+            });
+
+            PV(userId);
+            $.ajax({
+                url:"getFansById",
+                type:"POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                data:JSON.stringify({
+                    "userInfoId":userId,
+                }),
+                success:function(resp){
+                    console.log(resp);
+					$("#fans").html(resp.length);
+					$(resp).each(function (index, item) {
+                        $("#fensi").append($("<div class=\"col-ml-12 col-xs-4 col-sm-3\">" +
+                            "<div class=\"be-post style-4 yuanjiao\">" +
+                            "<a href=\"blog-detail-2.html\" class=\"be-img-block\" style=\"border-radius:100px\" >" +
+                            "<img src=\"img/p16.jpg\" alt=\"omg\">" +
+                            "</a>" +
+                            "<div class=\"author-post clearfix\" style=\"line-height: 24px\">" +
+                            "<span style=\"margin-bottom:10px\">作者名 <a href='author.html?id="+item.userInfoId+"'>"+item.name+"</a></span></br>" +
+                            "<span class=\"like-counter\" style=\"float: left;margin-left: 5%\" id='you"+item.userInfoId+"'><i class=\"fa fa-eye\"></i>400</span>" +
+                            "<span class=\"like-counter\" style=\"float: right;margin-right: 5%\" id='zan"+item.userInfoId+"'><i class=\"fa fa-thumbs-o-up\"></i> 40</span>\n" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>"));
+                        PC(item.userInfoId);
+                    })
+                },
+                error:function(resp){
+                    alert("获取失败4")
+                }
+			})
+		}
+
+        function PV(userId) {
+            $.ajax({
+                url:"getCountVisit",
+                type:"POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                data:JSON.stringify({
+                    "userInfoId":userId,
+                }),
+                success:function(resp){
+                    console.log(resp);
+                    $("#visit").html(resp.visit);
+                    $("#praise").html(resp.praise);
+                    var score = resp.visit+resp.praise+50;
+
+                     $.ajax({
+                         url:"updateScore",
+                         type:"POST",
+                         contentType: "application/json; charset=utf-8",
+                         dataType: 'json',
+						 data:JSON.stringify({
+                          "lvScore":score,
+						  "userInfoId":userId
+						 }),
+						 success:function () {
+                             getLevel(userId);
+                         },
+                         error:function () {
+							 console.error()
+                         }
+					 })
+                },
+                error:function(resp){
+                    alert("获取失败3")
+                }
+            });
+        }
+
+        function PC(userId) {
+            $.ajax({
+                url:"getCountVisit",
+                type:"POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                data:JSON.stringify({
+                    "userInfoId":userId,
+                }),
+                success:function(resp){
+                    console.log(resp);
+                    $("#you"+userId).html(resp.visit);
+                    $("#zan"+userId).html(resp.praise);
+                },
+                error:function(resp){
+                    alert("-----")
+                }
+            });
+        }
+
+
+    }
+
+    <!--作者下面自己的所有文章-->
+
+	$.ajax({
+	   type:"get",
+	   url:"getSessionLoginInfo",
+	   success:function(data){
+	       //alert(data.userInfoId)
+           initAllArticle(data.userInfoId)
+	   },
+	 error:function (data) {
+		 console.error(data);
+     }
+	})
+
+
+    function initAllArticle(id){
+        $.ajax({
+            method:"get",
+            url:"getUserInfoToShowArticle?userInfoId="+id,
+            success:function (data) {
+                $(data).each(function (index,item) {
+                    $("<div class=\"col-ml-12 col-xs-6 col-sm-4\">\n" +
+                        "\t\t\t\t\t\t\t\t\t<div class=\"be-post\">\n" +
+                        "\t\t\t\t\t\t\t\t\t\t<a href='blog-detail-2.html?articleId="+item.articleId+"' class=\"be-img-block\">\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t<img src=\""+item.potoPath+"\" alt=\"我的天啊\" style='width: 310px;height: 185px'>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t</a>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t<a href='blog-detail-2.html?articleId="+item.articleId+"' class=\"be-post-title\"><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">"+item.title+"</font></font></a>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t\t </font></span><span><a href='login.html?sid="+item.categoryId+"' class=\"be-post-tag\"><font style=\"vertical-align: inherit;\">"+item.categoryName+"</font></a></span></font>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t<div class=\"author-post\">\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t<img src=\"img/a1.png\" alt=\"\" class=\"ava-author\">\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t<font style=\"vertical-align: inherit;\">"+item.name+"</font></font></a></span>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t</div>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t<div class=\"info-block\">\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t<span><i class=\"fa fa-thumbs-o-up\"></i><span id='thumbsCount_"+index+"'></span></span>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t<span><i class=\"fa fa-eye\"></i><span id='browserCount_"+index+"'></span> </span>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t<span><i class=\"fa fa-comment-o\"></i><span id='commentCount_"+index+"'>0</span></span>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t</div>\n" +
+                        "\t\t\t\t\t\t\t\t\t</div>\n" +
+                        "\t\t\t\t\t\t\t\t</div>").insertAfter("#rowId>div:eq("+(index)+")")
+
+
+                    //初始化点赞数
+                    var id = item.articleId;
+                    initShowThumbsCount(id);
+                    function initShowThumbsCount(articleId) {
+                        $.ajax({
+                            type: "post",
+                            url: "getSupportCount",
+                            contentType: "application/json",
+                            dataType: "json",
+                            data: JSON.stringify({"articleId":articleId}),
+                            success:function (dataCount) {
+                                $("#thumbsCount_"+index+"").html(dataCount);
+                            },
+                            error:function () {
+                                console.log("请求错误")
+                            }
+                        })
+                    }
+
+                    <!--初始化浏览数-->
+                    initBrowselnCount(id)
+                    function initBrowselnCount(articleId) {
+                        $.ajax({
+                            type: "post",
+                            url: "getBrowselnCount",
+                            contentType: "application/json",
+                            dataType: "json",
+                            data: JSON.stringify({"articleId": articleId}),
+                            success:function (dataCount) {
+                                $("#browserCount_"+index+"").html(dataCount);
+                            },
+                            error:function () {
+                                console.log("请求错误")
+                            }
+                        })
+                    }
+
+                    initCommentCount(id)
+                    function initCommentCount(articleId) {
+                        $.ajax({
+                            type:"get",
+                            url:"getAllComments?articleId="+articleId,
+                            success:function(data){
+                                $("#commentCount_"+index+"").html(data);
+                            }
+                        })
+                    }
+                })
             },
-            error:function(responseText){
-                console.log(responseText);
-                alert("修改失败")
+            error:function (data) {
+                console.error(data)
             }
-
-
         })
     }
 
+    function getLevel(userId) {
+        $.ajax({
+            url:"getLevel",
+            type:"POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data:JSON.stringify({
+                "userInfoId":userId,
+            }),
+            success:function(resp){
+                $("#level").html(resp);
+            },
+            error:function(resp){
+            }
+        });
+    }
+
+
 </script>
+	<script type="text/javascript">
+        $.ajax({
+            type: 'POST',
+            url: 'collect/getArticleIdByUserId',
+            success: function (response) {
+                change(response,"")
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        });
+        function change(response, tagName) {
+            {
+                console.log(response);
+                $.ajax({
+                    type: 'POST',
+                    url: 'article/getArticleInfoByIds',
+                    data: "ids=" + response,
+                    success: function (response) {
+                        console.log(response);
+                        var k = "";
+                        $(response).each(function (index, item) {
+                            k+="<div class=\"col-ml-12 col-xs-6 col-sm-4\">\n" +
+                                "                                    <div class=\"be-post\">\n" +
+                                "                                        <a href=\"blog-detail-2.html?articleId="+item.articleId+"\" class=\"be-img-block\">\n" +
+                                "                                            <img src='" + item.potoPath + "' alt=\"omg\">\n" +
+                                "                                        </a>\n" +
+                                "                                        <a href=\"blog-detail-2.html?articleId="+item.articleId+"\" class=\"be-post-title\">" + item.title + "</a>\n" +
+                                "                                        <span>\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t\t<a href=\"blog-detail-2.html\" class=\"be-post-tag\">" + item.categoryName + "</a>,\n" +
+                                "\t\t\t\t\t\t\t\t\t\t\t</span>\n" +
+                                "                                        <div class=\"author-post\">\n" +
+                                "                                            <img src=\"img/a7.png\" alt=\"\" class=\"ava-author\">\n" +
+                                "                                            <span>by <a href=\"author.html?articleId="+item.articleId+"\">" + item.username + "</a></span>\n" +
+                                "                                        </div>\n" +
+                                "                                        <div class=\"info-block\">\n" +
+                                "                                            <span><i class=\"fa fa-thumbs-o-up\"></i> "+ item.support +" </span>\n" +
+                                "                                            <span><i class=\"fa fa-eye\"></i>" + item.browse + "</span>\n" +
+                                "                                            <span><i class=\"fa fa-comment-o\"></i> " + item.comment + "</span>\n" +
+                                "                                        </div>\n" +
+                                "                                    </div>\n" +
+                                "                                </div>";
+
+                        });
+                        $("#show").html(k);
+                    },
+                    error: function (response) {
+                        console.log(response)
+                    }
+                })
+            }
+        }
+
+        var userInfoId;
+        $.ajax({
+            type:"get",
+            url:"getSessionLoginInfo",
+            async:false,
+            success:function(data){
+                // alert(data.userInfoId);
+                userInfoId=data.userInfoId;
+            },
+            error:function (data) {
+                console.error(data);
+            }
+        })
+
+
+        $.ajax({
+            url:"getAttention?userInfoId="+userInfoId,
+            type:"GET",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success:function(resp){
+                console.log(resp);
+                $(resp).each(function(index,item){
+                    var attentionMessage ="<div class=\"col-ml-12 col-xs-6 col-sm-4\" >\n" +
+                        "\t\t\t\t\t\t\t\t\t<div class=\"be-post\">\n" +
+                        "\t\t\t\t\t\t\t\t\t\t<a href=\"author.html?id="+item.userInfoId+"\" class=\"be-img-block\">\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t<img src=\""+item.headPath+"\" alt=\"omg\">\n" +
+                        "\t\t\t\t\t\t\t\t\t\t</a>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t<div class=\"author-post\">\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t<span>姓名</span>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t<span>： <a href=\"author.html?id="+item.userInfoId+"\">"+item.name+"</a></span>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t</div>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t<div class=\"info-block\">\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t<span><i class=\"fa fa-eye\"></i> "+item.browseInfoCount+"</span>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t<span><i class=\"stat-icon icon-like\" ></i> "+item.supportCount+"</span>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t\t<span><i class=\"stat-icon icon-following\"></i> "+item.fansInfoCount+"</span>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t</div>\n" +
+                        "\t\t\t\t\t\t\t\t\t</div>\n" +
+                        "\t\t\t\t\t\t\t\t</div>";
+                    $("#attention").append(attentionMessage);
+                })
+            },
+            error:function(resp){
+            }
+        })
+
+	</script>
 <div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>

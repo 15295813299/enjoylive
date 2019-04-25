@@ -5,15 +5,16 @@
     <title>Title</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<link rel="shortcut icon" href="img/favicon.png">
-    	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="style/bootstrap.min.css">
-		<link rel="stylesheet" href="font-awesome/4.3.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="style/icon.css">
-		<link rel="stylesheet" href="style/loader.css">
-		<link rel="stylesheet" href="style/idangerous.swiper.css">
-		<link rel="stylesheet" href="style/stylesheet.css">
 </head>
+<style type="text/css">
+    .login-user-down a img{
+        max-height: 96px;
+        max-width: 40px;
+    }
+</style>
+
 <body>
+
 <!--已登录时的header -->
     <header>
     <div class="container-fluid custom-container">
@@ -172,15 +173,15 @@
                             </div>
                         </div>
                     </div>
-                    <a class="messages-popup" href="blog-detail-2.html">
+                    <a class="messages-popup" href="">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="noto-count">4</span>
+                        <span class="noto-count" id="noto-count-liuyan"></span>
                     </a>
                     <div class="noto-popup messages-block">
                         <div class="noto-label">Your Messages <span class="noto-label-links"><a href="messages-2.html">compose</a><a
                                 href="messages.html">View all messages</a></span></div>
-                        <div class="noto-body" style="max-height: 73px;">
-                            <div class="noto-entry style-2">
+                        <div class="noto-body" style="max-height: 73px;" id="noto-showMessage">
+                            <!--<div class="noto-entry style-2">
                                 <div class="noto-content clearfix">
                                     <div class="noto-img">
                                         <a href="blog-detail-2.html">
@@ -233,8 +234,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="noto-entry style-2">
+                            </div>-->
+                            <!--<div class="noto-entry style-2">
                                 <div class="noto-content clearfix">
                                     <div class="noto-img">
                                         <a href="blog-detail-2.html">
@@ -252,37 +253,21 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
-                    <div class="be-drop-down color-4 size-2">
-                        <span class="be-dropdown-content"><font style="vertical-align: inherit;"><font
-                                style="vertical-align: inherit;">状态</font></font></span>
-                        <ul class="drop-down-list">
-                            <li><a>在线</a></li>
-                            <li><a>离线</a></li>
-                            <li><a>隐身</a></li>
-                            <li><a>退出</a></li>
-                            <!--<script>-->
-                                <!--$("#exitUser").click(function () {-->
-                                    <!--$.ajax({-->
-                                        <!--type: "GET",-->
-                                        <!--url: "delSessionLoginInfo",-->
-                                        <!--success: function (data) {-->
-                                            <!--// alert(data)-->
-                                            <!--window.location.reload()-->
-                                        <!--}-->
-                                    <!--})-->
-                                <!--})-->
-
-                            <!--</script>-->
-                        </ul>
+                    <div onclick="ddd()" class="be-drop-down color-4 size-2">
+                        <span >注销</span>
                     </div>
                     <div class="be-drop-down login-user-down">
-                        <a href="author-login.html"><img class="login-user" src="img/login.jpg" alt=""/></a>
-                        <span class="be-dropdown-content"><font style="vertical-align: inherit;"><font
+                        <a href="author-login.html">
+                            <img class="login-user" id="headImg" src="img/login.jpg" alt="" style="width: 55%;"/>
+                        </a>
+
+
+                        <span class="be-dropdown-content" id="LocaName"><font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">嗨，</font></font><span><font
-                                style="vertical-align: inherit;"><font style="vertical-align: inherit;">泰勒</font></font></span></span>
+                                style="vertical-align: inherit;"><font style="vertical-align: inherit;" ></font></font></span></span>
                     </div>
                 </div>
             </div>
@@ -295,58 +280,9 @@
                     </li>
                     <li><a href="activity.html"><font style="vertical-align: inherit;"><font
                             style="vertical-align: inherit;">板块</font></font></a>
-                    <ul>
+                        <ul id="club">
                             <li>
-                                <a href="activity.html"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">游戏</font></font></a>
-                                <i class="fa fa-angle-right"></i><i class="fa fa-angle-down"></i>
-                                <ul>
-                                    <li><a href="page1.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">LOL</font></font></a></li>
-                                    <li><a href="page2.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">DNF</font></font></a></li>
-                                    <li><a href="page3.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">王者荣耀</font></font></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="activity.html"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">数码</font></font></a>
-                                <i class="fa fa-angle-right"></i><i class="fa fa-angle-down"></i>
-                                <ul>
-                                    <li><a href="page1.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">手机</font></font></a></li>
-                                    <li><a href="page2.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">电脑配置</font></font></a></li>
-                                    <li><a href="page3.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">摄影</font></font></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="activity.html"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">体育</font></font></a>
-                                <i class="fa fa-angle-right"></i><i class="fa fa-angle-down"></i>
-                                <ul>
-                                    <li><a href="page1.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">NBA</font></font></a></li>
-                                    <li><a href="page2.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">世界杯</font></font></a></li>
-                                    <li><a href="page3.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">田径</font></font></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="activity.html"><font style="vertical-align: inherit;"><font
-                                        style="vertical-align: inherit;">情感生活</font></font></a>
-                                <i class="fa fa-angle-right"></i><i class="fa fa-angle-down"></i>
-                                <ul>
-                                    <li><a href="page1.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">爱情</font></font></a></li>
-                                    <li><a href="page2.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">亲情</font></font></a></li>
-                                    <li><a href="page3.html"><font style="vertical-align: inherit;"><font
-                                            style="vertical-align: inherit;">基情</font></font></a></li>
-                                </ul>
+
                             </li>
                         </ul>
                     </li>
@@ -390,7 +326,7 @@
     </div>
 </header>
 
-<script>
+<script type="text/javascript">
     $(function () {
         var href = window.location.href.split("/");
         var hr=href[href.length-1];
@@ -411,8 +347,141 @@
                 $(item).parent().addClass("active-header");
             }
         });
+
+        var userinfoid;
+        $.ajax({
+            type: "GET",
+            url: "getSessionLoginInfo",
+            success: function (data) {
+                // alert(data.userInfoId);
+                userinfoid=data.userInfoId;
+                getNoReadMessageCount(userinfoid);
+                getLeaveMessage(userinfoid);
+            }
+        })
+        function getNoReadMessageCount(userinfoid) {
+            // alert(userinfoid);
+            $.ajax({
+                type: 'POST',
+                url: 'getNoReadMessageCount',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    "leaveMessageToUser": userinfoid
+                }),
+                success: function (responseText) {
+                    console.log(responseText);
+                    // alert(responseText);
+                    $("#noto-count-liuyan").text(responseText);
+                },
+                error: function (message) {
+                    // alert("获取失败");
+                },
+                dataType: 'json'
+            });
+        }
+        function getLeaveMessage(userinfoid) {
+            $.ajax({
+                type: 'POST',
+                url: 'getLeaveMessageNoRead?leaveMessageToUser='+userinfoid,
+                contentType: "application/json; charset=utf-8",
+                async:false,
+                dataType: 'json',
+                // data:JSON.stringify({ "leaveMessageToUser": userinfoid}),
+                success: function (responseText) {
+                    var len = responseText.length;
+                    $(responseText).each(function(index,item){
+                        $("<div class=\"noto-entry style-2\">" +
+                            "<div class=\"noto-content clearfix\">" +
+                            "<div class=\"noto-img\">" +
+                            "<a href=\"blog-detail-2.html\">" +
+                            "<img src='" + item.headPath + "'alt=\"\" class=\"be-ava-comment\">" +
+                            "</a>" +
+                            "</div>" +
+                            "<div class=\"noto-text\">" +
+                            "<div class=\"noto-text-top\">" +
+                            "<span class=\"noto-name\">" + "<a href=\"blog-detail-2.html\">" + item.name + "</a>" + "</span>" +
+                            "<span class=\"noto-date\">" + "<i class=\"fa fa-clock-o\">" + "</i>" + item.leaveMessageTime + "</span>" +
+                            "</div>" +
+                            "<div class=\"noto-message\">" +
+                            item.leaveMessageText +
+                            "</div>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>"
+                        ).insertAfter($("#noto-showMessage"));
+                    })
+                },
+                error: function (message) {
+                    // alert("获取失败");
+                },
+            });
+        }
     })
 
+    function ddd() {
+       $.ajax({
+           type:"GET",
+           url:"delSessionLoginInfo",
+           dataType:"JSON",
+           success:function (resp) {
+               alert("注销成功");
+               window.location.href = "index.html";
+           },
+           error:function () {
+               alert("失败");
+           }
+       })
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "getSessionLoginInfo",
+        success: function (data) {
+            console.log(data)
+            if (data) {
+                $("#LocaName").html(data.name);
+                 $("#headImg").attr("src",data.headPath);
+            }
+        }
+    })
+    init()
+    function init() {
+        $.ajax({
+            type:"post",
+            url:"getHeaderCategoryInfo",
+            contentType:"application/json",
+            dataType:"json",
+            success:function (data) {
+                console.log(data)
+                $(data).each(function (index,item) {
+                    // $("#club").empty();
+                    $(" <li id='categroy"+index+"'>\n" +
+                        "                                <a href='javascript:void(0)' onclick='goCategroy("+item.categoryId+")'><font style=\"vertical-align: inherit;\"><font\n" +
+                        "                                        style=\"vertical-align: inherit;\">"+item.categoryName+"</font></font></a>\n" +
+                        "                                <i class=\"fa fa-angle-right\"></i><i class=\"fa fa-angle-down\"></i>\n" +
+                        "                                <ul>\n" +
+                        "                                    <li></li>\n" +
+                        "                                </ul>\n" +
+                        "                            </li>").insertAfter("#club>li:eq("+(index)+")");
+                    $(item.childCategoryInfo).each(function (index1,citem) {
+                        $(" <li><a href='javascript:void(0)' onclick='goSmallCategroy("+citem.categoryId+")'><font style=\"vertical-align: inherit;\"><font\n" +
+                            "                                            style=\"vertical-align: inherit;\">"+citem.categoryName+"</font></font></a></li>").insertAfter("#"+"categroy"+index+" ul>li:eq("+(index1)+")");
+                    })
+
+
+                })
+            },
+            error:function () {
+                console.error()
+            }
+        })
+    }
+    function goCategroy(id) {
+        window.location.href = "activity_on.html?id="+id;
+    }
+    function goSmallCategroy(sid) {
+        window.location.href ="login.html?sid="+sid;
+    }
 </script>
 </body>
 </html>

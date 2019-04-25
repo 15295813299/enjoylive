@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.ShowSmallCategoryMapper">
+    <!--查找小版块对应的所有文章-->
+    <select id="categoryArticleList" parameterType="com.qf.dto.CategoryArticleDto" resultType="com.qf.dto.CategoryArticleDto">
+SELECT
+	*
+FROM
+	(
+		SELECT
+			tb2.*, ar.potoPath
+		FROM
+			(
+				SELECT
+					tb1.*,c1.categoryName
+				FROM
+					(
+						SELECT
+							a.*, u.`name`
+						FROM
+							articleInfo a,
+							userInfo u
+						WHERE
+							a.userInfoId = u.userInfoId
+						AND a.flag = 1
+						AND u.flag = 1
+					) tb1,
+					category c1
+				WHERE
+					tb1.categoryId = c1.categoryId
+				AND c1.flag = 1
+			) tb2
+		LEFT JOIN articlePoto ar ON tb2.articleId = ar.articleId
+	) tb3
+WHERE
+	tb3.categoryId = #{categoryId}
+    </select>
+</mapper>

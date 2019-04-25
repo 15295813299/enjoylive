@@ -888,6 +888,19 @@
     var startPage = 1;
     var showNum = 4;
     var page = $("#pagination");
+    function initCount(categoryId,index1) {
+        $.ajax({
+            type: "post",
+            async:false,
+            url: "getCountCategoryArticle?categoryId="+categoryId,
+            contentType: "application/json",
+            dataType: "json",
+            success:function (data) {
+                console.log(data)
+                $("#"+"sub"+index1).html(data)
+            }
+        })
+    }
     function initCategroyInfo(currentPage,pageSize) {
         $("#showCategroy>div").empty();
         $("#pagination").empty();
@@ -903,7 +916,7 @@
                  $(item.childCategoryInfo).each(function (index1,item1) {
                      $(" <div class=\"col-ml-12 col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2\">\n" +
                          "                <div class=\"be-post\">\n" +
-                         "                    <a href=\"blog-detail-2.html\" class=\"be-img-block\">\n" +
+                         "                    <a href='javascript:void(0)' onclick='goShowArticle("+item1.categoryId+")' class=\"be-img-block\">\n" +
                          "                        <img src='"+item1.categoryPoto+"' style=\"width:305px;height:212px\" alt=\"我的天啊\">\n" +
                          "                    </a>\n" +
                          "                    <div class=\"author-post\">\n" +
@@ -913,10 +926,11 @@
                          "                                style=\"vertical-align: inherit;\">"+item1.categoryName+"</font></font></a></span>\n" +
                          "                    </div>\n" +
                          "                    <div class=\"info-block\">\n" +
-                         "                        <span><i class=\"fa fa-thumbs-o-up\"></i>360<span  style=\"font-size: 20px;text-align: center;display: block;color: #00aced\" >"+item.categoryName+"</span></span>\n" +
+                         "                        <span><i class=\"fa fa-thumbs-o-up\"></i><span id='sub"+index1+"'></span><span  style=\"font-size: 20px;text-align: center;display: block;color: #00aced\" >"+item.categoryName+"</span></span>\n" +
                          "                    </div>\n" +
                          "                </div>\n" +
                          "            </div>").insertAfter("#showCategroy>div:eq("+(index1)+")");
+                                     initCount(item1.categoryId,index1)
                  })
              })
                 if(currentPage==1){
@@ -939,6 +953,9 @@
     }
 
     initCategroyInfo(startPage,showNum);
+    function goShowArticle(sid) {
+        window.location.href ="login.html?sid="+sid;
+    }
 </script>
 </body>
 </html>

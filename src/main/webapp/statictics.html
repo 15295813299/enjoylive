@@ -16,11 +16,12 @@
     <link rel="stylesheet" type="text/css" href="style/ie-9.css"/>
     <![endif]-->
     <!--[if lt IE 9]>
+    <script src="js/jquery-1.8.2.js"></script>
     <script src="script/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="script/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" charset="UTF-8"
-          href="https://translate.googleapis.com/translate_static/css/translateelement.css">
+    <script src="js/echarts.min.js"></script>
+
 </head>
 <body>
 
@@ -83,49 +84,45 @@
                             <div class="tab-nav-wrapper">
                                 <div class="nav-tab  clearfix">
                                     <div class="nav-tab-item active">
-                                        <span><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">项目视图</font></font></span>
+                                        <span ><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">游览量</font></font></span>
                                     </div>
                                     <div class="nav-tab-item ">
                                         <span><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">鉴赏</font></font></span>
+                                                style="vertical-align: inherit;">点赞数</font></font></span>
                                     </div>
-                                    <div class="nav-tab-item ">
-                                        <span><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">项目评论</font></font></span>
-                                    </div>
-                                    <div class="nav-tab-item ">
-                                        <span><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;">项目视图</font></font></span>
+                                    <div class="nav-tab-item " >
+                                        <span id=""><font style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">评论数</font></font></span>
                                     </div>
                                     <div class="stat-sort be-drop-down">
                                         <span class="be-dropdown-content"><font style="vertical-align: inherit;"><font
-                                                style="vertical-align: inherit;"> 所有的画廊 </font></font></span>
+                                                style="vertical-align: inherit;"> 过去七天 </font></font></span>
                                         <ul class="drop-down-list">
-                                            <li><a>Gallery 1</a></li>
-                                            <li><a>Gallery 2</a></li>
-                                            <li><a>Gallery 3</a></li>
-                                            <li><a>Gallery 4</a></li>
-                                            <li><a>Gallery 5</a></li>
+                                            <li><a>过去一个月</a></li>
+                                            <li><a>最近一年</a></li>
                                         </ul>
                                     </div>
                                 </div>
 
                             </div>
                             <div class="tabs-content clearfix">
-                                <div class="tab-info active">
-                                    <img class="img-responsive" src="img/graph.jpg" alt="">
+                                <div class="tab-info active"  id="visit" style="width: 100%;height:400px;">
+
                                 </div>
-                                <div class="tab-info">
-                                    <img class="img-responsive" src="img/graph.jpg" alt="">
+
+                                <div class="tab-info active" id="like"  style="width: 100%;height:400px;" >
+
                                 </div>
-                                <div class="tab-info">
-                                    <img class="img-responsive" src="img/graph.jpg" alt="">
-                                </div>
-                                <div class="tab-info">
-                                    <img class="img-responsive" src="img/graph.jpg" alt="">
+
+                                <div class="tab-info active" id="comment"  style="width: 100%;height:400px;">
+
                                 </div>
                             </div>
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -161,27 +158,27 @@
                                             <div class="stat-entry">
                                                 <img src="img/stat_1.png" alt="">
                                                 <div class="stat-number"><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">5300</font></font></div>
+                                                        style="vertical-align: inherit;" id="you">5300</font></font></div>
                                                 <div class="stat-text"><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">项目意见</font></font></div>
+                                                        style="vertical-align: inherit;">游览量</font></font></div>
                                             </div>
                                         </div>
                                         <div class="stat-item col-xs-12 col-sm-3">
                                             <div class="stat-entry">
                                                 <img src="img/stat_2.png" alt="">
                                                 <div class="stat-number"><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">1023</font></font></div>
+                                                        style="vertical-align: inherit;" id="zan">1023</font></font></div>
                                                 <div class="stat-text"><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">项目赞赏</font></font></div>
+                                                        style="vertical-align: inherit;">文章赞赏</font></font></div>
                                             </div>
                                         </div>
                                         <div class="stat-item col-xs-12 col-sm-3">
                                             <div class="stat-entry">
                                                 <img src="img/stat_3.png" alt="">
                                                 <div class="stat-number"><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">79</font></font></div>
+                                                        style="vertical-align: inherit;" id="ping">79</font></font></div>
                                                 <div class="stat-text"><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">项目评论</font></font></div>
+                                                        style="vertical-align: inherit;">文章评论</font></font></div>
                                             </div>
                                         </div>
                                         <div class="stat-item col-xs-12 col-sm-3">
@@ -1178,10 +1175,228 @@
 <div class="goog-te-spinner-pos">
     <div class="goog-te-spinner-animation">
         <svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66">
-            <circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33"
-                    r="30"></circle>
+            <circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
         </svg>
     </div>
 </div>
+
+<script type="text/javascript">
+
+
+    init();
+    var strings;
+    var mai= new Array();
+    mai.push(1);
+    mai.push(2);
+    mai.push(3);
+    mai.push(4);
+    mai.push(5);
+    mai.push(6);
+    mai.push(7);
+
+    function init(){
+        $.ajax({
+            url:"getSessionLoginInfo",
+            type:"GET",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success:function (resp) {
+                console.log(resp);
+                var userInfoId= resp.userInfoId;
+                initVisit(userInfoId);
+                initLike(userInfoId);
+                initComment(userInfoId);
+                initYou(userInfoId);
+                initPing(userInfoId);
+            },
+            error:function () {
+                alert("请先登录");
+                location.href="index.html"
+            }
+        });
+
+    }
+
+
+    function initVisit(userInfoId) {
+        $.ajax({
+            url:"getWeekCount",
+            type:"POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data:JSON.stringify({
+                "userInfoId":userInfoId,
+                "mai": mai
+            }),
+            success:function (resp) {
+                console.log(resp);
+                strings="游览量";
+                var obj2='visit';
+                initTu(resp,strings,obj2);
+            },
+            error:function () {
+                alert("失败");
+            }
+        });
+    }
+
+
+    function initLike(userInfoId) {
+        $.ajax({
+            url:"getWeekLike",
+            type:"POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data:JSON.stringify({
+                "userInfoId":userInfoId,
+                "mai": mai
+            }),
+            success:function (resp) {
+                console.log(resp);
+                strings="点赞量";
+                var obj2 = 'like';
+                initTu(resp,strings,obj2);
+
+            },
+            error:function () {
+                alert("失败");
+            }
+        });
+    }
+
+    function initComment(userInfoId) {
+        $.ajax({
+            url:"getWeekComment",
+            type:"POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data:JSON.stringify({
+                "userInfoId":userInfoId,
+                "mai": mai
+            }),
+            success:function (resp) {
+                console.log(resp);
+                strings="评论数";
+                var obj2 = 'comment';
+                initTu(resp,strings,obj2);
+
+            },
+            error:function () {
+                alert("失败");
+            }
+        });
+    }
+
+
+
+
+
+
+
+    function initTu(obj,strings,obj2) {
+        var att = [];
+        att.push(obj.c7);
+        att.push(obj.c6);
+        att.push(obj.c5);
+        att.push(obj.c4);
+        att.push(obj.c3);
+        att.push(obj.c2);
+        att.push(obj.c1);
+       // var myChart = echarts.init(obj2);
+
+        var myChart = echarts.init(document.getElementById(obj2));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: strings
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data:[strings]
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['六天前','五天前','四天前','三天前','前天','昨天','今天']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name:strings,
+                    type:'line',
+                    stack: '总量',
+                    data:att
+                }
+            ]
+        };
+        myChart.setOption(option);
+        // 使用刚指定的配置项和数据显示图表。
+    }
+
+
+    function initYou(userInfoId) {
+        $.ajax({
+            url:"getCountVisit",
+            type:"POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data:JSON.stringify({
+                "userInfoId":userInfoId,
+            }),
+            success:function(resp){
+                console.log(resp);
+                $("#you").html(resp.visit);
+                $("#zan").html(resp.praise);
+            },
+            error:function(resp){
+                alert("获取失败3")
+            }
+        });
+    }
+
+    function initPing(userInfoId) {
+        $.ajax({
+            url:"getComment",
+            type:"POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data:JSON.stringify({
+                "userInfoId":userInfoId,
+            }),
+            success:function(resp){
+                console.log(resp);
+                $("#ping").html(resp.c1);
+            },
+            error:function(resp){
+                alert("获取失败")
+            }
+        });
+    }
+
+
+
+
+
+</script>
+
+
+
+
 </body>
 </html>

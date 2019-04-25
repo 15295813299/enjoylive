@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.CommentInfoMapper">
+    <!--获取主评论-->
+    <select id="getComments" parameterType="Integer" resultType="com.qf.pojo.CommentInfo">
+        SELECT c.* ,u.name ,u.headPath from commentInfo c ,userInfo u
+        where u.userInfoId = c.userInfoId and c.flag = 1 and u.flag = 1
+        and c.articleId = #{articleId} GROUP BY c.commentDate DESC
+    </select>
+    <!--添加主评论-->
+    <insert id="addComments" parameterType="com.qf.pojo.CommentInfo">
+        insert into commentInfo values(default ,#{userInfoId},#{articleId},#{message},default,default)
+    </insert>
+
+    <!--查询文章对应主评论数量-->
+    <select id="commentsCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT
+	count(1) AS count
+FROM
+	articleInfo a
+,commentInfo c WHERE a.articleId = c.articleId
+AND c.flag = 1
+AND a.flag = 1
+and
+	a.articleId = #{id}
+    </select>
+</mapper>

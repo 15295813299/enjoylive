@@ -4,11 +4,113 @@
 <mapper namespace="com.qf.mapper.PersonageMapper">
 
 
-    <select id="getUserInfoById" parameterType="com.qf.pojo.UserInfo" resultType="com.qf.pojo.UserInfo">
+    <!--获取用户擅长领域-->
+    <select id="getProfessionById" parameterType="com.qf.pojo.UserInfo" resultType="com.qf.pojo.Category">
+        SELECT c.categoryId, c.categoryName from profession p,category c
+        where p.categoryId=c.categoryId and p.userInfoId=#{userInfoId} and p.flag=1
+    </select>
 
-      select * from userInfo where userInfoId=#{userInfoId}
+    <!--获取用户被游览量和点赞-->
+    <select id="getCountVisit" parameterType="com.qf.pojo.UserInfo" resultType="com.qf.dto.PersonageDto">
+        SELECT d.praise, COUNT(b.flag) AS 'visit'
+        FROM (
+            SELECT COUNT(s.flag) AS praise, a.userInfoId AS userInfoId
+            FROM support s
+                LEFT JOIN articleInfo a ON s.articleId = a.articleId
+            WHERE a.userInfoId = #{userInfoId}
+        ) d, browseInfo b
+        WHERE b.articleId IN (
+            SELECT a1.articleId
+            FROM articleInfo a1
+            WHERE a1.userInfoId = #{userInfoId}
+        )
+    </select>
 
+    <!--获取粉丝-->
+    <select id="getFansById" parameterType="com.qf.pojo.UserInfo" resultType="com.qf.dto.LoginInfoDto">
+        SELECT u.* from attention a,userInfo u where a.authorId= #{userInfoId} and a.userInfoId=u.userInfoId
+        and a.flag = 1 and u.flag = 1
     </select>
 
 
+
+    <!-- 信息匹配-->
+    <select id="reUserInfo" parameterType="com.qf.pojo.UserInfo" resultType="com.qf.pojo.UserInfo">
+        select * from userInfo where userInfoId=#{userInfoId}
+    </select>
+
+
+    <!--修改个人信息，包括头像-->
+    <update id="upPersonageById" parameterType="com.qf.pojo.UserInfo">
+        update userInfo
+        <set>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="email !=null and email !=''">
+                email=#{email},
+            </if>
+            <if test="country!=null and country!=''">
+                country=#{country},
+            </if>
+            <if test="province!=null and province!=''">
+                province=#{province},
+            </if>
+            <if test="city!=null and city!=''">
+                city=#{city},
+            </if>
+            <if test="brief !=null and brief !=''">
+                brief=#{brief},
+            </if>
+            <if test="birthYear !=null and birthYear !=''">
+                birthYear=#{birthYear},
+            </if>
+
+            <if test="birthMonth !=null and birthMonth !=''">
+                birthMonth=#{birthMonth},
+            </if>
+
+            <if test="birthYMD !=null and birthYMD !=''">
+                birthYMD=#{birthYMD},
+            </if>
+            <if test="headPath !=null and headPath !=''">
+                headPath=#{headPath},
+            </if>
+        </set>
+            where userInfoId=#{userInfoId}
+
+    </update>
+
+   <!-- 密码匹配-->
+    <select id="rePassword" parameterType="com.qf.pojo.UserInfo" resultType="com.qf.pojo.UserInfo">
+        select * from userInfo userInfoId=#{userInfoId} and password=#{password}
+    </select>
+
+   <!-- 获取所有的类型-->
+    <select id="getCategory" parameterType="com.qf.pojo.Category" resultType="com.qf.pojo.Category">
+        select * from category where flag =1
+        <if test="categoryId!=null and categoryId!=''">
+            and categoryId = #{categoryId}
+        </if>
+    </select>
+
+   <!-- 删除擅长领域-->
+    <update id="upAdept" parameterType="com.qf.pojo.UserInfo">
+        update profession set flag=0 where userInfoId=#{userInfoId}
+    </update>
+
+    <!--插入擅长领域-->
+    <insert id="setAdept" parameterType="com.qf.dto.PersonageDto">
+        INSERT INTO  profession VALUES
+        <foreach collection = "ids" item="id" separator=",">
+            (null, #{userInfoId}, #{id}, 1)
+        </foreach>
+    </insert>
+
+    <insert id="updateScore" parameterType="com.qf.dto.PersonageDto">
+        INSERT into LV(userInfoId,lvScore,flag) VALUES(#{userInfoId},#{lvScore},1)
+    </insert>
 </mapper>
