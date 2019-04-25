@@ -28,17 +28,7 @@
         <!--引入头部-->
         <div id="headLoad">	</div>
         <script>
-            $.ajax({
-                type: "GET",
-                url: "getSessionLoginInfo",
-                success: function (data) {
-                    if (data) {
-                        $("#headLoad").load("header2.html")
-                    } else {
-                        $("#headLoad").load("header1.html")
-                    }
-                }
-            })
+
         </script>
     </header>
     <main id="tt-pageContent">
@@ -203,6 +193,20 @@
 
 <script type="text/javascript">
 
+    var id;
+    $.ajax({
+        type: "GET",
+        url: "getSessionLoginInfo",
+        success: function (data) {
+            id=data.userInfoId
+            if (data) {
+                $("#headLoad").load("header2.html")
+            } else {
+                $("#headLoad").load("header1.html")
+            }
+        }
+    })
+
     $.ajax({
         type:'GET',
         url:'getCategoryIdList',
@@ -264,18 +268,18 @@
             url:'addArticle',
             contentType: "application/json; charset=utf-8",
             data:JSON.stringify({
-                "userInfoId":7,
+                "userInfoId":id,
                 "content":editor.txt.html(),
                 "categoryId":$("#category").val(),
                 "title":$("#inputTopicTitle").val(),
             }),
             success:function (responseText) {
+
                 if(responseText==true){
                     document.write("发布成功，页面将在1秒后跳转到首页");
                     setTimeout(function(){
                         window.location.href = "index.html";
                     },1000)
-
                 }else {
                     alert("发表失败");
                 }
