@@ -35,6 +35,6 @@
 
     <!--判断用户是否已关注-->
     <select id="judgeAttention" parameterType="com.qf.pojo.Attention" resultType="Integer">
-        SELECT COUNT(attentionId) from attention where userInfoId=31 and authorId=10 and flag = 1
+        SELECT COUNT(attentionId) from attention where userInfoId=#{userInfoId} and authorId=#{authorId} and flag = 1
     </select>
 </mapper>
