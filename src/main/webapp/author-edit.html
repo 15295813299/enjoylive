@@ -947,7 +947,7 @@
             processData: false,
 			success: function (resp) {
 				console.log(resp);
-                $("#headPath").attr("src","upload/"+resp.fileName);
+                $("#headPath").attr("src",resp.fileName);
                 upSetImg(resp.fileName);
                 $("#file2").css("display","none");
 			},
