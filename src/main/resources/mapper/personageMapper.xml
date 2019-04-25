@@ -86,7 +86,7 @@
 
    <!-- 密码匹配-->
     <select id="rePassword" parameterType="com.qf.pojo.UserInfo" resultType="com.qf.pojo.UserInfo">
-        select * from userInfo userInfoId=#{userInfoId} and password=#{password}
+        select * from userInfo where userInfoId=#{userInfoId} and password=#{password}
     </select>
 
    <!-- 获取所有的类型-->

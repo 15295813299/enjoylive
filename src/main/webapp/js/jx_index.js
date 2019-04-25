@@ -243,10 +243,10 @@ function change(response, tagName) {
                     k +=
                         "                        <div class=\"custom-column-5\">\n" +
                         "                            <div class=\"be-post\">\n" +
-                        "                                <a href=\"blog-detail-2.html\" class=\"be-img-block\">\n" +
+                        "                                <a href=\"blog-detail-2.html?articleId="+item.articleId+"\" class=\"be-img-block\">\n" +
                         "                                    <img src='" + item.potoPath + "' alt=\"我的天啊\">\n" +
                         "                                </a>\n" +
-                        "                                <a href=\"blog-detail-2.html\" class=\"be-post-title\"><font\n" +
+                        "                                <a href=\"blog-detail-2.html\articleId="+item.articleId+"\" class=\"be-post-title\"><font\n" +
                         "                                        style=\"vertical-align: inherit;\"><font\n" +
                         "                                        style=\"vertical-align: inherit;\">" + item.title + "</font></font></a>\n" +
                         "                                <font style=\"vertical-align: inherit;\"><span><a href=\"blog-detail-2.html\"\n" +
@@ -266,7 +266,7 @@ function change(response, tagName) {
                         "                                <div class=\"author-post\">\n" +
                         "                                    <img src='" + item.headPath + "' alt=\"\" class=\"ava-author\">\n" +
                         "                                    <span><font style=\"vertical-align: inherit;\"><font style=\"vertical-align: inherit;\">作者：</font></font><a\n" +
-                        "                                            href=\"blog-detail-2.html\"><font style=\"vertical-align: inherit;\"><font\n" +
+                        "                                            href=\"author.html?userInfoId="+item.userInfoId+"\"><font style=\"vertical-align: inherit;\"><font\n" +
                         "                                            style=\"vertical-align: inherit;\">" + item.username + "</font></font></a></span>\n" +
                         "                                </div>\n" +
                         "                                <div class=\"info-block\">\n" +
