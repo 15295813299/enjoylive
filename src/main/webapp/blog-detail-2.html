@@ -1176,14 +1176,12 @@
     $.ajax({
         type:"get",
         url:"getSessionLoginInfo",
+        async:false,
         success:function (data) {
             userInfoid = data.userInfoId;
         }
     })
-    var userInfoId = userInfoid;
-    if(typeof(userInfoId)=="undefined"){
-        userInfoId=7;
-    }
+	alert(userInfoid)
     var receiverId;
     var commentId;
 
