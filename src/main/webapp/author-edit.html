@@ -964,7 +964,7 @@
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
 			data:JSON.stringify({
-				"headPath":fileName,
+				"headPath":"upload/"+fileName,
 				"userInfoId":userId
 			}),
             success: function (resp) {
